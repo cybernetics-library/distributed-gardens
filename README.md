@@ -2,7 +2,7 @@
 
 ### /api
 
-Requires a Node version later than `7.6.0`. Preferably version `8.11.3`
+Requires Node version `8.4.0`
 ```
 npm install -d
 npm start
