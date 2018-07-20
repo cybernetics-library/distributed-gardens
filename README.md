@@ -14,7 +14,7 @@ npm start
 ## Events
 
 What kind of events does this handle?
-- Person checks in at 
+TODO
 
 ### Event message format
 
@@ -35,7 +35,7 @@ Each event/transaction is stored as a single event with timestamp & data
     - If message is of type 'order':
       - `order`: contains a string parsed by kiosk.
     - if message is of type ‘data':  
-      - `a list of media`??? TODO
+      TODO:
     
 
 
