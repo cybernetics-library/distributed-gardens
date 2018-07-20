@@ -2,7 +2,7 @@
 
 ### /api
 
-Requires Node version `8.4.0`.
+Requires Node version `8.4.0` (not a later version, but this specific version)
 
 (Use [NVM](https://github.com/creationix/nvm) to switch between Node versions.)
 
@@ -10,6 +10,11 @@ Requires Node version `8.4.0`.
 npm install -d
 npm start
 ```
+
+## Events
+
+What kind of events does this handle?
+- Person checks in at 
 
 ### Event message format
 
@@ -29,7 +34,8 @@ Each event/transaction is stored as a single event with timestamp & data
   - `body`: 
     - If message is of type 'order':
       - `order`: contains a string parsed by kiosk.
-    - if message is of type ‘data':      
+    - if message is of type ‘data':  
+      - `a list of media`??? TODO
     
 
 
@@ -43,4 +49,5 @@ example:
   'body': { 'order': 'restart_kiosk' }
 }
 ```
+
 
