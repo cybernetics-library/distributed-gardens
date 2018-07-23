@@ -5,11 +5,20 @@ import os
 
 BADGE_NUM = 400
 BADGE_URL_PREFIX = "HTTPS://DECENTRALIZEDWEB.NET/QR/2018.HTML?BADGE="
-BADGE_DIR_PREFIX = "qrcodes/badges/"
-
+BADGE_DIR = "qrcodes/badges/"
+PREFIX_DIR_FOR_INDESIGN = "Macintosh HD:Users:provolot:github:seeding-gardens:badge:qrcodes:badges:"
 
 def gen_qr_code(url, fname):
-    img = qrcode.make(url, border=0)
+    """
+    qr = qrcode.QRCode(
+	version=None,
+	box_size=10,
+	border=0,
+    )
+    qr.add_data(url)
+    qr.make(fit=True)
+    """
+    img = qr.make(url)
     img.save(fname)
 
 
@@ -41,9 +50,10 @@ with open('nouns.txt', 'r') as fnouns, open('adjectives.txt', 'r') as fadj, open
 
         badgeid = ('{:>05d}'.format(i))
         badgeurl = BADGE_URL_PREFIX + badgeid
-        badgefile = BADGE_DIR_PREFIX + badgeid + ".png"
-
-        badgeline = "{},The Garden of {} {},{},{}".format(badgeid, thisadj, thisnoun, badgeurl, badgefile)
+        badgefile = BADGE_DIR + badgeid + ".png"
         gen_qr_code(badgeurl, badgefile)
+        indesign_badge_dir = PREFIX_DIR_FOR_INDESIGN + badgeid + ".png"
+
+        badgeline = "{},The Garden of {} {},{},{}".format(badgeid, thisadj, thisnoun, badgeurl, indesign_badge_dir)
         print(badgeline)
         fbadgelines.write(badgeline + "\n")
