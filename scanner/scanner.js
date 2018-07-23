@@ -20,7 +20,6 @@
 
 
   function isBook(s) {
-//    console.log(s);
     if (s.includes('checkout') || s.includes('object')) {
 //      console.log("BOOK");
       return true;
@@ -37,7 +36,9 @@
   }
 
   function urlToId(s) {
+    $("#qrurl").html(s);
     return s.split("/")[s.split("/").length - 1];
+
   }
   window.urlToId = urlToId;
 
@@ -136,7 +137,6 @@ $(document).ready(function() {
 
   scanner.addListener('scan', function(content) {
     handleScans(content)
-    updateIframe(content);
   });
 
 
@@ -156,10 +156,7 @@ $(document).ready(function() {
 
 function sendMem() {
  submitLinkToApi(globalQR);
-
   setTimeout(showPrompt, 3400);
-
-
 };
 
 function showPrompt(){

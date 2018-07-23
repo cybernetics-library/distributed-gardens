@@ -26,6 +26,11 @@
         font-family: "Steps-Mono";
   }
 
+/* #qrurl {
+    color: rgb(42, 227, 37;
+} */
+
+
   .steps {
       font-family: 'Steps-Mono';
   }
@@ -58,14 +63,7 @@
     top: 13%;
     margin-left: -199px;
   }
-  .arrow90 {
-    width: 497px;
-    height: 497px;
-    position: absolute;
-    left: 50%;
-    top: 4.4%;
-    margin-left: -199px;
-  }
+
 
 
   .video-circle {
