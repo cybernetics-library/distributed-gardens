@@ -18,7 +18,7 @@ def gen_qr_code(url, fname):
     qr.add_data(url)
     qr.make(fit=True)
     """
-    img = qr.make(url)
+    img = qrcode.make(url, border=0)
     img.save(fname)
 
 
@@ -39,7 +39,7 @@ with open('nouns.txt', 'r') as fnouns, open('adjectives.txt', 'r') as fadj, open
     adj_index = 0
     noun_index = 0
 
-    badgeline = "id,garden_name,qr_url,@qrcode_filename"
+    badgeline = "id,garden_name,full_garden_name,qr_url,@qrcode_filename"
     fbadgelines.write(badgeline + "\n")
     for i in range(BADGE_NUM):
         thisadj = adjs[adj_index].capitalize()
@@ -54,6 +54,6 @@ with open('nouns.txt', 'r') as fnouns, open('adjectives.txt', 'r') as fadj, open
         gen_qr_code(badgeurl, badgefile)
         indesign_badge_dir = PREFIX_DIR_FOR_INDESIGN + badgeid + ".png"
 
-        badgeline = "{},The Garden of {} {},{},{}".format(badgeid, thisadj, thisnoun, badgeurl, indesign_badge_dir)
+        badgeline = "{},{} {},The Garden of {} {},{},{}".format(badgeid, thisadj, thisnoun, thisadj, thisnoun, badgeurl, indesign_badge_dir)
         print(badgeline)
         fbadgelines.write(badgeline + "\n")
