@@ -3,7 +3,7 @@ import sys
 import qrcode
 import os
 
-BADGE_NUM = 400
+BADGE_NUM = 1000
 BADGE_URL_PREFIX = "HTTPS://DECENTRALIZEDWEB.NET/QR/2018.HTML?BADGE="
 BADGE_DIR = "qrcodes/badges/"
 PREFIX_DIR_FOR_INDESIGN = "Macintosh HD:Users:provolot:github:seeding-gardens:badge:qrcodes:badges:"
