@@ -5,6 +5,7 @@ class Kiosk {
 
 
   constructor() {
+    this.init()
   
   }
 
@@ -20,14 +21,12 @@ class Kiosk {
 
     var collab_options = {
     };
-    const collaboration = self._app.collaborate("seedinggardens_test_v0", "gset", collab_options)
+    self.collaboration = self._app.collaborate("seedinggardens_test_v0", "gset", collab_options)
 
     Keys.generate().then((keys) => {
       console.log(keys);
       console.log(Keys.uriEncodeReadOnly(keys))
     });
-
-
 
 
     self._app.start()
@@ -41,6 +40,12 @@ class Kiosk {
           }); 
         }, 2000)
       })
+
+    self.collaboration.on('state changed', (fromSelf) => {
+      console.log('state changed. New collaboration value is: %j', self.collaboration.shared.value())
+    })
+
+
   }
 
 
