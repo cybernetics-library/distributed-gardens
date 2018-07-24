@@ -1,4 +1,4 @@
-# server-garden
+# distributed-gardens
 
 ### /api
 
