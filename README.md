@@ -35,6 +35,7 @@ Each event/transaction is stored as a single event with timestamp & data
       - `order`: contains a string parsed by kiosk.
     - if message is of type ‘data':  
       - `link`: Defines a link between a person and a kiosk
+        - defined as a tuple (in list form) of two badge IDs 
       - `media`: Defines a media: text, URL, etc. 
     
 
@@ -42,7 +43,7 @@ Each event/transaction is stored as a single event with timestamp & data
 example:
 ```
 {
-  'version': v1,
+  'version': 1,
   'timestamp': 1531764520.1234,
   'from': { name: 'dans_computer' },
   'type': 'order',
@@ -50,6 +51,15 @@ example:
 }
 ```
 
+```
+{
+  'version': 1,
+  'timestamp': 1531764520.1234,
+  'from': { name: 'kiosk_2' },
+  'type': 'data',
+  'body': { 'link': ['11111', '22222'] }
+}
+```
 
 ### Scanner
 
