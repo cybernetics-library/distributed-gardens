@@ -17,37 +17,35 @@ npm start
 
 ### Event message format
 
-Each event/transaction is stored as a single event with timestamp & data
+Events/transactions are stored as a single entry with timestamp & data
 
 - required fields:
   - `version`: `1`
   - `timestamp`: unix timestamp (in seconds). Can be a float.
   - `from`: 
     - `name`: This is a display name of who sent the message. 
-  - `type`: Either of type 'data' or 'order'
-    - `data` is what almost everyone will use. 
-        - this **does** get incorporated into the state
-    - `order` is meant to request things above the level of data -- say, restarting kiosks or reloading the database, etc. 
-          - This **does not** get incorporated into the state.
-          - each kiosk/website can choose, node-side, to listen to the order or not.
-  - `body`: 
-    - If message is of type 'order':
-      - `order`: contains a string parsed by kiosk.
-    - if message is of type ‘data':  
-      - `link`: Defines a link between a person and a kiosk
-        - defined as a tuple (in list form) of two badge IDs 
-      - `media`: Defines a media: text, URL, etc. 
-    
+  - `messages`: a list of messages. Each message can be of any type. Right now we'll try to have one message per entry.
+    - Message types:
+      - `link`: Defines a link between a person and a kiosk (this is undirected, but we still store from/to because there's a sequence in which who scanned which badge first)
+        - `link_from`: Who the person initially linking is 
+        - `link_to`: Who the person linking to is
+      - `seed`: Adds media to a Garden: text, URL, etc.
+        - `seed_to`: gardenID of garden seeting to
+        - `media`: list of strings pointing to media **(THIS COULD CHANGE)**
+      - `order`: Orders, requesting things above the level of data -- say, restarting kiosks or reloading the database, etc. 
+        - This **does not** get incorporated into the state.
+        - each kiosk/website can choose, node-side, to listen to the order or not.
+      
 
 
 example:
+
 ```
 {
   'version': 1,
   'timestamp': 1531764520.1234,
   'from': { name: 'dans_computer' },
-  'type': 'order',
-  'body': { 'order': 'restart_kiosk' }
+  'messages': [{ 'type': 'link', 'link_from': '11111', 'link_to': '22222' }]
 }
 ```
 
@@ -55,11 +53,33 @@ example:
 {
   'version': 1,
   'timestamp': 1531764520.1234,
-  'from': { name: 'kiosk_2' },
-  'type': 'data',
-  'body': { 'link': ['11111', '22222'] }
+  'from': { name: 'dans_computer' },
+  'messages': [{ 'type': 'seed', 'seed_to': '33333', media: ['http://youtube.com', 'This is a comment'] }]
 }
 ```
+
+```
+{
+  'version': 1,
+  'timestamp': 1531764520.1234,
+  'from': { name: 'dans_computer' },
+  'messages': [{ 'type': 'order', 'order': 'restart_kiosk'}]
+}
+```
+
+```
+{
+  'version': 1,
+  'timestamp': 1531764520.1234,
+  'from': { name: 'dans_computer' },
+  'messages': [
+    { 'type': 'link', 'link_from': '11111', 'link_to': '22222' },
+    { 'type': 'seed', 'seed_to': '33333', media: ['http://youtube.com', 'This is a comment'] },
+    { 'type': 'order', 'order': 'restart_kiosk'}
+  ]
+}
+```
+
 
 ### Scanner
 
