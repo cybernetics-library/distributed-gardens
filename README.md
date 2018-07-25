@@ -1,56 +1,92 @@
 # distributed-gardens
 
-### /api
 
-Requires Node version `8.4.0` (not a later version, but this specific version)
-
-(Use [NVM](https://github.com/creationix/nvm) to switch between Node versions.)
-
-```
-npm install -d
-npm start
-```
-
-## Events
-
-What kind of events does this handle?
-TODO
 
 ### Event message format
 
-Each event/transaction is stored as a single event with timestamp & data
+Events/transactions are stored as a single entry with timestamp & data
 
 - required fields:
   - `version`: `1`
   - `timestamp`: unix timestamp (in seconds). Can be a float.
   - `from`: 
     - `name`: This is a display name of who sent the message. 
-  - `type`: Either of type 'data' or 'order'
-    - `data` is what almost everyone will use. 
-        - this **does** get incorporated into the state
-    - `order` is meant to request things above the level of data -- say, restarting kiosks or reloading the database, etc. 
-          - This **does not** get incorporated into the state.
-          - each kiosk/website can choose, node-side, to listen to the order or not.
-  - `body`: 
-    - If message is of type 'order':
-      - `order`: contains a string parsed by kiosk.
-    - if message is of type ‘data':  
-      TODO:
-    
+  - `messages`: a list of messages. Each message can be of any type. Right now we'll try to have one message per entry.
+    - Message types:
+      - `link`: Defines a link between a person and a kiosk (this is undirected, but we still store from/to because there's a sequence in which who scanned which badge first)
+        - `link_from`: Who the person initially linking is 
+        - `link_to`: Who the person linking to is
+      - `seed`: Adds media to a Garden: text, URL, etc.
+        - `seed_to`: gardenID of garden seeting to
+        - `media`: list of metadata -- follows [IA metadata format](https://internetarchive.readthedocs.io/en/latest/metadata.html) **TODO/examine this**
+      - `order`: Orders, requesting things above the level of data -- say, restarting kiosks or reloading the database, etc. 
+        - This **does not** get incorporated into the state.
+        - each kiosk/website can choose, node-side, to listen to the order or not.
+      
 
 
-example:
+Examples:
+
+Linking between gardens (badges) `11111` and `22222`
 ```
 {
-  'version': v1,
+  'version': 1,
   'timestamp': 1531764520.1234,
-  'from': { name: 'dans_computer' },
-  'type': 'order',
-  'body': { 'order': 'restart_kiosk' }
+  'from': { name: 'kiosk_1_hallway' },
+  'messages': [{ 'type': 'link', 'link_from': '11111', 'link_to': '22222' }]
 }
 ```
 
+Seeding - adding data to a garden via a kiosk
+```
+{
+  'version': 1,
+  'timestamp': 1531764520.1234,
+  'from': { name: 'kiosk_2_hallway' },
+  'messages': [{ 'type': 'seed', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
+}
+```
+Order to restart kiosks
+```
+{
+  'version': 1,
+  'timestamp': 1531764520.1234,
+  'from': { name: 'dans_computer' },
+  'messages': [{ 'type': 'order', 'order': 'restart_kiosk'}]
+}
+```
 
+Multiple messages in one event
+```
+{
+  'version': 1,
+  'timestamp': 1531764520.1234,
+  'from': { name: 'dans_computer' },
+  'messages': [
+    { 'type': 'link', 'link_from': '11111', 'link_to': '22222' },
+    { 'type': 'seed', 'seed_to': '33333', media: [{ .. IA metadata format here}, {.. IA metadata}] },
+    { 'type': 'order', 'order': 'restart_kiosk'}
+  ]
+}
+```
+
+### Gardens
+
+Eventually, a garden will have this info:
+- Badge ID 
+- Badge name
+- Record of events, which includes / could incorporate
+  - Timestamps of checkins
+  - number of total checkins
+  - recent time till last check in
+- Files 
+  - file types
+  - file size
+  - file names
+- Peer gardens
+  - number of peers
+  - Names of peers
+  
 ### Scanner
 
 If you are running the scanner on a raspberry pi, you'll need to enable the camera in preferences and then add the following lines of code.
