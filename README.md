@@ -77,7 +77,7 @@ Multiple messages in one event
   'from': { name: 'dans_computer' },
   'messages': [
     { 'type': 'link', 'link_from': '11111', 'link_to': '22222' },
-    { 'type': 'seed', 'seed_to': '33333', media: ['http://youtube.com', 'This is a comment'] },
+    { 'type': 'seed', 'seed_to': '33333', media: [{ .. IA metadata format here}, {.. IA metadata}] },
     { 'type': 'order', 'order': 'restart_kiosk'}
   ]
 }
