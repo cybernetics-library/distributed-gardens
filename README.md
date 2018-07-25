@@ -1,6 +1,6 @@
 # distributed-gardens
 
-### /api
+### /kiosk (this is not working rn)
 
 Requires Node version `8.4.0` (not a later version, but this specific version)
 
