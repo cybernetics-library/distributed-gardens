@@ -39,6 +39,8 @@ with open('nouns.txt', 'r') as fnouns, open('adjectives.txt', 'r') as fadj, open
     adj_index = 0
     noun_index = 0
 
+    longest_ever = ""
+
     badgeline = "id,garden_name,full_garden_name,qr_url,@qrcode_filename"
     fbadgelines.write(badgeline + "\n")
     for i in range(BADGE_NUM):
@@ -57,3 +59,9 @@ with open('nouns.txt', 'r') as fnouns, open('adjectives.txt', 'r') as fadj, open
         badgeline = "{},{} {},The Garden of {} {},{},{}".format(badgeid, thisadj, thisnoun, thisadj, thisnoun, badgeurl, indesign_badge_dir)
         print(badgeline)
         fbadgelines.write(badgeline + "\n")
+
+        if (len(thisadj) + len(thisnoun) > len(longest_ever)):
+            longest_ever = thisadj + " " + thisnoun
+
+    print ("LONGEST EVER")
+    print (longest_ever)
