@@ -31,20 +31,21 @@ Events/transactions are stored as a single entry with timestamp & data
         - `link_to`: Who the person linking to is
       - `seed`: Adds media to a Garden: text, URL, etc.
         - `seed_to`: gardenID of garden seeting to
-        - `media`: list of strings pointing to media **(THIS COULD CHANGE)**
+        - `media`: list of metadata -- follows (https://internetarchive.readthedocs.io/en/latest/metadata.html)[IA metadata format]
       - `order`: Orders, requesting things above the level of data -- say, restarting kiosks or reloading the database, etc. 
         - This **does not** get incorporated into the state.
         - each kiosk/website can choose, node-side, to listen to the order or not.
       
 
 
-example:
+Examples:
 
+Linking between gardens (badges) `11111` and `22222`
 ```
 {
   'version': 1,
   'timestamp': 1531764520.1234,
-  'from': { name: 'dans_computer' },
+  'from': { name: 'kiosk_1_hallway' },
   'messages': [{ 'type': 'link', 'link_from': '11111', 'link_to': '22222' }]
 }
 ```
@@ -53,7 +54,7 @@ example:
 {
   'version': 1,
   'timestamp': 1531764520.1234,
-  'from': { name: 'dans_computer' },
+  'from': { name: 'kiosk_2_hallway' },
   'messages': [{ 'type': 'seed', 'seed_to': '33333', media: ['http://youtube.com', 'This is a comment'] }]
 }
 ```
