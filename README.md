@@ -37,13 +37,13 @@ Linking between gardens (badges) `11111` and `22222`
 }
 ```
 
-Seeding - adding data to a garden via a kiosk
+Seeding - badge 12345 adding data (seeding to) '33333' via a kiosk
 ```
 {
   'version': 1,
   'timestamp': 1531764520.1234,
   'from': { name: 'kiosk_2_hallway' },
-  'messages': [{ 'type': 'seed', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
+  'messages': [{ 'type': 'seed', 'seed_by': '12345', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
 }
 ```
 Order to restart kiosks
