@@ -50,15 +50,16 @@ Linking between gardens (badges) `11111` and `22222`
 }
 ```
 
+Seeding - adding data to a garden via a kiosk
 ```
 {
   'version': 1,
   'timestamp': 1531764520.1234,
   'from': { name: 'kiosk_2_hallway' },
-  'messages': [{ 'type': 'seed', 'seed_to': '33333', media: ['http://youtube.com', 'This is a comment'] }]
+  'messages': [{ 'type': 'seed', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
 }
 ```
-
+Order to restart kiosks
 ```
 {
   'version': 1,
@@ -68,6 +69,7 @@ Linking between gardens (badges) `11111` and `22222`
 }
 ```
 
+Multiple messages in one event
 ```
 {
   'version': 1,
