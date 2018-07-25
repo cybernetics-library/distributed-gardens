@@ -13,8 +13,7 @@ npm start
 
 ## Events
 
-What kind of events does this handle?
-TODO
+
 
 ### Event message format
 
@@ -35,7 +34,8 @@ Each event/transaction is stored as a single event with timestamp & data
     - If message is of type 'order':
       - `order`: contains a string parsed by kiosk.
     - if message is of type ‘data':  
-      TODO:
+      - `link`: Defines a link between a person and a kiosk
+      - `media`: Defines a media: text, URL, etc. 
     
 
 
