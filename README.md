@@ -1,17 +1,5 @@
 # distributed-gardens
 
-### /kiosk (this is not working rn)
-
-Requires Node version `8.4.0` (not a later version, but this specific version)
-
-(Use [NVM](https://github.com/creationix/nvm) to switch between Node versions.)
-
-```
-npm install -d
-npm start
-```
-
-
 
 
 ### Event message format
