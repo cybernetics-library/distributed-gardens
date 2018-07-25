@@ -31,7 +31,7 @@ Events/transactions are stored as a single entry with timestamp & data
         - `link_to`: Who the person linking to is
       - `seed`: Adds media to a Garden: text, URL, etc.
         - `seed_to`: gardenID of garden seeting to
-        - `media`: list of metadata -- follows (https://internetarchive.readthedocs.io/en/latest/metadata.html)[IA metadata format]
+        - `media`: list of metadata -- follows [IA metadata format](https://internetarchive.readthedocs.io/en/latest/metadata.html) **TODO/examine this**
       - `order`: Orders, requesting things above the level of data -- say, restarting kiosks or reloading the database, etc. 
         - This **does not** get incorporated into the state.
         - each kiosk/website can choose, node-side, to listen to the order or not.
