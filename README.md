@@ -85,18 +85,18 @@ Multiple messages in one event
 ### Gardens
 
 Eventually, a garden will have this info:
-- Badge ID #
+- Badge ID 
 - Badge name
 - Record of events, which includes / could incorporate
   - Timestamps of checkins
-  - # of total checkins
+  - number of total checkins
   - recent time till last check in
 - Files 
   - file types
   - file size
   - file names
 - Peer gardens
-  - # of peers
+  - number of peers
   - Names of peers
   
 ### Scanner
