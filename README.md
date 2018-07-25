@@ -11,7 +11,6 @@ npm install -d
 npm start
 ```
 
-## Events
 
 
 
@@ -83,7 +82,23 @@ Multiple messages in one event
 }
 ```
 
+### Gardens
 
+Eventually, a garden will have this info:
+- Badge ID #
+- Badge name
+- Record of events, which includes / could incorporate
+  - Timestamps of checkins
+  - # of total checkins
+  - recent time till last check in
+- Files 
+  - file types
+  - file size
+  - file names
+- Peer gardens
+  - # of peers
+  - Names of peers
+  
 ### Scanner
 
 If you are running the scanner on a raspberry pi, you'll need to enable the camera in preferences and then add the following lines of code.
