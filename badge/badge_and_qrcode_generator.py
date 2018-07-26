@@ -6,7 +6,7 @@ import os
 BADGE_NUM = 1000
 BADGE_URL_PREFIX = "HTTPS://DECENTRALIZEDWEB.NET/QR/2018.HTML?BADGE="
 BADGE_DIR = "qrcodes/badges/"
-PREFIX_DIR_FOR_INDESIGN = "Macintosh HD:Users:provolot:github:seeding-gardens:badge:qrcodes:badges:"
+PREFIX_DIR_FOR_INDESIGN = "Macintosh HD:Users:provolot:github:distributed-gardens:badge:qrcodes:badges:"
 
 def gen_qr_code(url, fname):
     """
@@ -41,7 +41,7 @@ with open('nouns.txt', 'r') as fnouns, open('adjectives.txt', 'r') as fadj, open
 
     longest_ever = ""
 
-    badgeline = "id,garden_name,full_garden_name,qr_url,@qrcode_filename"
+    badgeline = "id,adjective,noun,garden_name,full_garden_name,qr_url,@qrcode_filename"
     fbadgelines.write(badgeline + "\n")
     for i in range(BADGE_NUM):
         thisadj = adjs[adj_index].capitalize()
@@ -56,7 +56,7 @@ with open('nouns.txt', 'r') as fnouns, open('adjectives.txt', 'r') as fadj, open
         gen_qr_code(badgeurl, badgefile)
         indesign_badge_dir = PREFIX_DIR_FOR_INDESIGN + badgeid + ".png"
 
-        badgeline = "{},{} {},The Garden of {} {},{},{}".format(badgeid, thisadj, thisnoun, thisadj, thisnoun, badgeurl, indesign_badge_dir)
+        badgeline = "{},{},{},{} {},The Garden of {} {},{},{}".format(badgeid, thisadj, thisnoun, thisadj, thisnoun, thisadj, thisnoun, badgeurl, indesign_badge_dir)
         print(badgeline)
         fbadgelines.write(badgeline + "\n")
 
