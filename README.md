@@ -18,7 +18,7 @@ Events/transactions are stored as a single entry with timestamp & data
         - `link_from`: Who the person initially linking is 
         - `link_to`: Who the person linking to is
       - `seed`: Adds media to a Garden: text, URL, etc.
-        - `submitter_name`: name of person submitting
+        - `seeder_name`: name of person submitting
         - `seed_to`: gardenID of garden seeding to
         - `media`: list of metadata -- follows [IA metadata format](https://internetarchive.readthedocs.io/en/latest/metadata.html) **TODO/examine this**
       - `order`: Orders, requesting things above the level of data -- say, restarting kiosks or reloading the database, etc. 
