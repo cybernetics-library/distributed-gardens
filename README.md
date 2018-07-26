@@ -18,10 +18,12 @@ Events/transactions are stored as a single entry with timestamp & data
         - `link_from`: Who the person initially linking is 
         - `link_to`: Who the person linking to is
       - `seed`: Adds media to a Garden: text, URL, etc.
-        - `seeder_name`: name of person submitting
+        - `seeder_id`: badgeID of gardener submitting
         - `seed_to`: gardenID of garden seeding to
         - `media`: list of metadata -- follows [IA metadata format](https://internetarchive.readthedocs.io/en/latest/metadata.html) **TODO/examine this**
-
+      - `addinfo`: Adds info to a Gardener's profile
+        - `gid`: badgeID of gardener submitting
+        - `data`: list of data. Open-ended. Such as: `name`, `email`, `website`, `twitter_id`, `instagram_id`.
 
 Examples:
 
@@ -41,12 +43,22 @@ Seeding - badge 12345 adding data (seeding to) '33333' via a kiosk
 {
   'ver': 1,
   'ts': 1531764520.1234,
-  'from': { name: 'kiosk_2_hallway' },
-  'type': 'seed', 
-  'msgs': [{ 'submitter_name': 'Alice', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
+  'from': { name: 'web_microsite' },
+  'type': 'addinfo', 
+  'msgs': [{ 'seeder_id': '12345', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
 }
 ```
 
+Adding info - badge 56789 adding info to their own garden
+```
+{
+  'ver': 1,
+  'ts': 1531764520.1234,
+  'from': { name: 'kiosk_2_hallway' },
+  'type': 'seed', 
+  'msgs': [{ 'data': { 'name': 'Alice Abbasi', 'email': 'aliceabbasi@example.com' } }]
+}
+```
 
 ### Gardens
 
