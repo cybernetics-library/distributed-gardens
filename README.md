@@ -12,7 +12,7 @@ Events/transactions are stored as a single entry with timestamp & data
   - `from`: 
     - `name`: This is a display name of who sent the message. 
   - `type`: This is a type of message. Currently either only `link` or `seed`
-  - `msgs`: a list of messages. All messages must be of the same type. Right now we'll try to have one message per entry.
+  - `msg`: a message. there is one message per entry.
     - Message types:
       - `link`: Defines a link between a person and a kiosk (this is undirected, but we still store from/to because there's a sequence in which who scanned which badge first)
         - `link_from`: Who the person initially linking is 
@@ -23,7 +23,12 @@ Events/transactions are stored as a single entry with timestamp & data
         - `media`: list of metadata -- follows [IA metadata format](https://internetarchive.readthedocs.io/en/latest/metadata.html) **TODO/examine this**
       - `addinfo`: Adds info to a Gardener's profile
         - `gid`: badgeID of gardener submitting
-        - `data`: list of data. Open-ended. Such as: `name`, `email`, `website`, `twitter_id`, `instagram_id`.
+        - `name`
+        - `email`
+        - `website`
+        - `twitter_id`
+        - `instagram_id`
+        - and more.
 
 Examples:
 
@@ -34,7 +39,7 @@ Linking between gardens (badges) `11111` and `22222`
   'ts': 1531764520.1234,
   'from': { name: 'kiosk_1_hallway' },
   'type': 'link',
-  'msgs': [{ 'link_from': '11111', 'link_to': '22222' }]
+  'msg': { 'link_from': '11111', 'link_to': '22222' }
 }
 ```
 
@@ -45,7 +50,7 @@ Seeding - badge 12345 adding data (seeding to) '33333' via a kiosk
   'ts': 1531764520.1234,
   'from': { name: 'web_microsite' },
   'type': 'addinfo', 
-  'msgs': [{ 'seeder_id': '12345', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
+  'msg': { 'seeder_id': '12345', 'seed_to': '33333', media: [{ .. IA metadata format here}] }
 }
 ```
 
@@ -56,7 +61,7 @@ Adding info - badge 56789 adding info to their own garden
   'ts': 1531764520.1234,
   'from': { name: 'kiosk_2_hallway' },
   'type': 'seed', 
-  'msgs': [{ 'data': { 'name': 'Alice Abbasi', 'email': 'aliceabbasi@example.com' } }]
+  'msg': { 'gid': 56789', 'name': 'Alice Abbasi', 'email': 'aliceabbasi@example.com' } 
 }
 ```
 
