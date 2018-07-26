@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "3d-force-graph": "^1.38.1",
+    "biome": "github:parkan/biome",
     "jquery": "^3.3.1",
     "three": "^0.94.0",
     "vue": "^2.5.16",
