@@ -7,12 +7,12 @@
 Events/transactions are stored as a single entry with timestamp & data
 
 - required fields:
-  - `version`: `1`
-  - `timestamp`: unix timestamp (in seconds). Can be a float.
+  - `ver`: `1`
+  - `ts`: unix timestamp (in seconds). Can be a float.
   - `from`: 
     - `name`: This is a display name of who sent the message. 
   - `type`: This is a type of message. Currently either only `link` or `seed`
-  - `messages`: a list of messages. All messages must be of the same type. Right now we'll try to have one message per entry.
+  - `msgs`: a list of messages. All messages must be of the same type. Right now we'll try to have one message per entry.
     - Message types:
       - `link`: Defines a link between a person and a kiosk (this is undirected, but we still store from/to because there's a sequence in which who scanned which badge first)
         - `link_from`: Who the person initially linking is 
@@ -31,22 +31,22 @@ Examples:
 Linking between gardens (badges) `11111` and `22222`
 ```
 {
-  'version': 1,
-  'timestamp': 1531764520.1234,
+  'ver': 1,
+  'ts': 1531764520.1234,
   'from': { name: 'kiosk_1_hallway' },
   'type': 'link',
-  'messages': [{ 'link_from': '11111', 'link_to': '22222' }]
+  'msgs': [{ 'link_from': '11111', 'link_to': '22222' }]
 }
 ```
 
 Seeding - badge 12345 adding data (seeding to) '33333' via a kiosk
 ```
 {
-  'version': 1,
-  'timestamp': 1531764520.1234,
+  'ver': 1,
+  'ts': 1531764520.1234,
   'from': { name: 'kiosk_2_hallway' },
   'type': 'seed', 
-  'messages': [{ 'submitter_name': 'Alice', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
+  'msgs': [{ 'submitter_name': 'Alice', 'seed_to': '33333', media: [{ .. IA metadata format here}] }]
 }
 ```
 
