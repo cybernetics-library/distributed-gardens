@@ -1,18 +1,26 @@
 var Biome = require('biome')
 
 class gardenBiome {
-  constructor() {
-    this._init()
+  constructor(cb) {
+    this._init(cb)
   }
 
-  async _init() {
+  async _init(cb) {
     var self = this;
     self.biome = Biome()
     await self.biome.start()
-    await self.biome.addEvent({ from: { "name": "arkadiy" }, type: "seed", msg: "zb2rhZp3WapJaG6DQizqEP3SruMVScn35vixhgGMAyarNYoae" })
-    console.log(self.biome.getEvents())
-    console.log("yo");
+    var current_time = new Date().getTime();
+    await self.biome.addEvent({ from: { "name": "dan" }, type: "seed", msg: "wow here's the current timestamp: " + current_time })
+    await cb();
   }
+
+  getEvents() {
+    return this.biome.getEvents()
+  } 
 }
 
-var gb = new gardenBiome();
+var gb = new gardenBiome(() => {
+  console.log("woo finished");
+  console.log(gb.getEvents());
+});
+
