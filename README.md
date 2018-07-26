@@ -21,7 +21,7 @@ Events/transactions are stored as a single entry with timestamp & data
         - `seeder_id`: badgeID of gardener submitting
         - `seed_to`: gardenID of garden seeding to
         - `media`: list of metadata -- follows [IA metadata format](https://internetarchive.readthedocs.io/en/latest/metadata.html) **TODO/examine this**
-      - `addinfo`: Adds info to a Gardener's profile
+      - `setinfo`: Adds/edits info to a Gardener's profile. This is Last Writer Wins -- the most recent info key overwrites whatever was before.
         - `gid`: badgeID of gardener submitting
         - `name`
         - `email`
@@ -54,7 +54,7 @@ Seeding - badge 12345 adding data (seeding to) '33333' via a kiosk
 }
 ```
 
-Adding info - badge 56789 adding info to their own garden
+Set info - badge 56789 adding info to their own garden
 ```
 {
   'ver': 1,
