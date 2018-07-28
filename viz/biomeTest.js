@@ -1,17 +1,22 @@
 var Biome = require('biome')
 
 class gardenBiome {
-  constructor(cb) {
-    this._init(cb)
+  constructor() {
   }
 
-  async _init(cb) {
+  async init() {
     var self = this;
     self.biome = Biome()
     await self.biome.start()
+    self.biome.on('state changed', () => {
+      console.log("state changeed!");
+    });
+  }
+
+  async addEvent() {
+    var self = this;
     var current_time = new Date().getTime();
     await self.biome.addEvent({ from: { "name": "dan" }, type: "seed", msg: "wow here's the current timestamp: " + current_time })
-    await cb();
   }
 
   getEvents() {
@@ -19,8 +24,13 @@ class gardenBiome {
   } 
 }
 
-var gb = new gardenBiome(() => {
-  console.log("woo finished");
-  console.log(gb.getEvents());
-});
+var gb = new gardenBiome();
+
+gb.init()
+  .then(() => {
+    gb.addEvent()
+  })
+  .then(() => {
+    console.log(gb.getEvents());
+  });
 
