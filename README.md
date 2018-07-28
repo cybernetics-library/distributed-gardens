@@ -95,7 +95,7 @@ Eventually, a garden will have this info:
   - file types
   - file size
   - file names
-- Peer gardens
-  - number of peers
-  - Names of peers
+- Linked gardens
+  - Number of links
+  - Names of linked gardens
   
