@@ -1,6 +1,23 @@
 # distributed-gardens
 
 
+### Viz
+
+uses [Parcel](https://parceljs.org/getting_started.html):
+
+`npm install -g parcel-bundler`
+
+
+
+### Scanner
+
+If you are running the scanner on a raspberry pi, you'll need to enable the camera in preferences and then add the following lines of code.
+
+In terminal `sudo nano /etc/modules` and add the line `bcm2835-v4l2`. This makes a reference to a video stream from the native camera module at /dev/video0. This should allow chromium to request the video stream.
+
+[Reference](https://www.raspberrypi.org/forums/viewtopic.php?t=194311)
+
+
 
 ### V1 Event message format
 
@@ -82,10 +99,3 @@ Eventually, a garden will have this info:
   - number of peers
   - Names of peers
   
-### Scanner
-
-If you are running the scanner on a raspberry pi, you'll need to enable the camera in preferences and then add the following lines of code.
-
-In terminal `sudo nano /etc/modules` and add the line `bcm2835-v4l2`. This makes a reference to a video stream from the native camera module at /dev/video0. This should allow chromium to request the video stream.
-
-[Reference](https://www.raspberrypi.org/forums/viewtopic.php?t=194311)
