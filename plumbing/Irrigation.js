@@ -1,5 +1,5 @@
-import Biome from 'biome'
-import * as _ from 'lodash'; 
+var Biome = require('biome')
+var _ = require('lodash');
 
 
 class Irrigation {
@@ -12,10 +12,15 @@ class Irrigation {
     await self.biome.start()
   }
 
-  async addEvent() {
+  async addEventNow(msg) {
     var self = this;
-    var current_time = new Date().getTime();
-    await self.biome.addEvent({ from: { "name": "dan" }, type: "seed", msg: "wow here's the current timestamp: " + current_time })
+    msg.ver = 1;
+    msg.ts = new Date().getTime() / 1000;
+    await self.biome.addEvent(msg)
+  }
+
+   async addEvent(msg) {
+    await self.biome.addEvent(msg)
   }
 
   async addSampleEvent() {
@@ -30,24 +35,46 @@ class Irrigation {
     await self.biome.addEvent(msg);
   }
 
-  getHistory() {
-    // TODO: Cache this
-    return this.biome.getEvents();
+  getHistory(config) {
+    var self = this;
+
+    if(typeof(config) != "undefined" &&
+        "force" in config &&
+         config.force == true) {
+      this.last_getEvents = new Date().getTime()
+      this.cachedEvents = _.sortBy(self.biome.getEvents(), "ts");
+    }
+
+
+    if(typeof(this.cachedEvents) == "undefined" ||
+        typeof(this.last_getEvents) == "undefined" ||
+        this.last_getEvents - new Date().getTime() > 5 * 1000) {
+
+      this.last_getEvents = new Date().getTime()
+      this.cachedEvents = _.sortBy(self.biome.getEvents(), "ts");
+    } 
+
+    return this.cachedEvents
   } 
 
   getStats() {
     // CALCULATE world-wide stats here
-    var thisHistory = this.getHistory(); 
     var stats = {};
-    stats.participantNames = this._getParticipantNames(thisHistory);
+    stats.participantNames = this._getParticipantNames();
     stats.participantNum = stats.participantNames.length
     return stats
   }
 
-  _getParticipantNames(hist) {
+  _getParticipantNames() {
+    var self = this;
     return _.map(
-      _.uniqBy(hist, function(o) { return o.from.name; }),
+      _.uniqBy(self.getHistory(), function(o) { return o.from.name; }),
       function(d) { return d.from.name; })
+  }
+
+  getAdjacencyList() {
+    var self = this;
+    _.filter(self.getHistory(), { type: "link" })
   }
 
 }

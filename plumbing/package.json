@@ -13,10 +13,12 @@
     "jquery": "^3.3.1",
     "three": "^0.94.0",
     "vue": "^2.5.16",
+    "vue-hot-reload-api": "^2.3.0",
     "webpack-dev-middleware": "^1.10.1",
     "webpack-hot-middleware": "^2.17.0"
   },
   "devDependencies": {
+    "@vue/component-compiler-utils": "^2.1.0",
     "autoprefixer-loader": "^3.2.0",
     "babel-core": "^6.3.26",
     "babel-loader": "^6.2.0",
@@ -30,6 +32,7 @@
     "json-loader": "^0.5.4",
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
+    "vue-template-compiler": "^2.5.16",
     "webpack": "^1.13.1",
     "webpack-dev-server": "^1.14.1"
   }
