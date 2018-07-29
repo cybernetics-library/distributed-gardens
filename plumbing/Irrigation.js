@@ -1,4 +1,6 @@
-var Biome = require('biome')
+import Biome from 'biome'
+import * as _ from 'lodash'; 
+
 
 class Irrigation {
   constructor() {
@@ -28,10 +30,26 @@ class Irrigation {
     await self.biome.addEvent(msg);
   }
 
-  getEvents() {
-    console.log("xXy");
+  getHistory() {
+    // TODO: Cache this
     return this.biome.getEvents();
   } 
+
+  getStats() {
+    // CALCULATE world-wide stats here
+    var thisHistory = this.getHistory(); 
+    var stats = {};
+    stats.participantNames = this._getParticipantNames(thisHistory);
+    stats.participantNum = stats.participantNames.length
+    return stats
+  }
+
+  _getParticipantNames(hist) {
+    return _.map(
+      _.uniqBy(hist, function(o) { return o.from.name; }),
+      function(d) { return d.from.name; })
+  }
+
 }
 
 module.exports = Irrigation;
