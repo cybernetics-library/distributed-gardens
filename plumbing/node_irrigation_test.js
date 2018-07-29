@@ -20,7 +20,8 @@ irrigation.init()
   .then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed',
     'msg': { 'seed_by': '11111', 'seed_to': '66666',  media:[ 'NorbertWienerCybernetics'] } })); })
 //  .then(() => { console.log(irrigation.addSampleEvent()); })*/
-  .then(() => { irrigation.getHistory().forEach((d, i) => {
-    console.log(d);
-    console.log(i);
-  }); })
+//  .then(() => { irrigation.getHistory().forEach((d, i) => {
+//    console.log(d);
+//  }); })
+  .then(() => { console.log(irrigation.getAdjacencyList()); })
+  .then(() => { console.log(irrigation.getStats()); });

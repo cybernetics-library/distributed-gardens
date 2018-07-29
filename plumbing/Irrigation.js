@@ -19,22 +19,12 @@ class Irrigation {
     await self.biome.addEvent(msg)
   }
 
-   async addEvent(msg) {
+  async addEvent(msg) {
     await self.biome.addEvent(msg)
   }
 
-  async addSampleEvent() {
-    var self = this;
-    var msg = {
-      'ver': 1,
-      'ts': new Date().getTime() / 1000,
-      'from': { name: 'sample_maker' },
-      'type': 'scan',
-      'msg': { 'gid': '11111' }
-    }
-    await self.biome.addEvent(msg);
-  }
 
+  // force: true to force clearing cache
   getHistory(config) {
     var self = this;
 
@@ -62,19 +52,28 @@ class Irrigation {
     var stats = {};
     stats.participantNames = this._getParticipantNames();
     stats.participantNum = stats.participantNames.length
+    stats.numEvents = this.getHistory().length;
     return stats
   }
 
   _getParticipantNames() {
     var self = this;
-    return _.map(
-      _.uniqBy(self.getHistory(), function(o) { return o.from.name; }),
-      function(d) { return d.from.name; })
+    return  _.chain(self.getHistory())
+        .map((d) => { return d.from.name })
+        .uniq()
+        .value()
   }
 
   getAdjacencyList() {
     var self = this;
-    _.filter(self.getHistory(), { type: "link" })
+    var adjs =
+      _.chain(self.getHistory())
+        .filter({type: "link" })
+        .map((d) => { return [d.msg.link_from, d.msg.link_to].sort().join("-") })
+        .uniq()
+        .map((d) => { return d.split("-"); })
+        .value();
+    return adjs;
   }
 
 }
