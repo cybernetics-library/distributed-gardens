@@ -31,6 +31,7 @@ Events/transactions are stored as a single entry with timestamp & data
   - `type`: This is a type of message. Currently either only `link` or `seed`
   - `msg`: a message. there is one message per entry.
     - Message types:
+      - `scan`: Records a person scanning their badge at a kiosk
       - `link`: Defines a link between a person and a kiosk (this is undirected, but we still store from/to because there's a sequence in which who scanned which badge first)
         - `link_from`: Who the person initially linking is 
         - `link_to`: Who the person linking to is
@@ -49,6 +50,16 @@ Events/transactions are stored as a single entry with timestamp & data
 
 Examples:
 
+Scan - badge 23456 scanning into a kiosk
+```
+{
+  'ver': 1,
+  'ts': 1531764520.1234,
+  'from': { name: 'kiosk_2_hallway' },
+  'type': 'scan', 
+  'msg': { 'gid': 23456' } 
+}
+```
 Linking between gardens (badges) `11111` and `22222`
 ```
 {
@@ -67,7 +78,7 @@ Seeding - badge 12345 adding data (seeding to) '33333' via a kiosk
   'ts': 1531764520.1234,
   'from': { name: 'web_microsite' },
   'type': 'addinfo', 
-  'msg': { 'seeder_id': '12345', 'seed_to': '33333', media: [{ .. IA metadata format here}] }
+  'msg': { 'seed_by': '12345', 'seed_to': '33333', media: [{ .. IA metadata format here}] }
 }
 ```
 
@@ -78,7 +89,7 @@ Set info - badge 56789 adding info to their own garden
   'ts': 1531764520.1234,
   'from': { name: 'kiosk_2_hallway' },
   'type': 'seed', 
-  'msg': { 'gid': 56789', 'name': 'Alice Abbasi', 'email': 'aliceabbasi@example.com' } 
+  'msg': { 'badge_id': 56789', 'name': 'Alice Abbasi', 'email': 'aliceabbasi@example.com' } 
 }
 ```
 
