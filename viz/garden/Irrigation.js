@@ -1,6 +1,6 @@
 var Biome = require('biome')
 
-class gardenBiome {
+class Irrigation {
   constructor() {
   }
 
@@ -8,9 +8,6 @@ class gardenBiome {
     var self = this;
     self.biome = Biome()
     await self.biome.start()
-    self.biome.on('state changed', () => {
-      console.log("state changeed!");
-    });
   }
 
   async addEvent() {
@@ -19,18 +16,22 @@ class gardenBiome {
     await self.biome.addEvent({ from: { "name": "dan" }, type: "seed", msg: "wow here's the current timestamp: " + current_time })
   }
 
+  async addSampleEvent() {
+    var self = this;
+    var msg = {
+      'ver': 1,
+      'ts': new Date().getTime() / 1000,
+      'from': { name: 'sample_maker' },
+      'type': 'scan',
+      'msg': { 'gid': '11111' }
+    }
+    await self.biome.addEvent(msg);
+  }
+
   getEvents() {
-    return this.biome.getEvents()
+    console.log("xXy");
+    return this.biome.getEvents();
   } 
 }
 
-var gb = new gardenBiome();
-
-gb.init()
-  .then(() => {
-    gb.addEvent()
-  })
-  .then(() => {
-    console.log(gb.getEvents());
-  });
-
+module.exports = Irrigation;
