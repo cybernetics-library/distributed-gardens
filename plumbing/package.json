@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "parcel *.html meadow/*.html scanner/*.html examples/*.html",
+    "start": "parcel *.html meadow/*.html scanner/*.html examples/*.html garden/*.html",
     "build": "webpack --colors --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
