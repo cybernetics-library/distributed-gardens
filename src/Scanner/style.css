@@ -1,0 +1,117 @@
+
+
+@font-face {
+  font-family: 'Steps-Mono';
+  src: url('./fonts/steps-mono.eot'); /* IE9 Compat Modes */
+  src: url('./fonts/steps-mono.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/steps-mono.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/steps-mono.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./fonts/steps-mono.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+
+  html {
+   margin: 0px;
+   height: 100%;
+   width: 100%;
+}
+
+body {
+   margin: 0px;
+   min-height: 100%;
+   width: 100%;
+}
+
+body, html {
+  font-family: "Steps-Mono";
+  background: linear-gradient(rgba(255,0,0,0), #569051);
+  overflow: hidden
+}
+
+  .steps {
+      font-family: 'Steps-Mono';
+  }
+
+  .grayscale.blur {
+      filter: blur(5px) grayscale(100%) !important;
+  }
+
+
+  #cam1 {
+    width: 385px;
+    height: 385px;
+    filter: grayscale(100%);
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+    position: fixed;
+    bottom: 1.2em;
+  }
+
+  #freeze1 img {
+    transform: scaleX(-1);
+    width: 286px;
+    height: 286px;
+    filter: grayscale(100%);
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+    position: fixed;
+    bottom: 1.2em;
+    left: calc(50% - 143px);
+    z-index: 101;
+  }
+
+
+  video {
+    width: 385px;
+    height: 385px;
+    filter: grayscale(100%);
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+    position: fixed;
+    bottom: 1.2em;
+  }
+
+
+#prompt {
+  display: block;
+  position: absolute;
+  margin: auto;
+  text-align: center;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 4em;
+  color: lime;
+  padding: 8px;
+  width: fit-content;
+  height: fit-content;
+  border: 9px dashed;
+}
+
+
+
+  #garden_title {
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    position: fixed;
+    left: calc(50%);
+    bottom: 5.2em;
+    color: lime;
+  }
+
+  #garden_title_2 {
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    position: fixed;
+    color: lime;
+        right: 302px;
+    bottom: 75px;
+  }
