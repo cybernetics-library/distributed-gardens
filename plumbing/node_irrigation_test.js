@@ -23,5 +23,6 @@ irrigation.init()
 //  .then(() => { irrigation.getHistory().forEach((d, i) => {
 //    console.log(d);
 //  }); })
+  .then(() => { console.log(irrigation.getHistory()); })
   .then(() => { console.log(irrigation.getAdjacencyList()); })
   .then(() => { console.log(irrigation.getStats()); });
