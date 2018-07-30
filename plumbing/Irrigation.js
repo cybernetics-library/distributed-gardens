@@ -76,6 +76,12 @@ class Irrigation {
     return adjs;
   }
 
+  getGraphData() {
+    var self = this;
+    var graphdata = {}
+
+  }
+
 }
 
 module.exports = Irrigation;

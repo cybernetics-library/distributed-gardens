@@ -1,7 +1,10 @@
 var Irrigation  = require('../Irrigation');
+var _ = require('lodash');
+window._ = _;
 
 window.onload = () => {
   var irrigation = new Irrigation();
+  window.irrigation = irrigation;
   irrigation.init()
 
 /*  .then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'link', 'msg': { 'link_from': '11111', 'link_to': '22222' } })); })

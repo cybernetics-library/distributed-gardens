@@ -1,4 +1,4 @@
-// stupid wrapper around awesomely stupid iframe comms ;P
+// wrapper around iframe comms ;P
 
 var PaperCup = {};
 
