@@ -2,11 +2,11 @@
 
 @font-face {
   font-family: 'Steps-Mono';
-  src: url('./fonts/steps-mono.eot'); /* IE9 Compat Modes */
-  src: url('./fonts/steps-mono.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('./fonts/steps-mono.woff2') format('woff2'), /* Super Modern Browsers */
-       url('./fonts/steps-mono.woff') format('woff'), /* Pretty Modern Browsers */
-       url('./fonts/steps-mono.ttf')  format('truetype'), /* Safari, Android, iOS */
+  src: url('fonts/steps-mono.eot'); /* IE9 Compat Modes */
+  src: url('fonts/steps-mono.eot') format('embedded-opentype'), /* IE6-IE8 */
+       url('fonts/steps-mono.woff2') format('woff2'), /* Super Modern Browsers */
+       url('fonts/steps-mono.woff') format('woff'), /* Pretty Modern Browsers */
+       url('fonts/steps-mono.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 
   html {
