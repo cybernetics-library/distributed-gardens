@@ -8,10 +8,26 @@
             padding: 0;
             background: #71C1A9;
         }
-        iframe {
+        #scanner {
           border-width: 0px;
           width: 100vw;
-          height: 50vh;
+          height: 350px;
+          position: absolute;
+          bottom: 0px;
+          z-index: 100
+        }
+        #meadow {
+          width: 100vw;
+          min-height: 100vh;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: 50;
+        }
+        #debug {
+          position: absolute;
+          z-index: 10;
+
         }
 
     </style>
@@ -19,13 +35,16 @@
 </head>
 <body>
   <div id="app">
-    <li v-for="item in history">
-      {{item}}
-    </li>
-    {{stats}}
+    <meadow :graphdata=graphdata></meadow>
+    <div id="debug">
+      <li v-for="item in history">
+        {{item}}
+      </li>
+      {{stats}}
+    </div>
   </div>
   <script src="main.js"></script>
-  <iframe name="scanner" src="scanner/index.html"></iframe>
+  <iframe id="scanner" name="scanner" src="scanner/index.html"></iframe>
 </body>
 </html>
 

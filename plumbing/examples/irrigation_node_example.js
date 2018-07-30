@@ -1,4 +1,4 @@
-var Irrigation  = require('./Irrigation');
+var Irrigation  = require('../Irrigation');
 var irrigation = new Irrigation();
 irrigation.init()
 /*  .then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'link', 'msg': { 'link_from': '11111', 'link_to': '22222' } })); })
@@ -26,4 +26,5 @@ irrigation.init()
   .then(() => { console.log(irrigation.getHistory()); })
   .then(() => { console.log(irrigation.getAdjacencyList()); })
   .then(() => { console.log(irrigation.getStats()); })
+  .then(() => { console.log(irrigation.getGraphData()); })
   .then(() => { console.log(irrigation.biome._psa.peerCountGuess()); })

@@ -3,13 +3,14 @@
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "parcel *.html scanner/*.html examples/*.html",
+    "start": "parcel *.html meadow/*.html scanner/*.html examples/*.html",
     "build": "webpack --colors --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "3d-force-graph": "^1.38.1",
     "biome": "github:parkan/biome",
+    "force-graph": "^1.8.0",
     "jquery": "^3.3.1",
     "three": "^0.94.0",
     "vue": "^2.5.16",
