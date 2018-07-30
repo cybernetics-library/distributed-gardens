@@ -46,7 +46,6 @@ body, html {
     margin: auto;
     position: fixed;
     bottom: 1.2em;
-    left: calc(50% - 192px);
   }
 
   #freeze1 img {
@@ -64,6 +63,7 @@ body, html {
     z-index: 101;
   }
 
+
   video {
     width: 385px;
     height: 385px;
@@ -79,15 +79,18 @@ body, html {
 
 #prompt {
   display: block;
+  position: absolute;
   margin: auto;
   text-align: center;
-  margin-top: 5em;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   font-size: 4em;
   color: lime;
-  padding: 5px;
-  padding-left: 14px;
-  padding-right: 14px;
+  padding: 8px;
   width: fit-content;
+  height: fit-content;
   border: 9px dashed;
 }
 
@@ -96,7 +99,16 @@ body, html {
   #garden_title {
     font-size: 2em;
     font-weight: bold;
-    margin: auto;
     display: block;
-    margin-top: 18.8em;
+    position: fixed;
+    left: calc(50%);
+    bottom: 5.2em;
+  }
+
+  #garden_title_2 {
+    font-size: 2em;
+    font-weight: bold;
+    display: block;
+    position: fixed;
+    bottom: 5.2em;
   }

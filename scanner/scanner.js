@@ -114,8 +114,23 @@
 
 
 function waitForLink() {
+  $('#freeze1 img').css("left", "158px");
+  $('#garden_title').css("left", "300px");
 
-  
+  $('#prompt').html("Exchange data seeds with another Gardener")
+  $('#prompt').css("font-size", "3em");
+  $('#prompt').show();
+
+  $('#cam1').show();
+  $('#cam1').css("width", "286px");
+    $('#cam1').css("height", "286px");
+        $('#cam1').css("margin", "0");
+      $('#cam1').css("left", "");
+      $('#cam1').css("right", "158px");
+
+      new CircleType(document.getElementById('garden_title_2')).radius(245);
+      $('#garden_title_2').html("Garden")
+
 }
 
 
@@ -130,8 +145,15 @@ function freeze_scan_1() {
 
 $(document).ready(function() {
 
+  $('#prompt').css("top", "-218px");
+  $('#cam1').css("left", "calc(50% - 192px)");
+
+
+
   new CircleType(document.getElementById('garden_title'))
   .radius(245);
+
+
 
 Webcam.attach( '#cam1');
 
