@@ -1,10 +1,10 @@
-import $ from 'jquery';
-import _ from 'lodash'
-import * as THREE from 'three';
-import Vue from 'vue'
+//import $ from 'jquery';
+//import _ from 'lodash'
+//import * as THREE from 'three';
+//import Vue from 'vue'
 
 
-import Irrigation from './Irrigation';
+import Irrigation from '../Irrigation';
 
 
 
@@ -27,7 +27,7 @@ var garden = new Garden({})
 
 var irrigation = new Irrigation();
 irrigation.init()
-  .then(() => { console.log(irrigation.addSampleEvent()); })
+//  .then(() => { console.log(irrigation.addSampleEvent()); })
   .then(() => { console.log(irrigation.getEvents()); })
 
 
