@@ -2,7 +2,7 @@
 
 import Vue from 'vue/dist/vue.esm.js'
 import Garden from './Garden.vue'
-import fakeData from './fakeData'
+import fakeData from '../fakeData'
 
 ///////// TESTDATA
 //

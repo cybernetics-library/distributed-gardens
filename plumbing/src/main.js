@@ -3,21 +3,25 @@ import _ from 'lodash';
 
 import Irrigation from './Irrigation'
 import PaperCup from './PaperCup'
+import fakeData from './fakeData'
 
 import Meadow from './Meadow/Meadow.vue'
+import Garden from './Garden/Garden.vue'
 
 var mizdata = require('./Meadow/miserables.json')
 
 var vueapp = new Vue({
   el: '#app',
   components: {
-    Meadow
+    Meadow,
+    Garden
   },
   data: {
     irrigation: null,
     history: [],
     stats: {},
-    graphdata: mizdata
+    graphdata: mizdata,
+    gardendata: fakeData.gardenstats()
   },
   methods: {
     startIrrigation() {
