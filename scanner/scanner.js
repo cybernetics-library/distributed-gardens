@@ -2,6 +2,7 @@
 
   var globalQR;
   var theme;
+  var waiting = false;
 
 
 
@@ -86,7 +87,7 @@
     $("#prompt").hide();
     $("#garden_title").html("The Garden of Sleeping Dogs");
     new CircleType(document.getElementById('garden_title'))
-    .radius(195);
+    .radius(188);
 
     var res = parseQR(content);
     if(!(_.isEqual(window.prevlink, res))) {
@@ -114,6 +115,8 @@
 
 
 function waitForLink() {
+  //TODO
+  waiting = true;
   $('#freeze1 img').css("left", "158px");
   $('#garden_title').css("left", "300px");
 
@@ -127,12 +130,26 @@ function waitForLink() {
         $('#cam1').css("margin", "0");
       $('#cam1').css("left", "");
       $('#cam1').css("right", "158px");
-
-      new CircleType(document.getElementById('garden_title_2')).radius(245);
-      $('#garden_title_2').html("Garden")
-
 }
 
+
+function linkGardens() {
+$('#prompt').hide();
+$('#garden_title_2').html("The Garden of Ravenous Contemplation")
+new CircleType(document.getElementById('garden_title_2')).radius(188);
+setTimeout(function(){ refresh(); }, 10000);
+};
+
+
+function refresh(){
+  $('#prompt').css("top", "-218px");
+  $('#cam1').css("left", "calc(50% - 192px)");
+  $('#cam1').css("width", "385px");
+    $('#cam1').css("height", "385px");
+  $('#freeze1').hide();
+  $('#garden_title').hide();
+  $('#prompt').html("Scan here to grow your garden (refresh)");
+}
 
 
 
@@ -150,8 +167,8 @@ $(document).ready(function() {
 
 
 
-  new CircleType(document.getElementById('garden_title'))
-  .radius(245);
+  // new CircleType(document.getElementById('garden_title'))
+  // .radius(245);
 
 
 
@@ -178,11 +195,3 @@ Webcam.attach( '#cam1');
 
 
 });
-
-
-
-function showPrompt(){
-  $("video").removeClass( "blur grayscale" );
-  $("#garden_title").fadeIn(300);
-  $("#prompt-2").fadeOut(300).delay(2000);
-}

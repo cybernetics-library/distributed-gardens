@@ -103,6 +103,7 @@ body, html {
     position: fixed;
     left: calc(50%);
     bottom: 5.2em;
+    color: lime;
   }
 
   #garden_title_2 {
@@ -110,5 +111,7 @@ body, html {
     font-weight: bold;
     display: block;
     position: fixed;
-    bottom: 5.2em;
+    color: lime;
+        right: 302px;
+    bottom: 75px;
   }
