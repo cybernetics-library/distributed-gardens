@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import _ from 'lodash'
 import CircleType from 'circletype';
-import webcamjs from 'webcamjs';
+import Webcam from 'webcamjs';
 import Instascan from 'instascan'
 
 
