@@ -1,14 +1,13 @@
 <template>
   <div id="garden">
     <!--<div id="stats"> {{ gardendata }} </div>-->
-    <FilePlants :gardendata="gardendata"></FilePlants>
     <Grass :gardendata="gardendata"></Grass>
+    <FilePlants :gardendata="gardendata"></FilePlants>
   </div>
 </template>
 
 <style scoped>
 #garden {
-  border: 2px solid pink;
   height: 400px;
   width: 600px;
   position: relative;
