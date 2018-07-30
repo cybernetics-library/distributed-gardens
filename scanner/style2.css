@@ -1,0 +1,101 @@
+
+
+@font-face {
+  font-family: 'Steps-Mono';
+  src: url('./fonts/steps-mono.eot'); /* IE9 Compat Modes */
+  src: url('./fonts/steps-mono.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('./fonts/steps-mono.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./fonts/steps-mono.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./fonts/steps-mono.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+  body {
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+    background-color: rgb(138, 129, 152);
+
+        /* background: linear-gradient(180deg, rgb(204, 236, 220) 0%, rgb(204, 236, 220) 0%, rgba(95, 0, 143, 1) 100%); */
+    /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
+        font-family: "Steps-Mono";
+  }
+
+/* #qrurl {
+    color: rgb(42, 227, 37;
+} */
+
+
+  .steps {
+      font-family: 'Steps-Mono';
+  }
+
+  .grayscale.blur {
+      filter: blur(10px) grayscale(100%) !important;;
+  }
+
+  .flexcontainer {
+    height: fit-content;
+    margin-top: 3em;
+    display: flex;
+    /* align-items: center; this aligns vertically*/
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  #preview {
+    width: 385px;
+    height: 385px;
+    filter: grayscale(100%);
+  }
+
+  .arrows {
+    width: 397px;
+    height: 397px;
+    z-index: 1000;
+    position: absolute;
+    left: 50%;
+    top: 13%;
+    margin-left: -199px;
+  }
+
+
+
+  .video-circle {
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+.changed {
+  color: rgb(81, 32, 89);
+}
+
+  .centerdiv {
+        text-align: center;
+  }
+
+  iframe {
+    /* background: linear-gradient(180deg, rgb(204, 236, 220) 0%, rgb(204, 236, 220) 0%, rgba(95, 0, 143, 1) 100%); */
+    position: absolute;
+    left: -21%;
+    top: 54%;
+        /* background: linear-gradient(180deg, rgb(204, 236, 220) 0%, rgb(204, 236, 220) 0%, rgb(0, 0, 0) 100%);*/
+  }
+
+
+  h3 {
+    background-color: rgb(230, 230, 230);
+    /* font-weight: 400; */
+    font-size: 2em;
+    width: 424px;
+    /* text-align: center; */
+  }
+
+  .logo {
+    width: 157px;
+    position: absolute;
+    margin-left: 2em;
+  }
+
+  #prompt-1, #prompt-2 {
+    margin-top: 4em;
+    font-size: 1.4em;
+  }

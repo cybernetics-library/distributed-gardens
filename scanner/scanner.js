@@ -1,9 +1,11 @@
 
 
-  window.thisbook = "";
   var globalQR;
-  var memArray;
   var theme;
+
+
+
+
 
   window.prevlink = {};
 
@@ -36,7 +38,12 @@
   }
 
   function urlToId(s) {
-    $("#qrurl").html(s);
+    // show qr url
+    // $("#qrurl").html(s);
+
+
+
+
     return s.split("/")[s.split("/").length - 1];
 
   }
@@ -74,7 +81,12 @@
   function handleScans(content) {
 
     setTimeout(sameBookTimer, 12000);
-$("iframe").fadeIn(300);
+
+
+    $("#prompt").hide();
+    $("#garden_title").html("The Garden of Sleeping Dogs");
+    new CircleType(document.getElementById('garden_title'))
+    .radius(195);
 
     var res = parseQR(content);
     if(!(_.isEqual(window.prevlink, res))) {
@@ -82,57 +94,49 @@ $("iframe").fadeIn(300);
         console.log(res);
         console.log("new book");
         globalQR = content;
-           displayModal();
+           firstScan();
       };
   };
 
-  function submitLinkToApi(content) {
-    var res = parseQR(content);
-    window.restest = res;
-    var bookid = urlToId(res.books[Object.keys(res.books)[0]]);
-
-    $.post("https://library.cybernetics.social/connect_book_to_memory",
-    {
-    "book_id": bookid,
-    "station_id": "computer1",
-    "timestamp": new Date().getTime() / 1000,
-    "memory_from": $( "#mem-id" ).html(),
-    "memory_to": document.getElementById("mem-to-id").value,
-    "theme": theme
-  },
-    function (response) {
-        console.dir(response);
-      });
-  };
 
 
-  function displayModal() {
-    $("#prompt-1").fadeOut(300).delay(2000);
-    $("video").addClass( "blur grayscale" );
-    $("#prompt-2").fadeIn(400).delay(2000);
+  function firstScan() {
 
-    var apiurl = "https://library.cybernetics.social/memories/unique";
-    $.ajax({
-      type: "GET",
-      url: apiurl,
-      contentType: "application/json; charset=utf-8",
-      dataType: "json",
-      success: function(res) {
-        console.log(res.memories_all);
-        console.log("successfully submitted!")
-        memArray = res.memories_all;
-      }
-    });
+    $("#cam1").hide();
+    // $("#qr_still").show();
+    freeze_scan_1();
+    $( "#freeze1" ).addClass( "grayscale blur" );
+
+    setTimeout(function(){ waitForLink(); }, 3000);
 
 
-  }
+};
+
+
+function waitForLink() {
+
+  
+}
+
+
+
+
+function freeze_scan_1() {
+    Webcam.snap( function(data_uri) {
+        document.getElementById('freeze1').innerHTML = '<img src="'+data_uri+'"/>';
+    } );
+}
 
 
 $(document).ready(function() {
 
+  new CircleType(document.getElementById('garden_title'))
+  .radius(245);
+
+Webcam.attach( '#cam1');
 
   let scanner = new Instascan.Scanner({
-    video: document.getElementById('preview')
+    video: document.getElementById('cam1')
   });
 
   scanner.addListener('scan', function(content) {
@@ -154,13 +158,9 @@ $(document).ready(function() {
 });
 
 
-function sendMem() {
- submitLinkToApi(globalQR);
-  setTimeout(showPrompt, 3400);
-};
 
 function showPrompt(){
   $("video").removeClass( "blur grayscale" );
-  $("#prompt-1").fadeIn(300);
+  $("#garden_title").fadeIn(300);
   $("#prompt-2").fadeOut(300).delay(2000);
 }

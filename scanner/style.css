@@ -1,11 +1,4 @@
-@font-face {
-  font-family: 'Steps-Mono';
-  src: url('assets/fonts/steps-mono.otf') format('otf');
-  src: url('assets/fonts/steps-mono.eot'); /* IE9 Compat Modes */
-  src: url('assets/fonts/steps-mono-webfont.woff2') format('woff2'), /* Super Modern Browsers */
-       url('assets/fonts/steps-mono-webfont.woff') format('woff'), /* Pretty Modern Browsers */
-       url('assets/fonts/steps-mono.ttf')  format('truetype') /* Safari, Android, iOS */
-}
+
 
 @font-face {
   font-family: 'Steps-Mono';
@@ -15,94 +8,95 @@
        url('./fonts/steps-mono.woff') format('woff'), /* Pretty Modern Browsers */
        url('./fonts/steps-mono.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
-  body {
-    margin: 0px;
-    padding: 0px;
-    height: 100%;
-    background-color: rgb(138, 129, 152);
 
-        /* background: linear-gradient(180deg, rgb(204, 236, 220) 0%, rgb(204, 236, 220) 0%, rgba(95, 0, 143, 1) 100%); */
-    /* font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
-        font-family: "Steps-Mono";
-  }
+  html {
+   margin: 0px;
+   height: 100%;
+   width: 100%;
+}
 
-/* #qrurl {
-    color: rgb(42, 227, 37;
-} */
+body {
+   margin: 0px;
+   min-height: 100%;
+   width: 100%;
+}
 
+body, html {
+  font-family: "Steps-Mono";
+  background: linear-gradient(rgba(255,0,0,0), #569051);
+  overflow: hidden
+}
 
   .steps {
       font-family: 'Steps-Mono';
   }
 
   .grayscale.blur {
-      filter: blur(10px) grayscale(100%) !important;;
+      filter: blur(5px) grayscale(100%) !important;
   }
 
-  .flexcontainer {
-    height: fit-content;
-    margin-top: 3em;
-    display: flex;
-    /* align-items: center; this aligns vertically*/
-    justify-content: center;
-    flex-direction: row;
-  }
 
-  #preview {
+  #cam1 {
     width: 385px;
     height: 385px;
     filter: grayscale(100%);
-  }
-
-  .arrows {
-    width: 397px;
-    height: 397px;
-    z-index: 1000;
-    position: absolute;
-    left: 50%;
-    top: 13%;
-    margin-left: -199px;
-  }
-
-
-
-  .video-circle {
     border-radius: 50%;
     object-fit: cover;
+    display: block;
+    margin: auto;
+    position: fixed;
+    bottom: 1.2em;
+    left: calc(50% - 192px);
   }
 
-.changed {
-  color: rgb(81, 32, 89);
+  #freeze1 img {
+    transform: scaleX(-1);
+    width: 286px;
+    height: 286px;
+    filter: grayscale(100%);
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+    position: fixed;
+    bottom: 1.2em;
+    left: calc(50% - 143px);
+    z-index: 101;
+  }
+
+  video {
+    width: 385px;
+    height: 385px;
+    filter: grayscale(100%);
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    margin: auto;
+    position: fixed;
+    bottom: 1.2em;
+  }
+
+
+#prompt {
+  display: block;
+  margin: auto;
+  text-align: center;
+  margin-top: 5em;
+  font-size: 4em;
+  color: lime;
+  padding: 5px;
+  padding-left: 14px;
+  padding-right: 14px;
+  width: fit-content;
+  border: 9px dashed;
 }
 
-  .centerdiv {
-        text-align: center;
-  }
-
-  iframe {
-    /* background: linear-gradient(180deg, rgb(204, 236, 220) 0%, rgb(204, 236, 220) 0%, rgba(95, 0, 143, 1) 100%); */
-    position: absolute;
-    left: -21%;
-    top: 54%;
-        /* background: linear-gradient(180deg, rgb(204, 236, 220) 0%, rgb(204, 236, 220) 0%, rgb(0, 0, 0) 100%);*/
-  }
 
 
-  h3 {
-    background-color: rgb(230, 230, 230);
-    /* font-weight: 400; */
+  #garden_title {
     font-size: 2em;
-    width: 424px;
-    /* text-align: center; */
-  }
-
-  .logo {
-    width: 157px;
-    position: absolute;
-    margin-left: 2em;
-  }
-
-  #prompt-1, #prompt-2 {
-    margin-top: 4em;
-    font-size: 1.4em;
+    font-weight: bold;
+    margin: auto;
+    display: block;
+    margin-top: 18.8em;
   }
