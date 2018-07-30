@@ -1,4 +1,4 @@
-var Irrigation  = require('./Irrigation');
+var Irrigation  = require('../Irrigation');
 
 window.onload = () => {
   var irrigation = new Irrigation();

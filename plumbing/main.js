@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 import Irrigation from './Irrigation'
 import PaperCup from './PaperCup'
-import Scanner from './Scanner.vue'
 
 var vueapp = new Vue({
   el: '#app',
