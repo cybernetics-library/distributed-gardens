@@ -45,6 +45,9 @@ source ~/.bashrc
 echo "=== install vim...."
 sudo apt-get --assume-yes install vim
 
+echo "=== install vimrc...."
+cat vimrc.txt >  ~/.vimrc
+
 echo "=== install pm2..."
 npm install pm2@latest -g
 
