@@ -87,7 +87,7 @@
   const garden_overlay = document.getElementById('garden-overlay');
   var selectedNode = 0
   var nextNode = 3
-  var previousNode 
+  var previousNode = null
   var divNodes = []
   var gotBadge = false
 
@@ -176,8 +176,8 @@
       var ctx = canvas.getContext('2d')
       var canvasZoom = ctx.canvas.__zoom;
 
-      var correctedX = ((nextNode.x * canvasZoom.k) + (canvasZoom.x))
-      var correctedY = ((nextNode.y * canvasZoom.k) + (canvasZoom.y))
+      var correctedX = ((nextNode.x * canvasZoom.k) + (canvasZoom.x)) - 10*canvasZoom.k/2
+      var correctedY = ((nextNode.y * canvasZoom.k) + (canvasZoom.y)) - 10*canvasZoom.k/2
 
       nodes.forEach((node, i) => {
         var el = document.getElementById(i)
@@ -187,7 +187,21 @@
         el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
       })
 
-      garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
+      if(previousNode != null){
+        if(previousNode.y < nextNode.y - 10){
+          previousNode.y += .5
+        } else if (previousNode.y > nextNode.y + 10){
+          previousNode.y -= .5
+        }
+        // if(previousNode.x < nextNode.x - 10){
+        //   previousNode.x += 1
+        // } else if (previousNode.x > nextNode.x + 10){
+        //   previousNode.x -= 1
+        // }
+
+      }
+
+      garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); width:" + 10*canvasZoom.k + "px; height:" + 10*canvasZoom.k + "px; "
     }
 
     Graph = ForceGraph()(elem)

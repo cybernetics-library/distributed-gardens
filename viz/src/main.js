@@ -22,9 +22,10 @@ var vueapp = new Vue({
     irrigation: null,
     history: [],
     stats: {},
-    graphdata: {},
+    graphdata: mizdata,
     gardendata: fakeData.gardenstats(),
-    badgedata: badgedata
+    badgedata: badgedata,
+    currentbadge: '',
   },
   methods: {
     init: function() {
@@ -35,7 +36,7 @@ var vueapp = new Vue({
           self.getData();
           console.log(self.irrigation);
           console.log(self.graphdata);
-          self.graphdata = self.irrigation.getGraphData();
+          // self.graphdata = self.irrigation.getGraphData();
         });
       self.createPaperCupHandler();
     },
@@ -55,7 +56,9 @@ var vueapp = new Vue({
       var self = this;
       this.paperCupParent = new PaperCup.PaperCupParent();
       this.paperCupParent.addBadgeTitleRequestHandler("scanner", function(badgeId) {
-         return self.badgedata[badgeId].title;
+        self.currentbadge = badgeId
+        console.log('badgeID:', badgeId); 
+        return self.badgedata[badgeId].title;
       });
     }
   },

@@ -94,6 +94,8 @@ class Irrigation {
      .countBy()
      .map((v, k) => { var links = k.split("-"); return { "source": links[0], "target": links[1], "value": v} })
      .value()
+
+    console.log(graphdata, "graph data")
     return graphdata
   }
 

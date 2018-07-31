@@ -28,13 +28,23 @@
           position: absolute;
           z-index: 10;
         }
-
+        #app{
+          width: 100vw;
+          min-height: 100vh;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: 50;
+        }
     </style>
     <title>~222EARTH~</title>
 </head>
 <body>
   <div id="app">
-    <meadow :graphdata=graphdata></meadow>
+    <meadow 
+      :graphdata=graphdata
+      :currentbadge=currentbadge
+      ></meadow>
     <garden :gardendata=gardendata></garden>
     <div id="debug">
       <li v-for="item in history">
