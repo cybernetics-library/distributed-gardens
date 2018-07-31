@@ -12,7 +12,7 @@ import PaperCup from '../Papercup'
   var waiting = false;
 
 
-
+  var paperCupChild = new PaperCup.PaperCupChild();
 
 
   window.prevlink = {};
@@ -104,7 +104,11 @@ import PaperCup from '../Papercup'
         globalQR = content;
            firstScan();
 
-        PaperCup.sendToParent({ "type": "scan", "url": content })
+        var firstQRURL = content[0]
+        paperCupChild.requestBadgeTitle(firstQRURL, function(res) {
+          console.log("WE GOT BADGEEEE");
+          console.log(res);
+        });
 
       };
   };

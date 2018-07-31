@@ -60,13 +60,9 @@ window.PaperCup = PaperCup;
 window._ = _;
 window.Helpers = Helpers;
 
-
-PaperCup.listenToChild(function(name, msg) {
-
-  if(Helpers.keyOfObj("type", msg) == "scan") {
-    console.log(msg['url']);
-  }
-  
+var paperCupParent = new PaperCup.PaperCupParent();
+paperCupParent.addBadgeTitleRequestHandler("scanner", function(badgeId) {
+   return "THE GARDEN OF THIS FUCKING WORKS-" + badgeId
 });
 
 
