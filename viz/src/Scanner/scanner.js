@@ -129,6 +129,7 @@ function refresh(){
   $('#prompt').show();
   $( "#freeze1" ).html( "" );
   $('#cam1').show();
+  $('#garden_title').css("color", "rgb(125, 152, 129)");
 }
 
 
