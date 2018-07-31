@@ -1,6 +1,6 @@
 ### Setup
 
-Install Parcel: npm install -g parcel-bundler
+Install Parcel: `npm install -g parcel-bundler`
 
 ### Development
 
