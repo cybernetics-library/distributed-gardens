@@ -1,14 +1,13 @@
 {
-  "name": "cybersym_viz",
+  "name": "distributed_gardens_viz",
   "version": "1.0.0",
-  "main": "webpack.config.js",
   "scripts": {
     "start": "parcel src/index.html src/meadow/index.html src/scanner/index.html src/garden/index.html",
     "scanner": "cd src/scanner && parcel index.html",
     "examples": "cd src/examples && parcel *.html",
     "meadow": "cd src/meadow && parcel index.html",
     "garden": "cd src/garden && parcel index.html",
-    "build": "webpack --colors --progress",
+    "build": "",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
