@@ -32,6 +32,14 @@ export default {
   },
   methods: {
     initGraph() {
+      var self = this;
+      // hack to wait until data exists to create graph
+      self.myInterval = setInterval(function(){
+        if(Object.keys(self.graphdata).length != 0) {
+          clearInterval(self.myInterval);
+          self.createGraph();
+        }
+      },100);
     },
     createGraph() {
       var self = this;

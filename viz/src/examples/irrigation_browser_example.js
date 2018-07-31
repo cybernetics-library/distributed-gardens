@@ -23,6 +23,7 @@ window.onload = () => {
   .then(() => { console.log(irrigation.getHistory()); })
   .then(() => { console.log(irrigation.getAdjacencyList()); })
   .then(() => { console.log(irrigation.getStats()); })
+  .then(() => { console.log(irrigation.getGraphData()); })
   .then(() => { console.log(irrigation.biome._psa.peerCountGuess()); })
 }
 

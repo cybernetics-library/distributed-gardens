@@ -3,12 +3,13 @@ var _ = require('lodash');
 
 
 class Irrigation {
-  constructor() {
+  constructor(config) {
+    this.config = config
   }
 
   async init() {
     var self = this;
-    self.biome = Biome()
+    self.biome = Biome(this.config)
     await self.biome.start()
   }
 
