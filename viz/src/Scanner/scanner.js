@@ -4,6 +4,8 @@ import CircleType from 'circletype';
 import Webcam from 'webcamjs';
 import Instascan from 'instascan'
 
+import PaperCup from '../Papercup'
+
 
   var globalQR;
   var theme;
@@ -101,6 +103,9 @@ import Instascan from 'instascan'
         console.log("new book");
         globalQR = content;
            firstScan();
+
+        PaperCup.sendToParent({ "type": "scan", "url": content })
+
       };
   };
 

@@ -4,6 +4,7 @@ import _ from 'lodash';
 import Irrigation from './Irrigation'
 import PaperCup from './PaperCup'
 import fakeData from './fakeData'
+import Helpers from './Helpers'
 
 import Meadow from './Meadow/Meadow.vue'
 import Garden from './Garden/Garden.vue'
@@ -57,10 +58,15 @@ var vueapp = new Vue({
 window.vueapp = vueapp;
 window.PaperCup = PaperCup;
 window._ = _;
+window.Helpers = Helpers;
 
 
 PaperCup.listenToChild(function(name, msg) {
-  console.log("heard from " + name + " ::: " + msg);
+
+  if(Helpers.keyOfObj("type", msg) == "scan") {
+    console.log(msg['url']);
+  }
+  
 });
 
 
