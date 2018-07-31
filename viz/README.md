@@ -1,5 +1,8 @@
 ### Setup
 
+
+#### Setup this repo
+
 Use Node verson 8.4.0 (use NVM if necessary)
 
 NVM install process:
@@ -11,6 +14,23 @@ NVM install process:
 Install Parcel: `npm install -g parcel-bundler`
 
 Install requirements: `npm install -d`
+
+#### Setup rendezvous server 
+
+Clone [peer-star-app](https://github.com/ipfs-shipyard/peer-star-app) repo into a different folder (outside of this repo).
+
+And then: 
+
+```bash
+$ cd peer-star-app
+$ cd examples/react-app
+$ npm install
+```
+and then
+
+```bash
+$ npm run start:rv
+```
 
 ### Development
 
