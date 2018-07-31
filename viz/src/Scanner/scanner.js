@@ -95,25 +95,42 @@ function handleScans(content) {
 
   var res = parseQR(content);
   if (!(_.isEqual(window.prevlink, res))) {
+
+
+    if(Object.values(window.prevlink).length != 0) {
+      var prevQRURL = Object.values(window.prevlink.names)[0]
+    } else { var prevQRURL = "" }
+
+//    console.log(window.prevlink)
+
     window.prevlink = res;
-    console.log(res);
+//    console.log(res);
     console.log("new QR!!!!");
     isLink = true;
-        console.log(isLink);
+//    console.log(isLink);
     globalQR = content;
 
-    var firstQRURL = content[0]
-    paperCupChild.requestBadgeTitle(firstQRURL, function(garden_name) {
+    var thisQRURL = content[0]
+    paperCupChild.sendRequest("getBadgeTitle", thisQRURL, function(garden_name) {
       console.log("badge url to garden name");
-      console.log("badge url: " + firstQRURL);
+      console.log("badge url: " + thisQRURL);
       console.log("garden name: " + garden_name);
       $('#garden_title').html(garden_name);
+      $('#garden_title').show();
     });
 
     firstScan();
-  }else{
+//    paperCupChild.sendRequest("submitScan", thisQRURL, function() {  });
+    if(prevQRURL != "") {
+      // if there was a valid previous QR
+      var msg = { "link_from": prevQRURL, "link_to": thisQRURL }
+      console.log("scanner:: I'm trying to submit a link!");
+      console.log(msg);
+      paperCupChild.sendRequest("submitLink", msg, function() {  });
+    }
+  } else {
     isLink = false;
-    console.log(isLink);
+//    console.log(isLink);
   };
 };
 
@@ -125,6 +142,8 @@ function firstScan() {
   newGarden();
   $("#freeze1").addClass("grayscale blur");
 
+
+
 };
 
 
@@ -133,7 +152,8 @@ function refresh() {
   $('#prompt').fadeIn("slow");
   $("#freeze1").fadeOut("slow");
   $('#cam1').fadeIn("slow");
-  $('#garden_title').css("color", "#9fd6a7");
+  $('#garden_title').html("");
+  // $('#garden_title').css("color", "#9fd6a7");
   // resetQR();
 }
 
@@ -168,7 +188,7 @@ $(document).ready(function() {
 
 
   $('#prompt').css("top", "-218px");
-  $('#cam1').css("left", "calc(50% - 192px)");
+  $('#cam1').css("left", "calc(50% - 137px)");
 
 
 

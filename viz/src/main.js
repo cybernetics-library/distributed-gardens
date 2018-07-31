@@ -55,10 +55,32 @@ var vueapp = new Vue({
     createPaperCupHandler: function() {
       var self = this;
       this.paperCupParent = new PaperCup.PaperCupParent();
-      this.paperCupParent.addBadgeTitleRequestHandler("scanner", function(badgeId) {
-        self.currentbadge = badgeId
-        console.log('badgeID:', badgeId); 
-        return self.badgedata[badgeId].title;
+
+      this.paperCupParent.addRequestHandler("scanner", function(reqname, data) {
+        if(reqname == "getBadgeTitle") {
+          var badgeurl = data;
+          var badgeId = Helpers.getBadgeIdFromUrl(badgeurl);
+          self.currentbadge = badgeId
+          console.log(":::parent:: we were asked for badge title: " + self.badgedata[badgeId].title);
+          return self.badgedata[badgeId].title;
+        } 
+
+        if(reqname == "submitScan") {
+          console.log(":::parent:: we got a SCAN " + data);
+        } 
+
+        if(reqname == "submitLink") {
+          console.log(":::parent:: we got a LINK ")
+          var msg = {
+            'from': {'name': 'kiosk'}, // TODO CHANGE NAME PROGRAMMATICALLY
+            'type': 'link',
+            'msg': {
+              'link_from': Helpers.getBadgeIdFromUrl(data.link_from),
+              'link_to': Helpers.getBadgeIdFromUrl(data.link_to)
+            }
+          }
+          self.irrigation.addEventNow(msg)
+        } 
       });
     }
   },

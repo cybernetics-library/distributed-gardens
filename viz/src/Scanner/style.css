@@ -34,19 +34,19 @@ body {
 body, html {
   font-family: "Millimetre-Regular";
   /* font-family: 'Karla', sans-serif; */
-  background: linear-gradient(rgba(79, 140, 96,.4), #569051);
+  background: linear-gradient(rgba(79, 140, 96, 0) 60%, rgba(86, 144, 81, 0.4))
   overflow: hidden
 }
 
 
   .grayscale.blur {
-      filter: blur(5px) grayscale(100%) !important;
+      filter: blur(2px) grayscale(100%) !important;
   }
 
 
   #cam1 {
-    width: 385px;
-    height: 385px;
+    width: 275px;
+    height: 275px;
     filter: grayscale(100%);
     border-radius: 50%;
     object-fit: cover;
@@ -58,8 +58,8 @@ body, html {
 
   #freeze1 img {
     transform: scaleX(-1);
-    width: 385px;
-    height: 385px;
+    width: 275px;
+    height: 275px;
     filter: grayscale(100%);
     border-radius: 50%;
     object-fit: cover;
@@ -67,14 +67,14 @@ body, html {
     margin: auto;
     position: fixed;
     bottom: 1.2em;
-    left: calc(50% - 192px);
+    left: calc(50% - 137px);
     z-index: 101;
   }
 
 
   video {
-    width: 385px;
-    height: 385px;
+    width: 275px;
+    height: 275px;
     filter: grayscale(100%);
     border-radius: 50%;
     object-fit: cover;
