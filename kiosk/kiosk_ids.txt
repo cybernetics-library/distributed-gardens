@@ -1,4 +1,1 @@
-kiosk1
-kiosk2
-kiosk2
-kiosk2
+plantkiosk2
