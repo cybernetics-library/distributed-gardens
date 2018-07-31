@@ -160,7 +160,7 @@ if $COLORTERM == 'gnome-terminal'
 endif
 
 try
-    colorscheme flattened_dark
+    colorscheme solarized
 catch
 endtry
 
@@ -271,5 +271,6 @@ if has("win32")
   set guifont=Consolas:h10
   colorscheme solarized
 endif
+
 
 
