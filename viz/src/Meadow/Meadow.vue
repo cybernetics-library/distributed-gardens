@@ -32,6 +32,8 @@ export default {
   },
   methods: {
     initGraph() {
+    },
+    createGraph() {
       var self = this;
       var elem = document.getElementById('graph');
       self.Graph = ForceGraph()(elem)

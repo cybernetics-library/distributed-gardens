@@ -36,6 +36,7 @@ class Irrigation {
     }
 
 
+    // cache is just based on time right now.. TODO: use biome's event listener
     if(typeof(this.cachedEvents) == "undefined" ||
         typeof(this.last_getEvents) == "undefined" ||
         this.last_getEvents - new Date().getTime() > 5 * 1000) {
@@ -79,8 +80,22 @@ class Irrigation {
   getGraphData() {
     var self = this;
     var graphdata = {}
-
+    graphdata.nodes = _.chain(self.getHistory())
+     .filter({type: "link" })
+     .map((d) => { return [d.msg.link_from, d.msg.link_to] })
+     .flatten()
+     .uniq()
+     .map((d) => { return { "id": d } })
+     .value()
+    graphdata.links =  _.chain(self.getHistory())
+     .filter({type: "link" })
+     .map((d) => { return [d.msg.link_from, d.msg.link_to].sort().join("-") })
+     .countBy()
+     .map((v, k) => { var links = k.split("-"); return { "source": links[0], "target": links[1], "value": v} })
+     .value()
+    return graphdata
   }
+
 
 }
 
