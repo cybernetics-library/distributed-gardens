@@ -109,7 +109,7 @@ export default {
     placeImage(ctx, coords, imagePath,  of10Scale) {
       const image = new Image();
       image.src = imagePath;
-      image.onload = function(){
+      image.onload = () => {
         const 
           aspectRatio = image.height / image.width,
           height = (ctx.canvas.height * 0.7) * (of10Scale * 0.1),
