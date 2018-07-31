@@ -1,6 +1,7 @@
 ### Setup
 
 Install Parcel: `npm install -g parcel-bundler`
+Install requirements: `npm install -d`
 
 ### Development
 
