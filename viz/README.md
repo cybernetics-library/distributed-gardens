@@ -1,7 +1,7 @@
 ## Setup
 
 
-#### Setup this repo
+#### 1. Setup this repo
 
 Use Node verson 8.4.0 (use NVM if necessary)
 
@@ -15,7 +15,7 @@ Install Parcel: `npm install -g parcel-bundler`
 
 Install requirements: `npm install -d`
 
-#### Setup rendezvous server 
+#### 2. Setup rendezvous server 
 
 Clone [peer-star-app](https://github.com/ipfs-shipyard/peer-star-app) repo into a different folder (outside of this repo).
 
