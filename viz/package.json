@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "main": "webpack.config.js",
   "scripts": {
-    "start": "parcel src/*.html src/meadow/*.html src/scanner/index.html src/examples/*.html src/garden/*.html",
+    "start": "parcel src/index.html src/meadow/index.html src/scanner/index.html src/garden/index.html",
     "scanner": "parcel src/scanner/index.html",
     "examples": "parcel src/examples/*.html",
-    "meadow": "parcel src/meadow/*.html",
-    "garden": "parcel src/garden/*.html",
+    "meadow": "parcel src/meadow/index.html",
+    "garden": "parcel src/garden/index.html",
     "build": "webpack --colors --progress",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
