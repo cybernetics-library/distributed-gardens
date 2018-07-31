@@ -25,12 +25,7 @@ class PaperCupChild {
     var self = this;
     window.addEventListener('message', function(msg) {
       if(typeof(msg.data) == "object" && 'papercup' in msg.data && msg.data.papercup == "respondBadgeTitle") {
-        console.log("oh I'm a child I think I received response");
-        console.log(msg.data)
-        console.log(self.callbacks);
         if(msg.data.callback_name in self.callbacks) {
-          console.log("okay callingback!!! -- " + msg.data.callback_name);
-          console.log(self.callbacks[msg.data.callback_name]);
           self.callbacks[msg.data.callback_name](msg.data.badgeTitle);
           delete self.callbacks[msg.data.callback_name];
         }
@@ -51,11 +46,8 @@ class PaperCupParent {
     window.addEventListener('message', function(msg) {
       if(typeof(msg.data) == "object" && 'papercup' in msg.data && msg.data.papercup == "requestBadgeTitle") {
 
-        console.log("this is parent.. get title from " + msg.data.badgeId);
-        console.log(msg);
         // STEP 3: parent gets title
         var badgeTitle = cb(msg.data.badgeId);
-        console.log("this is parent.. title is " + badgeTitle)
 
         // STEP 4: parent sends message back to child
         var sendingmsg = {
