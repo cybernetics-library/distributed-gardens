@@ -133,7 +133,7 @@ function refresh() {
   $('#prompt').fadeIn("slow");
   $("#freeze1").fadeOut("slow");
   $('#cam1').fadeIn("slow");
-  $('#garden_title').css("color", "rgb(125, 152, 129)");
+  $('#garden_title').css("color", "#9fd6a7");
   // resetQR();
 }
 
@@ -151,7 +151,7 @@ function newGarden() {
 
   // change garden_title
   console.log("hiii");
-  // $('#garden_title').html("The Garden of Ravenous Contemplation");
+  $('#garden_title').css("color","#214f32");
   $('body').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
   $('html').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
 
