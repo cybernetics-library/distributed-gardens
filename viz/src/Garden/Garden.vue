@@ -39,7 +39,7 @@ export default {
     Grass
   },
   mounted() {
-    console.log("I was mounted");
+    console.log("gardenn  I was mounted");
     this.initGarden();
     window.self = this;
   },

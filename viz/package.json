@@ -17,6 +17,7 @@
     "force-graph": "^1.8.0",
     "instascan": "github:dantaeyoung/instascan",
     "jquery": "^3.3.1",
+    "seedrandom": "^2.4.3",
     "three": "^0.94.0",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0",

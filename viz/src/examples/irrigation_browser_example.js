@@ -7,7 +7,6 @@ window.onload = () => {
   window.irrigation = irrigation;
   irrigation.init()
 
-
   .then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed',
     'msg': { 'seed_by': '11111', 'seed_to': '11111',  media:[ 'ERIC_ED105298'] } })); })
 
