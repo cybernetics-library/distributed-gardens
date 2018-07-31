@@ -10,6 +10,7 @@ import Meadow from './Meadow/Meadow.vue'
 import Garden from './Garden/Garden.vue'
 
 var mizdata = require('./Meadow/miserables.json')
+var badge_data = require('./data/badge_data.json')
 
 var vueapp = new Vue({
   el: '#app',
