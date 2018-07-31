@@ -1,6 +1,15 @@
 ### Setup
 
+Use Node verson 8.4.0 (use NVM if necessary)
+
+NVM install process:
+- `curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash`
+- Restart your bash shell
+- `nvm install 8.4.0`
+- `nvm use 8.4.0`
+
 Install Parcel: `npm install -g parcel-bundler`
+
 Install requirements: `npm install -d`
 
 ### Development
