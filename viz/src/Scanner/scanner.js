@@ -103,7 +103,7 @@ function handleScans(content) {
     globalQR = content;
 
     var firstQRURL = content[0]
-    paperCupChild.requestBadgeTitle(firstQRURL, function(garden_name) {
+    paperCupChild.sendRequest("getBadgeTitle", firstQRURL, function(garden_name) {
       console.log("badge url to garden name");
       console.log("badge url: " + firstQRURL);
       console.log("garden name: " + garden_name);
