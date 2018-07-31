@@ -34,7 +34,7 @@ body {
 body, html {
   font-family: "Millimetre-Regular";
   /* font-family: 'Karla', sans-serif; */
-  background: linear-gradient(rgba(79, 140, 96,.4), #569051);
+  background: linear-gradient(rgba(79, 140, 96, 0) 60%, rgba(86, 144, 81, 0.4))
   overflow: hidden
 }
 
