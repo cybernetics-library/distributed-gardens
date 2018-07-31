@@ -1,0 +1,144 @@
+<head>
+  <style> 
+    body{ margin: 0; }
+    #info{
+      width: 100%;
+      position: fixed;
+      top: 0;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      z-index: 1;
+      padding: 1rem;
+      box-sizing: border-box;
+      font-family: sans-serif;
+    }
+    #garden-1{
+        position: fixed;
+        width: 10px; height: 10px;
+        background-color: red;
+        border-radius: 1000px;
+        transform: translate(50%, 50%);
+        z-index: 2;
+    }
+    .dot{
+        position: fixed;
+        width: 10px; height: 10px;
+        background-color: red;
+        border-radius: 1000px;
+        transform: translate(50%, 50%);
+        z-index: 2;
+    }
+  </style>
+
+  <script src="//unpkg.com/force-graph"></script>
+  <!--<script src="../../dist/force-graph.js"></script>-->
+</head>
+
+<body>
+  <div id="info">
+      <form class="pure-form" onsubmit="inputChange(event)">
+          <input id="num" type="text" placeholder="Node Number" />
+          <button type="submit">Nav to node</button>
+      </form>
+      <form class="pure-form" onsubmit="makeLink(event)">
+          <input id="link" type="text" placeholder="Node Number" />
+          <button type="submit">Make link to</button>
+      </form>
+      <div id="node">0</div>
+    </div>
+<div id="garden-1"></div>
+<div id="garden-2"></div>
+<div id="graph"></div>
+
+<script>
+  var Graph = null
+
+  function zoomTo(node){
+    Graph.centerAt(node.x, node.y, 1000);
+    Graph.zoom(8, 2000);
+  }
+  
+  function inputChange(e) {
+    e.preventDefault()
+    console.log('hello')
+    var val = document.getElementById("num").value
+    selectedNode = Graph.graphData().nodes[val]
+    zoomTo(selectedNode)
+  }
+
+  fetch('miserables.json').then(res => res.json()).then(data => {
+    const elem = document.getElementById('graph');
+    var selectedNode = 0
+    var nextNode = 0
+    divNodes = []
+
+    // function inputChange(e) {
+    //   console.log('hello')
+    //   e.preventDefault()
+    //   var val = document.getElementById("num").value
+    //   selectedNode = Graph.graphData().nodes[val]
+    //   zoomTo(selectedNode)
+    // }
+
+    function makeLink(e) {
+      e.preventDefault()
+      // var garden = document.getElementById("garden-1")
+      var val = document.getElementById("link").value
+      nextNode = val
+      links.push({source: selectedNode, target: nodes[val], val: 100 })
+      Graph.graphData({ nodes, links });
+    }
+
+    function manageNodes(nodes){
+      var garden = document.getElementById("garden-1")
+      // var garden2 = document.getElementById("garden-2")
+      var multiplier = Graph.zoom()
+      var halfWidth = window.innerWidth/2
+      var halfHeight = window.innerHeight/2
+
+      // nodes.forEach((node, i) => {
+      //   var el = document.getElementById(i)
+      //   var correctedX = ((node.x*multiplier) + halfWidth)
+      //   var correctedY = ((node.y*multiplier) + halfHeight)/2
+      //   console.log(el)
+      //   el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); background-color: red; width: 10px; height: 10px;position: fixed;z-index: 2;"
+      // })
+
+      var correctedX = ((selectedNode.x*multiplier) + halfWidth)
+      var correctedY = ((selectedNode.y*multiplier) + halfHeight)
+
+      garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
+
+      // nodes[0].x = 10
+      // nodes[0].y = 10
+
+      // nodes[3].x = 20
+      // nodes[3].y = 10
+    }
+
+    Graph = ForceGraph()(elem)
+      .graphData(data)
+      .nodeLabel('id')
+      .nodeAutoColorBy('group')
+      .linkDirectionalParticles(2)
+      .linkDirectionalParticleWidth(1.4)
+      .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+      .onEngineTick(() => manageNodes(Graph.graphData().nodes))
+      .onNodeClick(node => {
+        zoomTo(node)
+      });
+    
+      // Graph.zoom(1, 2000);
+      selectedNode = Graph.graphData().nodes[0]
+      // zoomTo(selectedNode)
+      Graph.graphData().nodes.forEach((node,i) => {
+        var elem = document.createElement('div');
+        elem.id = i
+        elem.className = 'dot'
+        document.body.appendChild(elem);
+        divNodes.push({el: elem})
+      })
+  });
+</script>
+</body>
