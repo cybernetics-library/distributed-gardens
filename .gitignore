@@ -5,3 +5,4 @@ package-lock.json
 dist/
 .cache
 badge/qrcodes
+.DS_Store
