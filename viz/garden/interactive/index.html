@@ -16,6 +16,7 @@
     #garden{
         position: fixed;
         width: 10px; height: 10px;
+        margin-left: -5px; margin-top: -5px;
         background-color: red;
         border-radius: 1000px;
         transform: translate(50%, 50%);
@@ -41,13 +42,12 @@
     }
 
     .dot{
-        position: fixed;
+        position: absolute;
         width: 10px; height: 10px;
         background-color: red;
-        border-radius: 1000px;
-        transform: translate(50%, 50%);
-        top: 50%; right: 50%;
-        transform: translate(50%,-50%);
+        /* border-radius: 1000px; */
+        /* top: 50%; right: 50%; */
+        /* transform: translate(50%,-50%); */
         z-index: 2;
     }
   </style>
@@ -83,7 +83,7 @@
 <script>
   var Graph = null
   const elem = document.getElementById('graph');
-  const garden = document.getElementById('garden');
+  // const garden = document.getElementById('garden');
   const garden_overlay = document.getElementById('garden-overlay');
   var selectedNode = 0
   var nextNode = 3
@@ -106,24 +106,6 @@
     Graph.centerAt(node.x, node.y, 1000);
     Graph.zoom(20, 2000);
   }
-  
-  // function inputChange(e) {
-  //   e.preventDefault()
-  //   var val = document.getElementById("num").value
-  //   selectedNode = Graph.graphData().nodes[val]
-  //   gotBadge = true
-  //   console.log(gotBadge)
-  //   initCycle()
-  // }
-
-  // function makeLink(e) {
-  //   e.preventDefault()
-  //   var { nodes, links } = Graph.graphData();
-  //   var val = document.getElementById("link").value
-  //   nextNode = nodes[val]
-  //   links.push({source: selectedNode, target: nodes[val], val: 100 })
-  //   Graph.graphData({ nodes, links });
-  // }
 
   function makeNode(e) {
     e.preventDefault()
@@ -131,6 +113,15 @@
     nodes.push({id: "new", group: 1 })
     Graph.graphData({ nodes, links });
     state = "ready"
+
+    var dot = document.createElement('div');
+    dot.id = Graph.graphData().nodes.length-1
+    dot.className = 'dot'
+    // elem.appendChild(dot);
+    elem.insertAdjacentElement('afterbegin', dot)
+
+    divNodes.push({el: dot})
+
     initCycle()
   }
 
@@ -143,8 +134,8 @@
   }
 
   function focusGraph() {
-    // zoomTo(nextNode)
-    Graph.zoom(2, 2000);
+    // Graph.centerAt(0, 0, 1000);
+    Graph.zoom(1, 2000);
     clearTimeout(focusTimer);
     state = "waiting"
     garden_overlay.className = 'dim'
@@ -154,7 +145,7 @@
   function renderGarden() {
     var { nodes, links } = Graph.graphData();
     if(previousNode){
-      links.push({source: nextNode, target: previousNode, val: 10 })
+      links.push({source: previousNode, target: nextNode, val: 10 })
       Graph.graphData({ nodes, links });
     }
     clearTimeout(renderTimer);
@@ -178,13 +169,23 @@
 
   fetch('miserables.json').then(res => res.json()).then(data => {
     function manageNodes(nodes){
+      var garden = document.getElementById("garden")
+      var graph = document.getElementById( 'graph' )
 
-      var multiplier = Graph.zoom()
-      var halfWidth = window.innerWidth/2
-      var halfHeight = window.innerHeight/2
+      var canvas = document.getElementById('graph').getElementsByTagName( 'canvas' )[0];
+      var ctx = canvas.getContext('2d')
+      var canvasZoom = ctx.canvas.__zoom;
 
-      var correctedX = ((nextNode.x*multiplier) + halfWidth)
-      var correctedY = ((nextNode.y*multiplier) + halfHeight)
+      var correctedX = ((nextNode.x * canvasZoom.k) + (canvasZoom.x))
+      var correctedY = ((nextNode.y * canvasZoom.k) + (canvasZoom.y))
+
+      nodes.forEach((node, i) => {
+        var el = document.getElementById(i)
+        var correctedX = ((node.x * canvasZoom.k) + (canvasZoom.x))
+        var correctedY = ((node.y * canvasZoom.k) + (canvasZoom.y))
+        // console.log(el)
+        el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
+      })
 
       garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
     }
@@ -202,16 +203,17 @@
         zoomTo(node)
       });
     
-      // selectedNode = Graph.graphData().nodes[0]
       nextNode = Graph.graphData().nodes[0]
 
-      // Graph.graphData().nodes.forEach((node,i) => {
-      //   var elem = document.createElement('div');
-      //   elem.id = i
-      //   elem.className = 'dot'
-      //   document.body.appendChild(elem);
-      //   divNodes.push({el: elem})
-      // })
+      Graph.graphData().nodes.forEach((node,i) => {
+        var dot = document.createElement('div');
+        dot.id = i
+        dot.className = 'dot'
+        // elem.appendChild(dot);
+        elem.insertAdjacentElement('afterbegin', dot)
+
+        divNodes.push({el: dot})
+      })
   });
 </script>
 </body>
