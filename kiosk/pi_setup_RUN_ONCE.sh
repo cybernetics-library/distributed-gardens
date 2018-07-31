@@ -31,11 +31,11 @@ sudo systemctl enable ssh
 sudo systemctl start ssh
 
 echo "=== creating $1.local hostname & installing avahi-daemon...."
-sudo echo $1 > /etc/hostname
+sudo bash -c "echo $1 > /etc/hostname"
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install avahi-daemon
-sudo echo "127.0.0.1 localhost localhost.localdomain $1" >> /etc/hosts
+sudo bash -c "sudo echo '127.0.0.1 localhost localhost.localdomain $1' >> /etc/hosts"
 
 
 echo "=== install nvm...."
