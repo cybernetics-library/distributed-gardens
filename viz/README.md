@@ -4,6 +4,8 @@
 
 `npm start`
 
+(this may take up to 60 seconds)
+
 Then sites are at:
 - `http://localhost:1234/index.html` 
 - `http://localhost:1234/scanner/index.html`
