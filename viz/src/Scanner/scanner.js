@@ -89,8 +89,6 @@ import Instascan from 'instascan'
     setTimeout(sameBookTimer, 12000);
 
 
-    $("#prompt").hide();
-    $("#garden_title").html("The Garden of Sleeping Dogs");
     // new CircleType(document.getElementById('garden_title'))
     // .radius(188);
 
@@ -109,7 +107,7 @@ import Instascan from 'instascan'
   function firstScan() {
 
     $("#cam1").hide();
-    freeze_scan_1();
+    newGarden();
     $( "#freeze1" ).addClass( "grayscale blur" );
 
     // setTimeout(function(){ waitForLink(); }, 3000);
@@ -157,14 +155,27 @@ import Instascan from 'instascan'
 
 
 
-function freeze_scan_1() {
+function newGarden() {
+
+  //freeze cam
     Webcam.snap( function(data_uri) {
         document.getElementById('freeze1').innerHTML = '<img src="'+data_uri+'"/>';
     } );
+// change garden_title
+console.log("hiii");
+$('#garden_title').html("The Garden of Ravenous Contemplation");
+  $('body').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
+    $('html').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
+
+ $('#prompt').hide();
+
 }
 
 
+
+
 $(document).ready(function() {
+  $('#garden_title').html("The Garden of Sleeping Dogs");
 
   $('#prompt').css("top", "-218px");
   $('#cam1').css("left", "calc(50% - 192px)");
