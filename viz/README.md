@@ -1,4 +1,8 @@
-## Development
+### Setup
+
+Install Parcel: npm install -g parcel-bundler
+
+### Development
 
 #### To build everything for development
 
