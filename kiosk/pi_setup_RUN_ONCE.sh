@@ -32,9 +32,9 @@ sudo systemctl start ssh
 
 echo "=== creating $1.local hostname & installing avahi-daemon...."
 sudo bash -c "echo $1 > /etc/hostname"
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get install avahi-daemon
+sudo apt-get --assume-yes update
+sudo apt-get --assume-yes upgrade
+sudo apt-get --assume-yes install avahi-daemon
 sudo bash -c "sudo echo '127.0.0.1 localhost localhost.localdomain $1' >> /etc/hosts"
 
 
@@ -43,7 +43,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.9/install.sh | b
 source ~/.bashrc
 
 echo "=== install vim...."
-sudo apt-get install vim
+sudo apt-get --assume-yes install vim
 
 echo "=== install pm2..."
 npm install pm2@latest -g
