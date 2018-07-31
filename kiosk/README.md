@@ -8,10 +8,11 @@ This a repo to coordinate running on the RPis
 
 (This happens on each Pi)
 - Clone this repo
+  - `git clone git://github.com/cybernetics-conference/distributed-gardens.git`
 - Run setup script, with an ID:
   - `pi_keys_and_hostname_setup.sh plantkiosk1` 
   - (this changes `kiosk_ids.txt`)
-- git commit and push to repo
+- git commit and push to repo 
 
 ### 2. Fanout test
 
