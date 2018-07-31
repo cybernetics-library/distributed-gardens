@@ -6,6 +6,8 @@
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+"solarized 
+Plugin 'altercation/vim-colors-solarized' 
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
