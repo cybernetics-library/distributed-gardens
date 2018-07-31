@@ -54,19 +54,31 @@ body, html {
     bottom: 1.2em;
   }
 
-  #freeze1 img {
-    transform: scaleX(-1);
+  #freeze1 {
+
     width: 275px;
     height: 275px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: fixed;
+    bottom: 1.2em;
+    left: calc(50% - 137px);
+    overflow: hidden;
+
+  }
+
+  #freeze1 img {
+    transform: scale(-1.5625, 1.25);
     filter: grayscale(100%);
+    /*
+    width: 275px;
+    height: 275px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
     margin: auto;
     position: fixed;
-    bottom: 1.2em;
-    left: calc(50% - 137px);
-    z-index: 101;
+    z-index: 101; */
   }
 
 

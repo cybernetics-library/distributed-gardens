@@ -172,13 +172,13 @@ function newGarden() {
   // change garden_title
   console.log("hiii");
   $('#garden_title').css("color","#214f32");
-  $('body').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
-  $('html').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
+  $('body').css("background", "linear-gradient(rgba(79, 140, 96, 0) 60%, rgba(86, 144, 81, 0.4))");
+//  $('html').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
 
   $('#prompt').hide();
   setTimeout(function() {
     refresh();
-  }, 9000);
+  }, 9000000);
 }
 
 

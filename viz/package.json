@@ -2,7 +2,7 @@
   "name": "distributed_gardens_viz",
   "version": "1.0.0",
   "scripts": {
-    "start": "cd src && parcel index.html",
+    "start": "cd src && parcel index.html scanner/index.html",
     "scanner": "cd src/scanner && parcel index.html",
     "examples": "cd src/examples && parcel *.html",
     "meadow": "cd src/meadow && parcel index.html",
