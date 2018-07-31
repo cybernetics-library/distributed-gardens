@@ -32,11 +32,32 @@ and then
 $ npm run start:rv
 ```
 
-Leave this running while you develop.
+Leave this running while you develop. Everything else below is back in this repo.
 
 ## Development
 
-#### To build everything for development
+#### 3. Test that IPFS / Biome / Irrigation is all peachy keen
+
+##### in browser
+- `npm run examples`
+- go to `http://localhost:1234/` and check console
+
+##### in Node
+- `cd viz/src/examples`
+- `node irrigation_node_example.js`
+
+
+#### 4. To build just the scanner/meadow/garden for development:
+
+Run one of:
+- `npm run scanner`
+- `npm run meadow`
+- `npm run garden`
+
+Then sites are at `http://localhost:1234/`
+
+
+#### 5. To build everything for development (to see everything working)
 
 `npm start`
 
@@ -50,12 +71,3 @@ Then sites are at:
 
 (You have to specify the specific URLs, including the `index.html`)
 
-
-#### To build just the scanner/meadow/garden for development:
-
-Run one of:
-- `npm run scanner`
-- `npm run meadow`
-- `npm run garden`
-
-Then sites are at `http://localhost:1234/`
