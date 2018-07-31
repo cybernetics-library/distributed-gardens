@@ -24,24 +24,28 @@ var vueapp = new Vue({
     gardendata: fakeData.gardenstats()
   },
   methods: {
-    startIrrigation() {
+    startIrrigation: async function() {
       var self = this;
-      var thisirrigation = new Irrigation();
-      thisirrigation.init()
-        .then(() => {
-          self.irrigation = thisirrigation;
-          self.getHistory();
-        })
+      self.irrigation = new Irrigation();
+      await self.irrigation.init()
     },
-    getHistory() {
+    getData: function() {
       var self = this;
+//      self.graphdata = self.irrigation.getGraphData();
+      self.irrigation = self.irrigation;
       self.history = self.irrigation.getHistory();
       self.stats = self.irrigation.getStats()
     }
   },
   mounted() {
 		var self = this;
-    this.startIrrigation();
+    this.startIrrigation()
+      .then(function () {
+        console.log("started!");
+        self.getData();
+        console.log(self.irrigation);
+        console.log(self.graphdata);
+      });
   },
   updated() {
   }
