@@ -1,3 +1,18 @@
 # Kiosk
 
-This a repo designed to run on the RPis
+This a repo to coordinate running on the RPis
+
+## Setup
+
+### 1. On the Pi: SSH Keys & hostname setup
+
+(This happens on each Pi)
+- Clone this repo
+- Run setup script, with an ID:
+  - `pi_keys_and_hostname_setup.sh plantkiosk1` 
+  - (this changes `kiosk_ids.txt`)
+- git commit and push to repo
+
+### 2. Fanout test
+
+`./fanoutkiosks.sh uptime` w

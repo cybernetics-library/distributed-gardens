@@ -1,0 +1,75 @@
+#!/bin/bash
+#Copyright 2002, 2003 William Stearns <wstearns@pobox.com>
+#Released under the GPL
+#V0.6.1
+
+Geometry="80x9"
+
+FanTermCleanup () {
+	for OnePipe in $InPipes $OutPipes; do
+		if [ -p "$OnePipe" ]; then
+			rm -f "$OnePipe"
+		fi
+	done
+	reset
+}
+
+#trap FanTermCleanup SIGHUP
+trap FanTermCleanup SIGTERM
+trap FanTermCleanup SIGINT         #Ctrl-C generates this
+
+
+if ! type -path mktemp >/dev/null 2>/dev/null ; then
+	echo "Sorry, no mktemp utility, exiting." >&2
+	exit 1
+fi
+
+if [ -z "$1" ]; then
+	echo Usage: >&2
+	echo "$0 ssh_host [ssh_host]..." >&2
+	exit 1
+fi 
+
+for OneHost in "$@" ; do
+	if [ "$NextGeom" = "yes" ]; then
+		Geometry="$OneHost"
+		NextGeom="no"
+	else
+		case "$OneHost" in
+		-geometry)
+			NextGeom="yes"
+			;;
+		*)
+			InPipe=`mktemp -q -u /tmp/fanout.XXXXXX`
+			if [ $? -ne 0 ]; then
+				echo "$0: Can't create temp file $InPipe." >&2
+				exit 1
+			fi
+			mknod --mode=600 $InPipe p
+			OutPipe=`mktemp -q -u /tmp/fanout.XXXXXX`
+			if [ $? -ne 0 ]; then
+				echo "$0: Can't create temp file $OutPipe." >&2
+				exit 1
+			fi
+			mknod --mode=600 $OutPipe p
+		
+			InPipes="$InPipes $InPipe"
+			OutPipes="$OutPipes $OutPipe"
+			cat $InPipe | ssh -t -t "$OneHost" >$OutPipe 2>&1 &
+			xterm -geometry "$Geometry" -T "$OneHost" -n "$OneHost" -e cat $OutPipe &
+			;;
+		esac
+	fi
+done
+
+fanmux $InPipes
+
+wait
+
+FanTermCleanup
+
+
+
+
+
+

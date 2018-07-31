@@ -1,0 +1,28 @@
+V0.6.1 1/15/2003
+- fanterm renamed to fanmux, fansetup* renamed to fanterm*.  Reset main
+  console on exit.  Make pipes with mode 600.  Real packaging.
+
+
+V0.6 1/12/2003
+- Fanterm is now character oriented (and rewritten in perl) so it can
+  even run interactive commands such as editors.  Added a "geometry"
+  parameter to fansetup so you can specify how large the resulting
+  xterms should be.  Clean up pipes on exit.  Fanterm renamed to
+  fanterm.sh - this will be abandoned as the perl version's better.
+
+
+V0.5 12/2/2002
+- Added fanterm and fansetup, the first pass at an interactive version
+  of fanout.  They actually function reasonably well, with the
+  limitation that they're line oriented, so nothing is sent to the
+  remote systems until a complete line of text is entered.  Perfectly
+  good for shell commands, not so hot for character-at-a-time editing.
+
+
+V0.4 8/7/2002
+- Added the --noping option to avoid pinging any of the target hosts. 
+  Good if one or more machines are up but can't be pinged because of an
+  intervening firewall.
+
+V0.3 9/16/2001
+- Addition of documentation

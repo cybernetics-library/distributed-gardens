@@ -1,0 +1,75 @@
+<html>
+<head>
+<title>Fanout - run commands on multiple remote machines at once</title>
+<META NAME="keywords" CONTENT="fanout, ssh, remote, commands, bash, Linux">
+</head>
+<body>
+<h2>Introduction</h2>
+	<p>Fanout allows you to run non-interactive commands on remote
+machines simultaneously, collecting the output in an organized fashion.
+The syntax is:</p>
+
+<pre>
+fanout "OneMachine SecondBox UserAccount@ThirdBox" "CommandToRun"
+</pre>
+
+<hr>
+<h2>Examples</h2>
+
+<ul>
+<li>fanout "wstearns@localhost localhost anotherhost.someplace.net" "echo My PID is \"\$PPID\" ; sleep 15"
+<li>fanout "localhost" "uname -a ; rpm -qa | egrep -i '(openlinux|redhat-release)' ; uptime ; df -P / ; netstat -a | grep '*:*'" | less
+<li>fanout "localhost myaccount@localhost" "uptime" >uptime-sample
+<li>fanout --noping "localhost myaccount@localhost" "uptime" >uptime-sample
+
+	<p>If you set the SERVERS variable in your environment, you
+can run commands on these machines over and over:</p>
+<pre>
+export SERVERS="web1 web2 mail"
+</pre>
+<li>fanout "$SERVERS" "uname -a ; ( if [ -f /var/log/dmesg ]; then cat /var/log/dmesg ; else dmesg ; fi ) | egrep -i '(hd[a-h]|sd[a-h])' ; ls -al /proc/kcore ; cat /proc/cpuinfo" >serverspecs
+</ul>
+
+<hr>
+<h2>Sample run</h2>
+<pre>
+#Sample run
+[wstearns@sparrow fanout]$ fanout "localhost wstearns@localhost aaa.bbb.ccc" "uptime" | less
+aaa.bbb.ccc unavailable
+Starting localhost
+Starting wstearns@localhost
+Fanout executing "uptime"
+Start time Fri Apr 7 00:13:07 EDT 2000 , End time Fri Apr 7 00:13:20 EDT 2000
+==== On aaa.bbb.ccc ====
+==== Machine unreachable by ping
+
+==== On localhost ====
+   12:13am  up 3 days, 10:44,  0 users,  load average: 0.17, 0.17, 0.22
+
+==== As wstearns on localhost ====
+   12:13am  up 3 days, 10:44,  0 users,  load average: 0.15, 0.16, 0.22
+</pre>
+
+<hr>
+<h2>Notes</h2>
+<ul>
+<li>The accounts you connect to should have your ssh key ready and you
+should be running ssh-agent ready to serve that key.  If you need help
+setting this up, please see
+<a href="../ssh-keyinstall">ssh-keyinstall</a>
+<a href="http://www.stearns.org/ssh-keyinstall/">(main site)</a>.
+<li>The command(s) you execute run concurrently on each remote machine.  Output does not show up until all are done.
+</ul>
+
+<hr>
+<h2>Download</h2>
+        <p>For a complete list of all files, see                                                              
+<a href="filelist.html">filelist.html</a>.</p>                                                                
+	
+
+<hr>
+<p><i>Copyright 2000, 2001, 2002 <a href="http://www.stearns.org/">William Stearns</a> &lt;wstearns@pobox.com&gt;</i>
+<p><i>Last edited: 8/7/2002</i></p>
+<p><i>Best viewed with something that can show web pages... &lt;grin&gt;</i></p>
+</body>
+</html>
