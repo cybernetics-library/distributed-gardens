@@ -20,7 +20,7 @@ var vueapp = new Vue({
     irrigation: null,
     history: [],
     stats: {},
-    graphdata: mizdata,
+    graphdata: {},
     gardendata: fakeData.gardenstats()
   },
   methods: {
@@ -45,6 +45,7 @@ var vueapp = new Vue({
         self.getData();
         console.log(self.irrigation);
         console.log(self.graphdata);
+        self.graphdata = self.irrigation.getGraphData();
       });
   },
   updated() {
