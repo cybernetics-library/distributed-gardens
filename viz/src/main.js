@@ -20,22 +20,19 @@ var vueapp = new Vue({
     irrigation: null,
     history: [],
     stats: {},
-    graphdata: {},
+    graphdata: mizdata,
     gardendata: fakeData.gardenstats()
   },
   methods: {
-    async startIrrigation() {
+    startIrrigation: async function() {
       var self = this;
-      var thisirrigation = new Irrigation();
-      await thisirrigation.init()
-/*        .then(() => {
-          self.irrigation = thisirrigation;
-          self.getHistory();
-          self.graphdata = thisirrigation.getGraphData();
-        })*/
+      self.irrigation = new Irrigation();
+      await self.irrigation.init()
     },
-    getHistory() {
+    getData: function() {
       var self = this;
+//      self.graphdata = self.irrigation.getGraphData();
+      self.irrigation = self.irrigation;
       self.history = self.irrigation.getHistory();
       self.stats = self.irrigation.getStats()
     }
@@ -43,7 +40,12 @@ var vueapp = new Vue({
   mounted() {
 		var self = this;
     this.startIrrigation()
-      .then(console.log("started!"));
+      .then(function () {
+        console.log("started!");
+        self.getData();
+        console.log(self.irrigation);
+        console.log(self.graphdata);
+      });
   },
   updated() {
   }
