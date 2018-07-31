@@ -45,8 +45,12 @@ source ~/.bashrc
 echo "=== install vim...."
 sudo apt-get --assume-yes install vim
 
-echo "=== install vimrc...."
+echo "=== install vimrc & Vundle...."
 cat vimrc.txt >  ~/.vimrc
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim -c 'PluginInstall' -c 'qa!'
+
+
 
 echo "=== install pm2..."
 npm install pm2@latest -g
