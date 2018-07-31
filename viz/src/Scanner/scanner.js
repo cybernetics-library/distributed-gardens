@@ -108,6 +108,7 @@ function handleScans(content) {
       console.log("badge url: " + firstQRURL);
       console.log("garden name: " + garden_name);
       $('#garden_title').html(garden_name);
+      $('#garden_title').show();
     });
 
     firstScan();
@@ -137,7 +138,8 @@ function refresh() {
   $('#prompt').fadeIn("slow");
   $("#freeze1").fadeOut("slow");
   $('#cam1').fadeIn("slow");
-  $('#garden_title').css("color", "#9fd6a7");
+  $('#garden_title').html("");
+  // $('#garden_title').css("color", "#9fd6a7");
   // resetQR();
 }
 
@@ -172,7 +174,7 @@ $(document).ready(function() {
 
 
   $('#prompt').css("top", "-218px");
-  $('#cam1').css("left", "calc(50% - 192px)");
+  $('#cam1').css("left", "calc(50% - 137px)");
 
 
 
