@@ -170,7 +170,7 @@ $(document).ready(function() {
 
 
   $('#prompt').css("top", "-218px");
-  $('#cam1').css("left", "calc(50% - 192px)");
+  $('#cam1').css("left", "calc(50% - 137px)");
 
 
 
