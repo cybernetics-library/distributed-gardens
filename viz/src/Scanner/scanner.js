@@ -38,6 +38,11 @@ function isBook(s) {
   }
 }
 
+window.isBook = isBook;
+
+function isName(s) {
+  return !isBook(s);
+}
 
 function urlToId(s) {
   // show qr url
