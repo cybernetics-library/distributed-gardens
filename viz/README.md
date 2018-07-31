@@ -1,4 +1,4 @@
-### Setup
+## Setup
 
 
 #### Setup this repo
@@ -32,7 +32,9 @@ and then
 $ npm run start:rv
 ```
 
-### Development
+Leave this running while you develop.
+
+## Development
 
 #### To build everything for development
 
