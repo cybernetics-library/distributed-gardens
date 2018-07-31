@@ -101,13 +101,13 @@ function handleScans(content) {
       var prevQRURL = Object.values(window.prevlink.names)[0]
     } else { var prevQRURL = "" }
 
-    console.log(window.prevlink)
+//    console.log(window.prevlink)
 
     window.prevlink = res;
-    console.log(res);
+//    console.log(res);
     console.log("new QR!!!!");
     isLink = true;
-    console.log(isLink);
+//    console.log(isLink);
     globalQR = content;
 
     var thisQRURL = content[0]
@@ -130,7 +130,7 @@ function handleScans(content) {
     }
   } else {
     isLink = false;
-    console.log(isLink);
+//    console.log(isLink);
   };
 };
 

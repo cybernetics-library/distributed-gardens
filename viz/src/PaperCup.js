@@ -31,7 +31,6 @@ class PaperCupChild {
         var callback_name = msg.data.callback_name
         var response = msg.data.response
 
-        console.log("child: I heard a reponse " + reqname + callback_name + response);
 
         if(callback_name in self.callbacks) {
           self.callbacks[callback_name](response);

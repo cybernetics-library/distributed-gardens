@@ -68,9 +68,16 @@ var vueapp = new Vue({
 
         if(reqname == "submitLink") {
           console.log(":::parent:: we got a LINK ")
-          console.log(data);
+          var msg = {
+            'from': {'name': 'kiosk'}, // TODO CHANGE NAME PROGRAMMATICALLY
+            'type': 'link',
+            'msg': {
+              'link_from': Helpers.getBadgeIdFromUrl(data.link_from),
+              'link_to': Helpers.getBadgeIdFromUrl(data.link_to)
+            }
+          }
+          self.irrigation.addEventNow(msg)
         } 
-
       });
     }
   },
