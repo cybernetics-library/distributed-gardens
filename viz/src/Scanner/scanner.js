@@ -151,7 +151,7 @@ function newGarden() {
 
   // change garden_title
   console.log("hiii");
-  $('#garden_title').html("The Garden of Ravenous Contemplation");
+  // $('#garden_title').html("The Garden of Ravenous Contemplation");
   $('body').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
   $('html').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
 
