@@ -111,6 +111,8 @@ function handleScans(content) {
     });
 
     firstScan();
+    paperCupChild.sendRequest("submitScan", firstQRURL, function() {  });
+//    paperCupChild.sendRequest("submitLink", firstQRURL, function() {  });
   }else{
     isLink = false;
     console.log(isLink);
@@ -124,6 +126,8 @@ function firstScan() {
   $("#cam1").hide();
   newGarden();
   $("#freeze1").addClass("grayscale blur");
+
+
 
 };
 

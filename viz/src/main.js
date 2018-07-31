@@ -58,7 +58,16 @@ var vueapp = new Vue({
         if(reqname == "getBadgeTitle") {
           console.log(":::parent:: we were asked for badge title: " + self.badgedata[badgeId].title);
           return self.badgedata[badgeId].title;
-        } // add more
+        } 
+
+        if(reqname == "submitScan") {
+          console.log(":::parent:: we got a SCAN " + badgeId);
+        } 
+
+        if(reqname == "submitLink") {
+          console.log(":::parent:: we got a LINK " + badgeId);
+        } 
+
       });
     }
   },
