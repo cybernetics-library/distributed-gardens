@@ -1,7 +1,7 @@
 ## Setup
 
 
-#### 1. Setup this repo
+### 1. Setup this repo
 
 Use Node verson 8.4.0 (use NVM if necessary)
 
@@ -15,7 +15,7 @@ Install Parcel: `npm install -g parcel-bundler`
 
 Install requirements: `npm install -d`
 
-#### 2. Setup rendezvous server 
+### 2. Setup rendezvous server 
 
 Clone [peer-star-app](https://github.com/ipfs-shipyard/peer-star-app) repo into a different folder (outside of this repo).
 
@@ -36,7 +36,7 @@ Leave this running while you develop. Everything else below is back in this repo
 
 ## Development
 
-#### 3. Test that IPFS / Biome / Irrigation is all peachy keen
+### 3. Test that IPFS / Biome / Irrigation is all peachy keen
 
 ##### in browser
 - `npm run examples`
@@ -47,7 +47,7 @@ Leave this running while you develop. Everything else below is back in this repo
 - `node irrigation_node_example.js`
 
 
-#### 4. To build just the scanner/meadow/garden for development:
+### 4. To build just the scanner/meadow/garden for development:
 
 Run one of:
 - `npm run scanner`
@@ -57,7 +57,7 @@ Run one of:
 Then sites are at `http://localhost:1234/`
 
 
-#### 5. To build everything for development (to see everything working)
+### 5. To build everything for development (to see everything working)
 
 `npm start`
 
