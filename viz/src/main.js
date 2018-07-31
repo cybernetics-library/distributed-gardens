@@ -7,7 +7,7 @@ import fakeData from './fakeData'
 import Helpers from './Helpers'
 
 import Meadow from './Meadow/Meadow.vue'
-import Garden from './Garden/Garden.vue'
+// import Garden from './Garden/Garden.vue'
 
 var mizdata = require('./Meadow/miserables.json')
 var badgedata = require('./data/badge_data.json')
@@ -16,7 +16,7 @@ var vueapp = new Vue({
   el: '#app',
   components: {
     Meadow,
-    Garden
+    // Garden
   },
   data: {
     irrigation: null,

@@ -9,7 +9,10 @@
     </div>
 
     <div id="garden-overlay" class="dim"></div>
-    <div id="garden"></div>
+    <!-- <div id="garden"></div> -->
+
+    <garden :gardendata=gardendata></garden>
+
     <div id="graph"></div>
   </div>
 </template>
@@ -33,10 +36,11 @@
     }
     #garden{
         position: fixed;
-        width: 10px; height: 10px;
-        margin-left: -5px; margin-top: -5px;
-        background-color: red;
-        border-radius: 1000px;
+        width: 640px; height: 480px;
+        /* width: 10px; height: 10px; */
+        /* margin-left: -5px; margin-top: -5px; */
+        background-color:'none';
+        /* border-radius: 1000px; */
         transform: translate(50%, 50%);
         z-index: 2;
     }
@@ -71,6 +75,7 @@
 </style>
 
 <script>
+import Garden from '../Garden/Garden.vue'
 import ForceGraph from 'force-graph'
 
 export default {
@@ -78,9 +83,15 @@ export default {
     "graphdata": {
       default: {},
     },
+    "gardendata": {
+      default: {},
+    },
     "currentbadge":{
       default: {},
     }
+  },
+  components: {
+    Garden
   },
   data: () => {
     console.log('new data')
@@ -118,7 +129,6 @@ export default {
       var renderTimer
       var focusTimer
       this.state = "ready"
-
 
       var self = this;
       self.Graph = ForceGraph()(elem)
