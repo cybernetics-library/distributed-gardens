@@ -134,7 +134,7 @@ function refresh() {
   $("#freeze1").fadeOut("slow");
   $('#cam1').fadeIn("slow");
   $('#garden_title').css("color", "rgb(125, 152, 129)");
-  resetQR();
+  // resetQR();
 }
 
 
@@ -165,7 +165,7 @@ function newGarden() {
 
 
 $(document).ready(function() {
-  $('#garden_title').html("The Garden of Sleeping Dogs");
+
 
   $('#prompt').css("top", "-218px");
   $('#cam1').css("left", "calc(50% - 192px)");
