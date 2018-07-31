@@ -7,15 +7,14 @@ class PaperCupChild {
   }
 
  // STEP 1: child requests something and sends it, storing the callback in a list of callbacks needed to process
-  sendRequest(reqname, url, cb) {
+  sendRequest(reqname, data, cb) {
     var self = this;
-    var badgeId = Helpers.getBadgeIdFromUrl(url);
-    var callback_name = badgeId
+    var callback_name = new Date().getTime()
     self.callbacks[callback_name] = cb
     var msg = {
       "papercup": true,
       "reqname": reqname, // for example "requestBadgeTitle",
-      "badgeId": badgeId,
+      "data": data,
       "callback_name" : callback_name
     }
     window.parent.postMessage(msg, '*');
@@ -56,10 +55,10 @@ class PaperCupParent {
       if(typeof(msg.data) == "object" && 'papercup' in msg.data) {
 
         var reqname = msg.data.reqname
-        var badgeId = msg.data.badgeId
+        var data = msg.data.data
         var callback_name = msg.data.callbackname
 
-        var response = handler(reqname, badgeId);
+        var response = handler(reqname, data);
 
         // STEP 3: parent gets response 
 

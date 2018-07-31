@@ -54,18 +54,21 @@ var vueapp = new Vue({
     createPaperCupHandler: function() {
       var self = this;
       this.paperCupParent = new PaperCup.PaperCupParent();
-      this.paperCupParent.addRequestHandler("scanner", function(reqname, badgeId) {
+      this.paperCupParent.addRequestHandler("scanner", function(reqname, data) {
         if(reqname == "getBadgeTitle") {
+          var badgeurl = data;
+          var badgeId = Helpers.getBadgeIdFromUrl(badgeurl);
           console.log(":::parent:: we were asked for badge title: " + self.badgedata[badgeId].title);
           return self.badgedata[badgeId].title;
         } 
 
         if(reqname == "submitScan") {
-          console.log(":::parent:: we got a SCAN " + badgeId);
+          console.log(":::parent:: we got a SCAN " + data);
         } 
 
         if(reqname == "submitLink") {
-          console.log(":::parent:: we got a LINK " + badgeId);
+          console.log(":::parent:: we got a LINK ")
+          console.log(data);
         } 
 
       });
