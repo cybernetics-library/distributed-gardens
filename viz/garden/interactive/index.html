@@ -14,8 +14,9 @@
       font-family: sans-serif;
     }
     #garden-1{
-        position: fixed;
+        position: absolute;
         width: 10px; height: 10px;
+        margin-left: -5px; margin-top: -5px;
         background-color: red;
         border-radius: 1000px;
         transform: translate(50%, 50%);
@@ -92,10 +93,10 @@
 
     function manageNodes(nodes){
       var garden = document.getElementById("garden-1")
+      var graph = document.getElementById( 'graph' )
+
+
       // var garden2 = document.getElementById("garden-2")
-      var multiplier = Graph.zoom()
-      var halfWidth = window.innerWidth/2
-      var halfHeight = window.innerHeight/2
 
       // nodes.forEach((node, i) => {
       //   var el = document.getElementById(i)
@@ -105,8 +106,12 @@
       //   el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); background-color: red; width: 10px; height: 10px;position: fixed;z-index: 2;"
       // })
 
-      var correctedX = ((selectedNode.x*multiplier) + halfWidth)
-      var correctedY = ((selectedNode.y*multiplier) + halfHeight)
+      var canvas = document.getElementById('graph').getElementsByTagName( 'canvas' )[0];
+      var ctx = canvas.getContext('2d')
+      var canvasZoom = ctx.canvas.__zoom;
+
+      var correctedX = ((selectedNode.x * canvasZoom.k) + (canvasZoom.x))
+      var correctedY = ((selectedNode.y * canvasZoom.k) + (canvasZoom.y))
 
       garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
 
