@@ -5,7 +5,7 @@
       width: 100%;
       position: fixed;
       top: 0;
-      color: white;
+      color: black;
       display: flex;
       justify-content: space-between;
       z-index: 1;
@@ -13,7 +13,7 @@
       box-sizing: border-box;
       font-family: sans-serif;
     }
-    #garden-1{
+    #garden{
         position: fixed;
         width: 10px; height: 10px;
         background-color: red;
@@ -21,12 +21,33 @@
         transform: translate(50%, 50%);
         z-index: 2;
     }
+
+     #garden-overlay{
+        position: absolute;
+        width: 300px; height: 300px;
+        border-radius: 1000px;
+        position: absolute;
+        top: 50%; right: 50%;
+        transform: translate(50%,-50%);
+        background: green;
+        color: white;
+        z-index: 2;
+        transition: opacity 5s ease;
+        opacity: 1;
+
+    }
+    #garden-overlay.dim{
+      opacity: 0;
+    }
+
     .dot{
         position: fixed;
         width: 10px; height: 10px;
         background-color: red;
         border-radius: 1000px;
         transform: translate(50%, 50%);
+        top: 50%; right: 50%;
+        transform: translate(50%,-50%);
         z-index: 2;
     }
   </style>
@@ -45,76 +66,127 @@
           <input id="link" type="text" placeholder="Node Number" />
           <button type="submit">Make link to</button>
       </form>
+
+      <form class="pure-form" onsubmit="makeNode(event)">
+        <!-- <input id="link" type="text" placeholder="Node Number" /> -->
+        <button type="submit">makeNode</button>
+      </form>
+
+      <div id="node">0</div>
       <div id="node">0</div>
     </div>
-<div id="garden-1"></div>
-<div id="garden-2"></div>
+
+<div id="garden-overlay" class="dim"></div>
+<div id="garden"></div>
 <div id="graph"></div>
 
 <script>
   var Graph = null
+  const elem = document.getElementById('graph');
+  const garden = document.getElementById('garden');
+  const garden_overlay = document.getElementById('garden-overlay');
+  var selectedNode = 0
+  var nextNode = 3
+  var previousNode 
+  var divNodes = []
+  var gotBadge = false
+
+  var renderTimer
+  var focusTimer
+
+  // states we have to animate
+  var state = "ready" // one node is centered with its local area shows (1hops)
+  // var state = "new" // new badge is scanned, current node is pinned left
+  // var state = "connecting" // new badge garden appears & grows right unconnected to node with adjacent nodes
+  // var state = "connected" // connected made and both gardens are visible for 30 sec
+  // var state = "ready" // Animate to new garden, wait for next
 
   function zoomTo(node){
+    console.log('hello')
     Graph.centerAt(node.x, node.y, 1000);
-    Graph.zoom(8, 2000);
+    Graph.zoom(20, 2000);
   }
   
-  function inputChange(e) {
+  // function inputChange(e) {
+  //   e.preventDefault()
+  //   var val = document.getElementById("num").value
+  //   selectedNode = Graph.graphData().nodes[val]
+  //   gotBadge = true
+  //   console.log(gotBadge)
+  //   initCycle()
+  // }
+
+  // function makeLink(e) {
+  //   e.preventDefault()
+  //   var { nodes, links } = Graph.graphData();
+  //   var val = document.getElementById("link").value
+  //   nextNode = nodes[val]
+  //   links.push({source: selectedNode, target: nodes[val], val: 100 })
+  //   Graph.graphData({ nodes, links });
+  // }
+
+  function makeNode(e) {
     e.preventDefault()
-    console.log('hello')
-    var val = document.getElementById("num").value
-    selectedNode = Graph.graphData().nodes[val]
-    zoomTo(selectedNode)
+    var { nodes, links } = Graph.graphData();
+    nodes.push({id: "new", group: 1 })
+    Graph.graphData({ nodes, links });
+    state = "ready"
+    initCycle()
+  }
+
+  function focusGarden() {
+    zoomTo(nextNode)
+    clearTimeout(focusTimer);
+    state = "focused"
+    garden_overlay.className = 'none'
+    initCycle()
+  }
+
+  function focusGraph() {
+    // zoomTo(nextNode)
+    Graph.zoom(2, 2000);
+    clearTimeout(focusTimer);
+    state = "waiting"
+    garden_overlay.className = 'dim'
+    initCycle()
+  }
+
+  function renderGarden() {
+    var { nodes, links } = Graph.graphData();
+    if(previousNode){
+      links.push({source: nextNode, target: previousNode, val: 10 })
+      Graph.graphData({ nodes, links });
+    }
+    clearTimeout(renderTimer);
+    focusTimer = setTimeout(focusGarden, 3000);
+  }
+
+  function initCycle() {
+    if (state === "waiting"){
+      console.log("ready for next one")
+      // renderTimer = setTimeout(focusGraph, 10000);
+    } else if(state === 'ready'){
+      previousNode = nextNode
+      nextNode = Graph.graphData().nodes[Graph.graphData().nodes.length-1]
+      Graph.centerAt(nextNode.x, nextNode.y, 1000);
+      renderTimer = setTimeout(renderGarden, 3000);
+    } else if (state === "focused"){
+      console.log("growing garden")
+      renderTimer = setTimeout(focusGraph, 10000);
+    }
   }
 
   fetch('miserables.json').then(res => res.json()).then(data => {
-    const elem = document.getElementById('graph');
-    var selectedNode = 0
-    var nextNode = 0
-    divNodes = []
-
-    // function inputChange(e) {
-    //   console.log('hello')
-    //   e.preventDefault()
-    //   var val = document.getElementById("num").value
-    //   selectedNode = Graph.graphData().nodes[val]
-    //   zoomTo(selectedNode)
-    // }
-
-    function makeLink(e) {
-      e.preventDefault()
-      // var garden = document.getElementById("garden-1")
-      var val = document.getElementById("link").value
-      nextNode = val
-      links.push({source: selectedNode, target: nodes[val], val: 100 })
-      Graph.graphData({ nodes, links });
-    }
-
     function manageNodes(nodes){
-      var garden = document.getElementById("garden-1")
-      // var garden2 = document.getElementById("garden-2")
+
       var multiplier = Graph.zoom()
       var halfWidth = window.innerWidth/2
       var halfHeight = window.innerHeight/2
 
-      // nodes.forEach((node, i) => {
-      //   var el = document.getElementById(i)
-      //   var correctedX = ((node.x*multiplier) + halfWidth)
-      //   var correctedY = ((node.y*multiplier) + halfHeight)/2
-      //   console.log(el)
-      //   el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); background-color: red; width: 10px; height: 10px;position: fixed;z-index: 2;"
-      // })
-
-      var correctedX = ((selectedNode.x*multiplier) + halfWidth)
-      var correctedY = ((selectedNode.y*multiplier) + halfHeight)
+      var correctedX = ((nextNode.x*multiplier) + halfWidth)
+      var correctedY = ((nextNode.y*multiplier) + halfHeight)
 
       garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
-
-      // nodes[0].x = 10
-      // nodes[0].y = 10
-
-      // nodes[3].x = 20
-      // nodes[3].y = 10
     }
 
     Graph = ForceGraph()(elem)
@@ -125,20 +197,21 @@
       .linkDirectionalParticleWidth(1.4)
       .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
       .onEngineTick(() => manageNodes(Graph.graphData().nodes))
+      .enableZoomPanInteraction(false)
       .onNodeClick(node => {
         zoomTo(node)
       });
     
-      // Graph.zoom(1, 2000);
-      selectedNode = Graph.graphData().nodes[0]
-      // zoomTo(selectedNode)
-      Graph.graphData().nodes.forEach((node,i) => {
-        var elem = document.createElement('div');
-        elem.id = i
-        elem.className = 'dot'
-        document.body.appendChild(elem);
-        divNodes.push({el: elem})
-      })
+      // selectedNode = Graph.graphData().nodes[0]
+      nextNode = Graph.graphData().nodes[0]
+
+      // Graph.graphData().nodes.forEach((node,i) => {
+      //   var elem = document.createElement('div');
+      //   elem.id = i
+      //   elem.className = 'dot'
+      //   document.body.appendChild(elem);
+      //   divNodes.push({el: elem})
+      // })
   });
 </script>
 </body>
