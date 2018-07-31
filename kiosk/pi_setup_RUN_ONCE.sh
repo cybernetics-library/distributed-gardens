@@ -63,4 +63,5 @@ echo "$1" >> kiosk_ids.txt
 echo "=== Success! $1 added to kiosk_ids."
 echo "Please git commit -am 'kiosk registration' and push to master so that we can register kiosk_ids!"
 echo "OR add manually on another computer"
+echo "THEN REBOOOOT"
 
