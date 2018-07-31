@@ -98,9 +98,20 @@ import Instascan from 'instascan'
         console.log(res);
         console.log("new book");
         globalQR = content;
-           newGarden();
+           firstScan();
       };
   };
+
+
+
+  function firstScan() {
+
+    $("#cam1").hide();
+    newGarden();
+    $( "#freeze1" ).addClass( "grayscale blur" );
+
+
+};
 
 
 function refresh(){
@@ -113,19 +124,14 @@ function refresh(){
 
 
 function newGarden() {
-
-  $("#cam1").hide();
-  newGarden();
-  $( "#freeze1" ).addClass( "grayscale blur" );
-
+$( "#freeze1" ).hide();
   //freeze cam
     Webcam.snap( function(data_uri) {
-        // $( "#freeze1" ).hide();
         document.getElementById('freeze1').innerHTML = '<img src="'+data_uri+'"/>';
-        // $( "#freeze1" ).fadeIn( "slow" );
-
-
     } );
+
+    $( "#freeze1" ).fadeIn( "slow" );
+
 
 // change garden_title
 console.log("hiii");
@@ -134,7 +140,7 @@ $('#garden_title').html("The Garden of Ravenous Contemplation");
     $('html').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
 
  $('#prompt').hide();
-setTimeout(function(){ refresh(); }, 8000);
+setTimeout(function(){ refresh(); }, 9000);
 }
 
 
