@@ -31,6 +31,13 @@ var vueapp = new Vue({
   methods: {
     init: function() {
       var self = this;
+
+      opts = {}
+      if(Helpers.getUrlValue("nonce") != undefined) {
+        opts.nonce = Heplers.getUrlValue("nonce")
+      }
+      self.opts = opts;
+
       self.startIrrigation()
         .then(function () {
           console.log("started!");
@@ -44,7 +51,7 @@ var vueapp = new Vue({
     },
     startIrrigation: async function() {
       var self = this;
-      self.irrigation = new Irrigation();
+      self.irrigation = new Irrigation(self.opts);
       await self.irrigation.init()
     },
     getData: function() {
