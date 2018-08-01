@@ -40,7 +40,7 @@ export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 echo "=== removing Wolfram (and cutting out 300mb from our download needs)"
-sudo apt-get assume-yes purge wolfram-engine
+sudo apt-get --assume-yes purge wolfram-engine
 
 echo "=== creating $kioskid.local hostname & installing avahi-daemon...."
 sudo bash -c "echo $kioskid > /etc/hostname"
