@@ -31,6 +31,13 @@ var vueapp = new Vue({
   methods: {
     init: function() {
       var self = this;
+
+      var opts = {}
+      if(Helpers.getUrlValue("nonce") != undefined) {
+        opts.nonce = Helpers.getUrlValue("nonce")
+      }
+      self.opts = opts;
+
       self.startIrrigation()
         .then(function () {
           console.log("started!");
@@ -44,7 +51,7 @@ var vueapp = new Vue({
     },
     startIrrigation: async function() {
       var self = this;
-      self.irrigation = new Irrigation();
+      self.irrigation = new Irrigation(self.opts);
       await self.irrigation.init()
     },
     getData: function() {
@@ -64,6 +71,7 @@ var vueapp = new Vue({
           var badgeId = Helpers.getBadgeIdFromUrl(badgeurl);
           self.currentbadge = badgeId
           self.gardendata = self.irrigation.getGardenData(self.currentbadge);
+          console.log(":::parent:: we got a scan from badge id: " + badgeId);
           console.log(":::parent:: we were asked for badge title: " + self.badgedata[badgeId].title);
           return self.badgedata[badgeId].title;
         } 
@@ -73,6 +81,7 @@ var vueapp = new Vue({
         } 
 
         if(reqname == "submitLink") {
+          console.log(":::parent:: we got a scan from badge id: " + badgeId);
           console.log(":::parent:: we got a LINK ")
           var msg = {
             'from': {'name': 'kiosk'}, // TODO CHANGE NAME PROGRAMMATICALLY
@@ -82,7 +91,10 @@ var vueapp = new Vue({
               'link_to': Helpers.getBadgeIdFromUrl(data.link_to)
             }
           }
-          self.irrigation.addEventNow(msg)
+          self.irrigation.addEventNow(msg).then(function() {
+            console.log("SUBMITTED LINK");
+            console.log(msg);
+          });
         } 
       });
     }

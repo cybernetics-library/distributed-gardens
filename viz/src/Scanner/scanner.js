@@ -130,6 +130,7 @@ function handleScans(content) {
       console.log("scanner:: I'm trying to submit a link!");
       $('#garden_title').html(garden_string);
 
+      paperCupChild.sendRequest("submitLink", msg, function() {  });
       console.log(msg);
       const audioBuffer = new Audio(audioFile);
       audioBuffer.play();

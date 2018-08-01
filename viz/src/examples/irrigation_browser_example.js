@@ -25,7 +25,7 @@ window.onload = () => {
   if(getUrlValue("nonce") != undefined) {
     opts.nonce = getUrlValue("nonce")
   }
-  var irrigation = new Irrigation()
+  var irrigation = new Irrigation(opts)
   window.irrigation = irrigation;
   irrigation.init()
 /*
