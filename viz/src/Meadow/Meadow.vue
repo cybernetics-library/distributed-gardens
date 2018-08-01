@@ -185,17 +185,33 @@ export default {
     },
     makeNode(Graph, currentbadge) {
       var { nodes, links } = this.Graph.graphData();
-      nodes.push({id: "new", group: 100 })
+      var isNew = false
+
+      // nodes.forEeach((node) => {
+      //   if(node.id === this.badgeId){
+      //     console.log('I found ')
+      //     isNew = true
+      //     this.state = "readyNew"
+      //   }
+      // })
+
+      // if(!isNew){
+      //   nodes.push({id: this.badgeId, group: 100 })
+      //   this.Graph.graphData({ nodes, links });
+      //   this.state = "ready"
+      // }
+
+      nodes.push({id: this.badgeId, group: 100 })
       this.Graph.graphData({ nodes, links });
       this.state = "ready"
 
-      var dot = document.createElement('div');
-      dot.id = this.Graph.graphData().nodes.length-1
-      dot.className = 'dot'
-      this.elem.appendChild(dot);
-      this.elem.insertAdjacentElement('afterbegin', dot)
+      // var dot = document.createElement('div');
+      // dot.id = this.Graph.graphData().nodes.length-1
+      // dot.className = 'dot'
+      // this.elem.appendChild(dot);
+      // this.elem.insertAdjacentElement('afterbegin', dot)
 
-      this.divNodes.push({el: dot})
+      // this.divNodes.push({el: dot})
 
       this.initCycle()
     },
@@ -246,6 +262,16 @@ export default {
     },
     initCycle() {
       if (this.state === "waiting"){
+        console.log('waiting');
+      // } else if(this.state === 'readyNew'){
+      //   this.previousNode = this.nextNode
+      //   nodes.forEeach((node) => {
+      //     if(node.id === this.badgeId){
+      //       this.nextNode = node
+      //     }
+      //   })
+      //   this.Graph.centerAt(this.nextNode.x, this.nextNode.y, 1000);
+      //   this.renderTimer = setTimeout(this.renderGarden, 3000);
       } else if(this.state === 'ready'){
         this.previousNode = this.nextNode
         this.nextNode = this.Graph.graphData().nodes[this.Graph.graphData().nodes.length-1]

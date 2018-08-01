@@ -1,3 +1,21 @@
+
+
+var getUrlValue = function(VarSearch){
+    var SearchString = window.location.search.substring(1);
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] === VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+}
+window.getUrlValue = getUrlValue;
+
+
+
+
+
 let text = `
 ERIC_ED105298
 AnApproachToCybernetics
@@ -75,24 +93,51 @@ var _ = require('lodash');
 window.$ = $;
 window._ = _;
 
-var irrigation = new Irrigation({ nonce: 11112 });
+var opts = {}
+if(getUrlValue("nonce") != undefined) {
+  opts.nonce = getUrlValue("nonce")
+}
+var irrigation = new Irrigation(opts)
+
+const badges = require('../data/badge_data.json')
+
 
 window.onload = () => {
-    irrigation.init().then(() => { console.log(irrigation.addEventNow({
-        'from':
-        { 'name': 'tester' },
-        'type': 'seed',
-        'msg': {
-        'seed_by': '22222',
-        'seed_to': '33333',
-        media:[ 'noise-arch_cottsts'] }
-        })); })
-
-    // irrigation.init().then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed', 'msg': { 'seed_by': '11111', 'seed_to': '44444',  media:[ 'electricsheep-flock-244-32500-1'] } })); })
-
     var listArray = text.split(/[\r\n]+/)
-    listArray.forEach((item) => {
-        console.log(item)
-    })
+
+    function getRandomMedia() {
+        return listArray[Math.floor(Math.random()*listArray.length)];
+    }
+
+    irrigation.init().then(() => {
+
+      (async function submitstuff() { 
+
+        var pbadges = irrigation.getParticipantBadges();
+
+        for (var k in badges) {
+
+          if(pbadges.includes(k.toString()) == false) {
+            // seed only if badge hasn't
+
+              var msg = {
+                'from': {'name': 'seeder' },
+                'type': 'seed',
+                'msg': {
+                  'seed_by': '88888',
+                  'seed_to': k.toString(),
+                  'media':[ getRandomMedia()]
+                }
+              }
+              console.log("SEEDING :: ")
+              await irrigation.addEventNow(msg)
+              console.log("FINISHED SEEDING")
+              console.log(msg)
+            }
+          }
+
+      })();
+
+    });
 }
 

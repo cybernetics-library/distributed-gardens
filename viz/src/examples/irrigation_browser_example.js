@@ -231,5 +231,9 @@ window.onload = () => {
       console.log("WOO EVENT CHANGED in example layer");
       irrigation.getHistory({ force: true })
     });
+    irrigation.listen("new event", function(d) {
+      console.log("WOO NEW EVENT ");
+      console.log(d);
+    });
   });
 }
