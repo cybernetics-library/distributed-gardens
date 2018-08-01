@@ -7,6 +7,10 @@ This a repo to coordinate running on the RPis
 ### 1. On the Pi: SSH Keys & hostname setup
 
 (This happens on each Pi)
+- change password
+- set country and timezone
+- login to wifi
+- `mkdir ~/github && cd ~/github`
 - Clone this repo
   - `git clone git://github.com/cybernetics-conference/distributed-gardens.git`
 - Run setup script, with an ID:
