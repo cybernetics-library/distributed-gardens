@@ -77,3 +77,5 @@ echo "Please git commit -am 'kiosk registration' and push to master so that we c
 echo "OR add manually on another computer"
 echo "THEN REBOOOOT"
 
+reboot
+
