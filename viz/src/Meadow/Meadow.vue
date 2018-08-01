@@ -199,8 +199,6 @@ export default {
   // }
 
  function manageNodes(nodes, nextNode){
-      // console.log(nextNode)
-      // console.log(nextNode)
       var garden = document.getElementById("garden")
       var graph = document.getElementById( 'graph' )
 
@@ -219,7 +217,7 @@ export default {
       //   el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
       // })
 
-      garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); width:" + 10*canvasZoom.k + "px; height:" + 10*canvasZoom.k + "px; "
+      // garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); width:" + 10*canvasZoom.k + "px; height:" + 10*canvasZoom.k + "px; "
     }
 
 /*function inputChange(e) {

@@ -10,11 +10,11 @@
 #garden {
   height: 400px;
   width: 600px;
-  /* position: relative; */
+  position: relative;
 }
 
 #garden * {
-  /* position: absolute; */
+  position: absolute;
 }
 </style>
 
