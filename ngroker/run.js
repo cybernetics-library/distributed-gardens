@@ -7,10 +7,17 @@ var slack = new SlackWebhook('https://hooks.slack.com/services/TB3SRL4H4/BC1SRHH
   }
 })
 
+var token = "6g2FnmNKMqN52GMuTJUX5_3yEmpdoatP2nkHtBvT1SJ";
 const ngrok = require('ngrok');
-(async function() {
-  const url = await ngrok.connect(22);
-  slack.send(url)
-})();
+ngrok.authtoken(token).then(function() {
+
+  ngrok.connect({proto: 'tcp', addr: 22})
+   .then(function(d) {
+    console.log(d);
+    slack.send(d)
+   });
+
+});
+
 
 
