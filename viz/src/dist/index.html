@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <style type="text/css">
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #71C1A9;
+        }
+        #scanner {
+          border-width: 0px;
+          width: 100vw;
+          height: 100vh;
+          position: absolute;
+          bottom: 0px;
+          z-index: 100
+        }
+        #meadow {
+          width: 100vw;
+          min-height: 100vh;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: 50;
+        }
+        #debug {
+          position: absolute;
+          z-index: 10;
+          opacity: 0.1;
+        }
+        #app{
+          width: 100vw;
+          min-height: 100vh;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: 50;
+        }
+    </style>
+    <title>~222EARTH~</title>
+<link rel="stylesheet" href="/main.01cdbd5d.css"></head>
+<body>
+  <div id="app">
+    <meadow :graphdata="graphdata" :currentbadge="currentbadge" :gardendata="gardendata"></meadow>
+    <!-- <garden :gardendata=gardendata></garden> -->
+    <div id="debug">
+      <li v-for="item in history">
+        {{item}}
+      </li>
+      {{stats}}
+    </div>
+  </div>
+  <script src="/main.01cdbd5d.js"></script>
+  <iframe id="scanner" name="scanner" src="/scanner/index.html"></iframe>
+</body>
+</html>
