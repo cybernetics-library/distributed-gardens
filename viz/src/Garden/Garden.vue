@@ -1,8 +1,8 @@
 <template>
   <div id="garden">
     <!--<div id="stats"> {{ gardendata }} </div>-->
-    <Grass :gardendata="gardendata"></Grass>
     <FilePlants :gardendata="gardendata"></FilePlants>
+    <Grass :gardendata="gardendata"></Grass>
   </div>
 </template>
 

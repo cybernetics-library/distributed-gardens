@@ -1,0 +1,76 @@
+#!/usr/bin/perl
+#Copyright 2003, William Stearns <wstearns@pobox.com>
+#Released under the GPL
+#V0.6.1
+
+#use strict;			#Unfortunately, use strict doesn't like: print { $pipe_handles[$Handle] } "$InChars";
+use IO::File;			#For writes to the pipes
+
+my @pipe_handles;		#Filehandles to which we write the characters.
+my $OnePipe;
+my $InChars;
+my $HandleCount = 0;
+
+$| = 1;				#Enable autoflush
+
+undef $!;
+print "Opening pipes for write.  If you do not see the message Pipes have been opened, this may indicate that one or more pipes have no listener.\n";
+
+while (my $OnePipe = shift) {
+	if (-e "$OnePipe") {
+		$HandleCount++;
+		#Make sure something's listening on the pipe or this blocks.
+		if ($pipe_handles[$HandleCount] = IO::File->new($OnePipe, O_WRONLY)) {
+			warn "Open succeeded.\n";
+		} else {
+			warn "Opening pipe $OnePipe failed, please check existence and permissions: $!";
+		}
+		$pipe_handles[$HandleCount]->autoflush(1);
+		print { $pipe_handles[$HandleCount] } "stty echo\n\n";
+	} else {
+		print "$OnePipe is not a pipe, skipping.\n";
+	}
+}
+print STDOUT "Pipes have been opened.\n";
+
+if ($HandleCount > 0) {
+	print "$HandleCount handles opened.\n";
+} else {
+	die "Sorry, no pipes specified on the command line.\n";
+}
+
+system "stty cbreak -echo";
+while (read STDIN,$InChars,1) {
+	#print STDOUT "$InChars";	#For debugging, shows characters on the input terminal.
+	foreach my $Handle (1..$HandleCount) {
+		print { $pipe_handles[$Handle] } "$InChars";
+	}
+}
+
+END {
+	system "stty -cbreak echo";
+}
+
+
+#Graveyard
+#use Term::ReadKey;	#Perl module that handles single character input.  Not included in stock distribution.
+
+#open $pipe_handles, ">>testpipe" or die "Couldn't open $OnePipe, exiting: $!";
+#close $pipe_handles;
+
+#select $pipe_handles; $| = 1;
+
+#Following is line-at-a-time
+#while ($InChars = <>) {
+#	print $InChars;
+#}
+
+	#$pipe_handles->syswrite($InChars);
+	#$pipe_handles->flush;
+
+#END {
+#	ReadMode 'restore';
+#}
+
+
+
