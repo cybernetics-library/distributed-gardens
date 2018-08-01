@@ -1,9 +1,31 @@
 var Irrigation  = require('../Irrigation');
 var $ = require('jquery');
+var _ = require('lodash');
 window.$ = $;
+window._ = _;
+
+
+
+
+var getUrlValue = function(VarSearch){
+    var SearchString = window.location.search.substring(1);
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] === VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+}
+window.getUrlValue = getUrlValue;
 
 window.onload = () => {
-  var irrigation = new Irrigation({ nonce: 11113 });
+
+  opts = {}
+  if(getUrlValue("nonce") != undefined) {
+    opts.nonce = getUrlValue("nonce")
+  }
+  var irrigation = new Irrigation(opts)
   window.irrigation = irrigation;
   irrigation.init()
 /*
@@ -193,7 +215,7 @@ window.onload = () => {
 
 
 */
-
+  .then(() => { console.log("WE ARE USING NONCE: " + irrigation.biome._config.nonce)})
   .then(() => { console.log(irrigation.getHistory()); 
     $("#output").html(JSON.stringify(irrigation.getHistory(), null, 2))
   })
@@ -202,6 +224,7 @@ window.onload = () => {
     $("#output2").html(JSON.stringify(irrigation.getStats(), null, 2))
   })
   .then(() => { console.log(irrigation.getGraphData()); })
+  .then(() => { console.log(irrigation.getGardenData()); })
   .then(() => { console.log(irrigation.biome._psa.peerCountGuess()); })
   .then(() => {
     irrigation.listen("state changed", function(d) {

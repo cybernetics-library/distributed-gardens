@@ -103,7 +103,8 @@ export default {
       divNodes: [],
       renderTimer: null,
       focusTimer: null,
-      elem: null
+      elem: null,
+      aspect: null
     }
   },
   updated() {
@@ -123,6 +124,8 @@ export default {
       const garden_overlay = document.getElementById('garden-overlay');
       var selectedNode = 0
       var gotBadge = false
+      this.aspect = window.innerHeight/window.innerWidth
+
 
       this.state = "ready"
 
@@ -133,9 +136,24 @@ export default {
         .nodeAutoColorBy('group')
         .linkDirectionalParticles(2)
         .linkDirectionalParticleWidth(1.4)
+        .d3VelocityDecay(.9)
+        // .d3Force('center', [50,50])
+        .nodeCanvasObject((node, ctx)=> {
+          ctx.fillStyle = "rgba(65,151,113,.1)";
+          // ctx.strokeStyle = "rgba(65,151,113,.4)";
+          // ctx.beginPath();
+          // ctx.ellipse(120, 500, 100, 70, 0, 0, Math.PI*2);
+          // ctx.stroke();
+          ctx.beginPath(); 
+          // ctx.arc(node.x, node.y, 5, 0, 2 * Math.PI, false);
+          ctx.ellipse(node.x, node.y+1, 4.5, 1, 0, 0, 2 * Math.PI);
+
+          ctx.fill(); // circle
+          // ctx.stroke();
+        })
+        .linkCurvature('value')
         .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
         .onEngineTick(() => {
-          // this.nextNode = this.Graph.graphData().nodes[0]
           this.manageNodes(this.Graph.graphData().nodes, this.nextNode)
         })
         // .enableZoomPanInteraction(false)
@@ -144,25 +162,26 @@ export default {
         });
         
         this.nextNode = self.Graph.graphData().nodes[0]
+        this.Graph.zoom(10, 2000);
         // this.previousNode = this.nextNode
 
-      self.Graph.graphData().nodes.forEach((node,i) => {
-        var dot = document.createElement('div');
-        dot.id = i
-        dot.className = 'dot'
-        // elem.appendChild(dot);
-        this.elem.insertAdjacentElement('afterbegin', dot)
+      // self.Graph.graphData().nodes.forEach((node,i) => {
+      //   var dot = document.createElement('div');
+      //   dot.id = i
+      //   dot.className = 'dot'
+      //   // elem.appendChild(dot);
+      //   this.elem.insertAdjacentElement('afterbegin', dot)
 
-        this.divNodes.push({el: dot})
-      })
+      //   this.divNodes.push({el: dot})
+      // })
 
     },
     getColor(n) {
       return '#419771';
     },
     zoomTo(Graph, node){
-      Graph.centerAt(node.x, node.y, 1000);
-      Graph.zoom(20, 2000);
+      Graph.centerAt(node.x, node.y-2, 1000);
+      Graph.zoom(60, 2000);
     },
     makeNode(Graph, currentbadge) {
       var { nodes, links } = this.Graph.graphData();
@@ -191,16 +210,15 @@ export default {
       var correctedX = ((nextNode.x * canvasZoom.k) + (canvasZoom.x)) - 10*canvasZoom.k/2
       var correctedY = ((nextNode.y * canvasZoom.k) + (canvasZoom.y)) - 10*canvasZoom.k/2
 
-      nodes.forEach((node, i) => {
-        var el = document.getElementById(i)
-        var correctedX = ((node.x * canvasZoom.k) + (canvasZoom.x)) - 10*canvasZoom.k/2
-        var correctedY = ((node.y * canvasZoom.k) + (canvasZoom.y)) - 10*canvasZoom.k/2
+      // nodes.forEach((node, i) => {
+      //   var el = document.getElementById(i)
+      //   var correctedX = ((node.x * canvasZoom.k) + (canvasZoom.x)) - 10*canvasZoom.k/2
+      //   var correctedY = ((node.y * canvasZoom.k) + (canvasZoom.y)) - 10*canvasZoom.k/2
 
-        // console.log(el)
-        el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
-      })
+      //   el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
+      // })
 
-      garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); width:" + 10*canvasZoom.k + "px; height:" + 10*canvasZoom.k + "px; "
+      garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); width:" + 10*canvasZoom.k + "px; height:" + (10*canvasZoom.k)*this.aspect + "px; "
     },
     focusGarden() {
       console.log(this.nextNode)
@@ -208,21 +226,19 @@ export default {
       clearTimeout(this.focusTimer);
       this.state = "focused"
       console.log(this.state)
-      // garden_overlay.className = 'none'
       this.initCycle()
     },
     focusGraph() {
-      // Graph.centerAt(0, 0, 1000);
-      this.Graph.zoom(4, 2000);
+      this.Graph.centerAt(0, 0, 1000);
+      this.Graph.zoom(10, 2000);
       clearTimeout(this.focusTimer);
       this.state = "waiting"
-      // garden_overlay.className = 'dim'
       this.initCycle()
     },
     renderGarden() {
       var { nodes, links } = this.Graph.graphData();
       if(this.previousNode){
-        links.push({source: this.previousNode, target: this.nextNode, val: 1000 })
+        links.push({source: this.previousNode, target: this.nextNode, val: 10 })
         this.Graph.graphData({ nodes, links });
       }
       clearTimeout(this.renderTimer);
@@ -230,7 +246,6 @@ export default {
     },
     initCycle() {
       if (this.state === "waiting"){
-        // renderTimer = setTimeout(focusGraph, 10000);
       } else if(this.state === 'ready'){
         this.previousNode = this.nextNode
         this.nextNode = this.Graph.graphData().nodes[this.Graph.graphData().nodes.length-1]

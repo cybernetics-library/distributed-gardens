@@ -117,7 +117,7 @@ function handleScans(content) {
       console.log("garden name: " + garden_name);
       $('#garden_title').html(garden_name);
       $('#garden_title').show();
-      garden_string = garden
+      garden_string = garden_name
     });
 
     firstScan();
@@ -128,9 +128,9 @@ function handleScans(content) {
       console.log("scanner:: I'm trying to submit a link!");
       // $('#garden_title').html(garden_string);
 
+      paperCupChild.sendRequest("submitLink", msg, function() {  });
       console.log(msg);
       audio.play();
-      paperCupChild.sendRequest("submitLink", msg, function() {  });
     }
   } else {
     $('#garden_title').html("");
@@ -143,15 +143,15 @@ function handleScans(content) {
 function firstScan() {
   $("#cam1").hide();
   newGarden();
-  $("#freeze1").addClass("grayscale blur");
+  $("#freeze1").addClass("grayscale blur").delay( 1500 ).css('transform', 'translateY(70%)');
 };
 
 
 function refresh() {
   console.log("refreshhhhhhhh");
   $('#prompt').fadeIn("slow");
-  $("#freeze1").fadeOut("slow");
-  $('#cam1').fadeIn("slow");
+  $("#freeze1").css('transform', 'translateY(0%)').fadeOut("slow");
+  $('#cam1').delay(700).fadeIn("slow");
   $('#garden_title').html("");
   clearTimeout(timer);
   // $('#garden_title').css("color", "#9fd6a7");
