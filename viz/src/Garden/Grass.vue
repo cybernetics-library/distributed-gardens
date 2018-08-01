@@ -33,15 +33,24 @@ export default {
   props: {
     "gardendata": {
       default: {},
+    },
+    "currentbadge": {
+      default: {},
     }
   },
   data: () => {
     return {
     }
   },
+  updated() {
+    if(this.currentbadge != this.badgeId){
+      this.badgeId = this.currentbadge
+      this.init();
+    }
+  },
   mounted() {
     console.log("grass was mounted");
-    this.init();
+    //this.init();
     window.self = this;
   },
   methods: {

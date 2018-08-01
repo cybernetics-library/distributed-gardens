@@ -41,6 +41,7 @@ export default {
   updated() {
     if(this.currentbadge != this.badgeId){
       this.badgeId = this.currentbadge
+      this.init();
     }
   },
   components: {

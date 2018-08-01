@@ -1,0 +1,88 @@
+#FilePlants {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  position: relative;
+  font-family: Helvetica, Arial;
+  font-size: 0.8em;
+  color: green;
+}
+.flower {
+  position: absolute;
+  text-align: center;
+}#grass {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: Helvetica, Arial;
+  font-size: 0.8em;
+  color: green;
+}
+.flower {
+  position: absolute;
+  text-align: center;
+}
+#garden[data-v-ce0ca1] {
+  height: 400px;
+  width: 600px;
+  position: relative;
+}
+#garden *[data-v-ce0ca1] {
+  position: absolute;
+}
+body[data-v-c33ffa]{ margin: 0;
+}
+#info[data-v-c33ffa]{
+  width: 100%;
+  position: fixed;
+  top: 0;
+  color: black;
+  display: flex;
+  justify-content: space-between;
+  z-index: 1;
+  padding: 1rem;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+h1[data-v-c33ffa]{
+  position: fixed;
+}
+#garden[data-v-c33ffa]{
+    position: fixed;
+    width: 640px; height: 480px;
+    /* width: 10px; height: 10px; */
+    /* margin-left: -5px; margin-top: -5px; */
+    background-color:'none';
+    /* border-radius: 1000px; */
+    transform: translate(50%, 50%);
+    z-index: 2;
+}
+#garden-overlay[data-v-c33ffa]{
+    position: absolute;
+    width: 300px; height: 300px;
+    border-radius: 1000px;
+    position: absolute;
+    top: 50%; right: 50%;
+    transform: translate(50%,-50%);
+    background: green;
+    color: white;
+    z-index: 2;
+    transition: opacity 5s ease;
+    opacity: 1;
+}
+#garden-overlay.dim[data-v-c33ffa]{
+  opacity: 0;
+}
+.dot[data-v-c33ffa]{
+    position: absolute;
+    width: 10px; height: 10px;
+    background-color: red;
+    /* border-radius: 1000px; */
+    /* top: 50%; right: 50%; */
+    /* transform: translate(50%,-50%); */
+    z-index: 2;
+}
