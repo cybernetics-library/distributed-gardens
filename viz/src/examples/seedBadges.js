@@ -77,22 +77,29 @@ window._ = _;
 
 var irrigation = new Irrigation({ nonce: 11112 });
 
+const badges = require('../data/badge_data.json')
+
 window.onload = () => {
-    irrigation.init().then(() => { console.log(irrigation.addEventNow({
-        'from':
-        { 'name': 'tester' },
-        'type': 'seed',
-        'msg': {
-        'seed_by': '22222',
-        'seed_to': '33333',
-        media:[ 'noise-arch_cottsts'] }
-        })); })
-
-    // irrigation.init().then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed', 'msg': { 'seed_by': '11111', 'seed_to': '44444',  media:[ 'electricsheep-flock-244-32500-1'] } })); })
-
     var listArray = text.split(/[\r\n]+/)
-    listArray.forEach((item) => {
-        console.log(item)
+
+    function getRandomMedia() {
+        return listArray[Math.floor(Math.random()*listArray.length)];
+    }
+
+    irrigation.init().then(() => { 
+        for (var k in badges) {
+            // console.log(
+                irrigation.addEventNow({
+                    'from':
+                    {'name': 'seeder' },
+                    'type': 'seed',
+                    'msg': {
+                    'seed_by': '88888',
+                    'seed_to': k.toString(),
+                    'media':[ getRandomMedia()] }
+                })
+            // )
+        }
     })
 }
 
