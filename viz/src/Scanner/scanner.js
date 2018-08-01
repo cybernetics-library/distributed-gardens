@@ -150,6 +150,7 @@ function firstScan() {
 function refresh() {
   console.log("refreshhhhhhhh");
   $('#prompt').fadeIn("slow");
+  $("#freeze1").css('transform', 'translateY(0%)')
   $("#freeze1").fadeOut("slow");
   $('#cam1').fadeIn("slow");
   $('#garden_title').html("");
