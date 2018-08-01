@@ -89,7 +89,7 @@ window.onload = () => {
     irrigation.init().then(() => { 
         for (var k in badges) {
             // console.log(
-                irrigation.addEventNow({
+                  var msg = {
                     'from':
                     {'name': 'seeder' },
                     'type': 'seed',
@@ -97,7 +97,10 @@ window.onload = () => {
                     'seed_by': '88888',
                     'seed_to': k.toString(),
                     'media':[ getRandomMedia()] }
-                })
+                }
+                console.log("SEEDING :: ")
+                console.log(msg)
+                irrigation.addEventNow(msg)
             // )
         }
     })
