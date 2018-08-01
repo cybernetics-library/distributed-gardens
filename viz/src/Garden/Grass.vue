@@ -79,6 +79,7 @@ export default {
 
       ctx.beginPath();
       ctx.ellipse(xC, yC, xRad, yRad, 0, 0, Math.PI*2);
+      ctx.setLineDash([5, 15]);
       ctx.stroke();
 
       const linksNumber = this.gardendata.links.length;
