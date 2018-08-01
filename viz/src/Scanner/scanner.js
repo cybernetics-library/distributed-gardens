@@ -100,9 +100,11 @@ function handleScans(content) {
   if (!(_.isEqual(window.prevlink, res))) {
 
     
-    if(Object.values(window.prevlink).length != 0) {
+    if (Object.values(window.prevlink).length != 0) {
       var prevQRURL = Object.values(window.prevlink.names)[0]
-    } else { var prevQRURL = "" }
+    } else {
+      var prevQRURL = ""
+    }
 
 
     window.prevlink = res;
@@ -150,7 +152,7 @@ function handleScans(content) {
 function firstScan() {
   $("#cam1").hide();
   newGarden();
-  $("#freeze1").addClass("grayscale blur").delay( 1500 ).css('transform', 'translateY(70%)');
+  $("#freeze1").addClass("grayscale blur").delay(1500).css('transform', 'translateY(70%)');
 };
 
 
@@ -177,7 +179,7 @@ function newGarden() {
   $("#freeze1").fadeIn("slow");
 
   console.log("hiii");
-  $('#garden_title').css("color","#214f32");
+  $('#garden_title').css("color", "#214f32");
   $('body').css("background", "linear-gradient(rgba(79, 140, 96, 0) 60%, rgba(86, 144, 81, 0.4))");
 
   $('#prompt').hide();
