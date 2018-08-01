@@ -32,8 +32,7 @@ class Irrigation {
 
 
   listen(event_name, cb) { // register listener
-    console.log(event_name);
-    console.log(cb);
+    var self = this;
     self.biome.on(event_name, cb)
   }
 

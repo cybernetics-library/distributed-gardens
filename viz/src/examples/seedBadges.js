@@ -110,25 +110,32 @@ window.onload = () => {
     }
 
     irrigation.init().then(() => {
-      
+
       (async function submitstuff() { 
-//        for (var k in Object.keys(badges).slice(0, 40)) {
+
+        var pbadges = irrigation.getParticipantBadges();
+
         for (var k in badges) {
-            // console.log(
-            var msg = {
-              'from':
-              {'name': 'seeder' },
-              'type': 'seed',
-              'msg': {
-              'seed_by': '88888',
-              'seed_to': k.toString(),
-              'media':[ getRandomMedia()] }
+
+          if(pbadges.includes(k.toString()) == false) {
+            // seed only if badge hasn't
+
+              var msg = {
+                'from': {'name': 'seeder' },
+                'type': 'seed',
+                'msg': {
+                  'seed_by': '88888',
+                  'seed_to': k.toString(),
+                  'media':[ getRandomMedia()]
+                }
+              }
+              console.log("SEEDING :: ")
+              await irrigation.addEventNow(msg)
+              console.log("FINISHED SEEDING")
+              console.log(msg)
+            }
           }
-          console.log("SEEDING :: ")
-          await irrigation.addEventNow(msg)
-          console.log("FINISHED SEEDING")
-          console.log(msg)
-        }
+
       })();
 
     });
