@@ -24,6 +24,11 @@ class Irrigation {
     await self.biome.addEvent(msg)
   }
 
+  listen(event_name, cb) { // register listener
+    console.log(event_name);
+    console.log(cb);
+    self.biome.on(event_name, cb)
+  }
 
   // force: true to force clearing cache
   getHistory(config) {
