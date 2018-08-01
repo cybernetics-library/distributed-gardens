@@ -109,23 +109,28 @@ window.onload = () => {
         return listArray[Math.floor(Math.random()*listArray.length)];
     }
 
-    irrigation.init().then(() => { 
+    irrigation.init().then(() => {
+      
+      (async function submitstuff() { 
+//        for (var k in Object.keys(badges).slice(0, 40)) {
         for (var k in badges) {
             // console.log(
-                  var msg = {
-                    'from':
-                    {'name': 'seeder' },
-                    'type': 'seed',
-                    'msg': {
-                    'seed_by': '88888',
-                    'seed_to': k.toString(),
-                    'media':[ getRandomMedia()] }
-                }
-                console.log("SEEDING :: ")
-                console.log(msg)
-                irrigation.addEventNow(msg)
-            // )
+            var msg = {
+              'from':
+              {'name': 'seeder' },
+              'type': 'seed',
+              'msg': {
+              'seed_by': '88888',
+              'seed_to': k.toString(),
+              'media':[ getRandomMedia()] }
+          }
+          console.log("SEEDING :: ")
+          await irrigation.addEventNow(msg)
+          console.log("FINISHED SEEDING")
+          console.log(msg)
         }
-    })
+      })();
+
+    });
 }
 
