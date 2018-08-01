@@ -92,16 +92,62 @@ class Irrigation {
      .flatten()
      .uniq()
      .map((d) => { return { "id": d } })
+    .compact()
      .value()
     graphdata.links =  _.chain(self.getHistory())
      .filter({type: "link" })
      .map((d) => { return [d.msg.link_from, d.msg.link_to].sort().join("-") })
      .countBy()
      .map((v, k) => { var links = k.split("-"); return { "source": links[0], "target": links[1], "value": v} })
+     .compact()
      .value()
 
     console.log(graphdata, "graph data")
     return graphdata
+  }
+
+  getLinks(myid) {
+    var self = this;
+    return _.chain(self.getHistory())
+      .filter({type: "link" })
+      .compact()
+      .map(function(d) {
+        if(d.msg.link_from === myid) { return d.msg.link_to; }
+        if(d.msg.link_to === myid) { return d.msg.link_from; }
+      })
+      .compact()
+      .value()
+  }
+
+  getAllFiles() {
+    var self = this;
+    return  _.chain(self.getHistory())
+      .filter({type: "seed" })
+      .map((d) => { return d.msg.media; })
+      .flatten()
+      .compact()
+      .value()
+  }
+
+
+  getFiles(myid) {
+    var self = this;
+    return _.chain(self.getHistory())
+      .filter({type: "seed" })
+      .filter((d) => { return d.msg.seed_to == myid })
+      .map((d) => { return d.msg.media; })
+      .flatten()
+      .compact()
+      .value()
+  }
+
+
+  getGardenData(myid) {
+    var self = this;
+    var gardendata = {};
+    gardendata.files = self.getFiles(myid)
+    gardendata.links = self.getLinks(myid)
+    return gardendata
   }
 
 

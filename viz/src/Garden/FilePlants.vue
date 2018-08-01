@@ -132,6 +132,7 @@ export default {
 
       ctx.beginPath();
       ctx.ellipse(xC, yC, xRad, yRad, 0, 0, Math.PI*2);
+      ctx.setLineDash([5, 15]);
       ctx.stroke();
 
       for (var i = this.gardendata.files.length - 1; i >= 0; i--) {
@@ -188,6 +189,7 @@ export default {
       ctx.lineTo(pathCoords1.x, pathCoords1.y);
       ctx.lineTo(pathCoords2.x, pathCoords2.y);
       ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+      ctx.setLineDash([]);
       ctx.stroke();
 
       ctx.fillText(imagePath, pathCoords2.x - textMeasures.width - 10, pathCoords2.y);

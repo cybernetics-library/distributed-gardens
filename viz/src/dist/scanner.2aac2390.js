@@ -65693,9 +65693,8 @@ function firstScan() {
 function refresh() {
   console.log("refreshhhhhhhh");
   (0, _jquery2.default)('#prompt').fadeIn("slow");
-  (0, _jquery2.default)("#freeze1").css('transform', 'translateY(0%)');
-  (0, _jquery2.default)("#freeze1").fadeOut("slow");
-  (0, _jquery2.default)('#cam1').fadeIn("slow");
+  (0, _jquery2.default)("#freeze1").css('transform', 'translateY(0%)').fadeOut("slow");
+  (0, _jquery2.default)('#cam1').delay(700).fadeIn("slow");
   (0, _jquery2.default)('#garden_title').html("");
   clearTimeout(timer);
   // $('#garden_title').css("color", "#9fd6a7");
@@ -65779,7 +65778,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58592' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58737' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
