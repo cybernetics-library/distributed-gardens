@@ -15,7 +15,10 @@
 .flower {
   position: absolute;
   text-align: center;
-}#grass {
+}.hide {
+  opacity: 0;
+}
+#grass {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -34,10 +37,16 @@
   width: 600px;
   position: relative;
 }
+.hide[data-v-ce0ca1] {
+  visibility: hidden;
+}
 #garden *[data-v-ce0ca1] {
   position: absolute;
 }
 body[data-v-c33ffa]{ margin: 0;
+}
+.hide[data-v-c33ffa] {
+  visibility: hidden;
 }
 #info[data-v-c33ffa]{
   width: 100%;

@@ -1,6 +1,6 @@
 <template>
   <div id="meadow">
-    <h1>{{currentbadge}}</h1>
+    <h1 class="hide">{{currentbadge}}</h1>
     <div id="garden-overlay" class="dim"></div>
 
     <garden 
@@ -14,6 +14,9 @@
 
 <style scoped>
     body{ margin: 0; }
+    .hide {
+      visibility: hidden;
+    }
     #info{
       width: 100%;
       position: fixed;
