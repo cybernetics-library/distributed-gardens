@@ -203,4 +203,10 @@ window.onload = () => {
   })
   .then(() => { console.log(irrigation.getGraphData()); })
   .then(() => { console.log(irrigation.biome._psa.peerCountGuess()); })
+  .then(() => {
+    irrigation.listen("state changed", function(d) {
+      console.log("WOO EVENT CHANGED in example layer");
+      irrigation.getHistory({ force: true })
+    });
+  });
 }
