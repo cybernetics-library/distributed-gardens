@@ -143,7 +143,7 @@ function firstScan() {
 
   $("#cam1").hide();
   newGarden();
-  $("#freeze1").addClass("grayscale blur");
+  $("#freeze1").addClass("grayscale blur").delay( 1000 ).css('transform', 'translateY(70%)');
 
 
 
