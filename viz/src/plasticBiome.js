@@ -1,7 +1,7 @@
 const MongoClient = require('mongodb').MongoClient;
 const assert = require('assert');
 
-class Biome {
+class plasticBiome {
 
   constructor() {
     var self = this;
@@ -40,5 +40,5 @@ class Biome {
 }
 
 
-module.exports = Biome;
+module.exports = plasticBiome;
 
