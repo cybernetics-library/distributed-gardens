@@ -3,7 +3,7 @@ var _ = require('lodash');
 window._ = _;
 
 window.onload = () => {
-  var irrigation = new Irrigation();
+  var irrigation = new Irrigation({ nonce: 11113 });
   window.irrigation = irrigation;
   irrigation.init()
 /*

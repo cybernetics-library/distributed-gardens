@@ -3,5 +3,6 @@ plantkiosk2
 plantkiosk3
 plantkiosk4
 plantkiosk5
+plantkiosk7
 plantkiosk8
 relay
