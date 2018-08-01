@@ -57,16 +57,33 @@ class Irrigation {
   getStats() {
     // CALCULATE world-wide stats here
     var stats = {};
-    stats.participantNames = this._getParticipantNames();
+    stats.participantNames = this.getParticipantNames();
+    stats.participantBadges = this.getParticipantBadges();
     stats.participantNum = stats.participantNames.length
     stats.numEvents = this.getHistory().length;
     return stats
   }
 
-  _getParticipantNames() {
+  getParticipantNames() {
     var self = this;
     return  _.chain(self.getHistory())
         .map((d) => { return d.from.name })
+        .uniq()
+        .value()
+  }
+
+   getParticipantBadges() {
+    var self = this;
+    return  _.chain(self.getHistory())
+        .map((d) => {
+          if (d.type == "seed") { return d.msg.seed_to }
+          if (d.type == "link") { return [d.msg.link_from, d.msg.link_to] }
+          // there are no scans
+          if (d.type == "setinfo") { return d.msg.badge_id; }
+
+        })
+        .flatten()
+        .compact()
         .uniq()
         .value()
   }
@@ -115,16 +132,18 @@ class Irrigation {
         if(d.msg.link_from === myid) { return d.msg.link_to; }
         if(d.msg.link_to === myid) { return d.msg.link_from; }
       })
+      .uniq()
       .compact()
       .value()
   }
 
-  getAllFiles() {
+  getWorldFiles() {
     var self = this;
     return  _.chain(self.getHistory())
       .filter({type: "seed" })
       .map((d) => { return d.msg.media; })
       .flatten()
+      .uniq()
       .compact()
       .value()
   }
@@ -137,6 +156,7 @@ class Irrigation {
       .filter((d) => { return d.msg.seed_to == myid })
       .map((d) => { return d.msg.media; })
       .flatten()
+      .uniq()
       .compact()
       .value()
   }
@@ -145,10 +165,35 @@ class Irrigation {
   getGardenData(myid) {
     var self = this;
     var gardendata = {};
-    gardendata.files = self.getFiles(myid)
-    gardendata.links = self.getLinks(myid)
+    gardendata.myfiles = self.getFiles(myid)
+    gardendata.mylinks = self.getLinks(myid)
+    gardendata.links = self.getLinksOfLinks(myid)
+		gardendata.files = self.getFilesOfLinksOfLinks(myid)
     return gardendata
   }
+
+  getLinksOfLinks(myid) {
+		var self = this;
+		return _.chain(self.getLinks(myid))
+			.map((thisid) => { 
+				return self.getLinks(thisid)
+			})
+			.flatten()
+			.concat(self.getLinks(myid))
+			.pull(myid)
+			.uniq()
+			.value()
+
+  }
+
+	getFilesOfLinksOfLinks(myid) {
+		var self = this;
+		return _.chain(self.getLinksOfLinks(myid))
+				.map((l) => { return self.getFiles(l) })
+				.flatten()
+				.compact().uniq()
+				.value()
+	}
 
 
 }
