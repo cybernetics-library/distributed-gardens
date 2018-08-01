@@ -1,6 +1,6 @@
 <template>
   <div id="garden">
-    <!--<div id="stats"> {{ gardendata }} </div>-->
+    <div id="stats"> {{ currentbadge }} </div>
     <FilePlants :gardendata="gardendata"></FilePlants>
     <Grass :gardendata="gardendata"></Grass>
   </div>
@@ -35,10 +35,13 @@ export default {
   data: () => {
     return {
       current_time: null,
+      badgeID: null,
     }
   },
   updated() {
-    console.log(this.currentbadge)
+    if(this.currentbadge != this.badgeId){
+      this.badgeId = this.currentbadge
+    }
   },
   components: {
     FilePlants,
@@ -46,7 +49,6 @@ export default {
   },
   mounted() {
     console.log("gardenn  I was mounted");
-     console.log(this.currentbadge)
     this.initGarden();
     window.self = this;
   },
