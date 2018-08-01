@@ -91,7 +91,10 @@ var vueapp = new Vue({
               'link_to': Helpers.getBadgeIdFromUrl(data.link_to)
             }
           }
-          self.irrigation.addEventNow(msg)
+          self.irrigation.addEventNow(msg).then(function() {
+            console.log("SUBMITTED LINK");
+            console.log(msg);
+          });
         } 
       });
     }
