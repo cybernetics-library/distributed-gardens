@@ -37,7 +37,7 @@ git config --global user.name "plantkiosk"
 
 echo "=== hiding mouse pointer when not moving "
 LINE='@unclutter -idle 0.1'
-FILE=~/.config/lxsession/LXDE/autostart
+FILE=~/.config/lxsession/LXDE-pi/autostart
 grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
 
 
