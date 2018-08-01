@@ -1,3 +1,21 @@
+
+
+var getUrlValue = function(VarSearch){
+    var SearchString = window.location.search.substring(1);
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] === VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+}
+window.getUrlValue = getUrlValue;
+
+
+
+
+
 let text = `
 ERIC_ED105298
 AnApproachToCybernetics
@@ -75,9 +93,14 @@ var _ = require('lodash');
 window.$ = $;
 window._ = _;
 
-var irrigation = new Irrigation({ nonce: 11112 });
+opts = {}
+if(getUrlValue("nonce") != undefined) {
+  opts.nonce = getUrlValue("nonce")
+}
+var irrigation = new Irrigation(opts)
 
 const badges = require('../data/badge_data.json')
+
 
 window.onload = () => {
     var listArray = text.split(/[\r\n]+/)
