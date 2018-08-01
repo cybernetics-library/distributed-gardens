@@ -65561,7 +65561,7 @@ var globalQR;
 var theme;
 var isLink = false;
 var timer;
-var audio = require('./assets/garden.mp3');
+var audioFile = require('./assets/garden.mp3');
 var garden_string = "";
 
 var paperCupChild = new _Papercup2.default.PaperCupChild();
@@ -65640,6 +65640,8 @@ function handleScans(content) {
   // .radius(188);
 
   var res = parseQR(content);
+  console.log('garden name', res);
+  console.log('prev name', window.prevlink);
   if (!_lodash2.default.isEqual(window.prevlink, res)) {
     if (Object.values(window.prevlink).length != 0) {
       var prevQRURL = Object.values(window.prevlink.names)[0];
@@ -65663,7 +65665,7 @@ function handleScans(content) {
       console.log("garden name: " + garden_name);
       (0, _jquery2.default)('#garden_title').html(garden_name);
       (0, _jquery2.default)('#garden_title').show();
-      garden_string = garden;
+      garden_string = garden_name;
     });
 
     firstScan();
@@ -65672,13 +65674,15 @@ function handleScans(content) {
       // if there was a valid previous QR
       var msg = { "link_from": prevQRURL, "link_to": thisQRURL };
       console.log("scanner:: I'm trying to submit a link!");
-      // $('#garden_title').html(garden_string);
+      (0, _jquery2.default)('#garden_title').html(garden_string);
 
       console.log(msg);
-      audio.play();
+      var audioBuffer = new Audio(audioFile);
+      audioBuffer.play();
       paperCupChild.sendRequest("submitLink", msg, function () {});
     }
   } else {
+    console.log('settting title to nothing');
     (0, _jquery2.default)('#garden_title').html("");
     isLink = false;
   };
@@ -65778,7 +65782,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '58737' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56850' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
