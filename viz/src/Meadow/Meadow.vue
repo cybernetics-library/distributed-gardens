@@ -1,17 +1,12 @@
 <template>
   <div id="meadow">
     <h1>{{currentbadge}}</h1>
-    <div id="info">
-
-      <form class="pure-form" onsubmit="makeNode(event)">
-        <button type="submit">makeNode</button>
-      </form>
-    </div>
-
     <div id="garden-overlay" class="dim"></div>
-    <!-- <div id="garden"></div> -->
 
-    <garden :gardendata=gardendata></garden>
+    <garden 
+      :gardendata=gardendata
+      :currentbadge=currentbadge
+    ></garden>
 
     <div id="graph"></div>
   </div>
@@ -96,6 +91,7 @@ export default {
   data: () => {
     return {
       current_time: null,
+      // graphdata: null,
       Graph: null,
       badgeId: null,
       state: null,
@@ -108,12 +104,14 @@ export default {
     }
   },
   updated() {
+    console.log(this.gardendata)
     if(this.currentbadge != this.badgeId){
       this.badgeId = this.currentbadge
           this.makeNode(this.Graph, this.currentbadge)
     }
   },
   mounted() {
+    // console.log(this.graphdata)
     this.initGraph();
     window.self = this;
   },
@@ -124,8 +122,6 @@ export default {
       var selectedNode = 0
       var gotBadge = false
 
-      // var renderTimer
-      // var focusTimer
       this.state = "ready"
 
       var self = this;

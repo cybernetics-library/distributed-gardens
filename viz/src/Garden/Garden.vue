@@ -1,6 +1,6 @@
 <template>
   <div id="garden">
-    <!--<div id="stats"> {{ gardendata }} </div>-->
+    <div id="stats"> {{ currentbadge }} </div>
     <FilePlants :gardendata="gardendata"></FilePlants>
     <Grass :gardendata="gardendata"></Grass>
   </div>
@@ -27,11 +27,20 @@ export default {
   props: {
     "gardendata": {
       default: {},
+    },
+    "currentbadge": {
+      default: {},
     }
   },
   data: () => {
     return {
       current_time: null,
+      badgeID: null,
+    }
+  },
+  updated() {
+    if(this.currentbadge != this.badgeId){
+      this.badgeId = this.currentbadge
     }
   },
   components: {

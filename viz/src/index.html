@@ -44,18 +44,20 @@
 </head>
 <body>
   <div id="app">
-    <meadow 
+    {}
+    <meadow
+      v-if=graphdata
       :graphdata=graphdata
       :currentbadge=currentbadge
       :gardendata=gardendata
       ></meadow>
     <!-- <garden :gardendata=gardendata></garden> -->
-    <div id="debug">
+    <!-- <div id="debug">
       <li v-for="item in history">
         {{item}}
       </li>
       {{stats}}
-    </div>
+    </div> -->
   </div>
   <script src="main.js"></script>
   <iframe id="scanner" name="scanner" src="scanner/index.html"></iframe>
