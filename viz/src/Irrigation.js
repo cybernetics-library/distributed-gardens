@@ -107,6 +107,7 @@ class Irrigation {
   }
 
   getLinks(myid) {
+    var self = this;
     return _.chain(self.getHistory())
       .filter({type: "link" })
       .compact()
@@ -118,16 +119,34 @@ class Irrigation {
       .value()
   }
 
-  getGardenData() {
-    var gardendata = {};
-    gardendata.files = _.chain(self.getHistory())
+  getAllFiles() {
+    var self = this;
+    return  _.chain(self.getHistory())
       .filter({type: "seed" })
       .map((d) => { return d.msg.media; })
       .flatten()
       .compact()
       .value()
+  }
 
-    //links is an array of badge ids
+
+  getFiles(myid) {
+    var self = this;
+    return _.chain(self.getHistory())
+      .filter({type: "seed" })
+      .filter((d) => { return d.msg.seed_to == myid })
+      .map((d) => { return d.msg.media; })
+      .flatten()
+      .compact()
+      .value()
+  }
+
+
+  getGardenData(myid) {
+    var self = this;
+    var gardendata = {};
+    gardendata.files = self.getFiles(myid)
+    gardendata.links = self.getLinks(myid)
     return gardendata
   }
 
