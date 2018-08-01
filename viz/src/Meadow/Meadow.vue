@@ -14,6 +14,9 @@
 
 <style scoped>
     body{ margin: 0; }
+    .hide {
+      visibility: hidden;
+    }
     #info{
       width: 100%;
       position: fixed;

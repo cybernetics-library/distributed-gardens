@@ -1,10 +1,7 @@
 <template>
-  <div>
-    <span class="hide">{{currentbadge}}</span>
   <canvas id="FilePlants">
-
+    <span class="hide">{{currentbadge}}</span>
   </canvas>
-</div>
 </template>
 
 <style>

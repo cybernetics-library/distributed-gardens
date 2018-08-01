@@ -1,10 +1,13 @@
 <template>
-  <canvas id="grass">
-
-  </canvas>
+    <canvas id="grass">  
+      <span class="hide">{{currentbadge}}</span>
+    </canvas>
 </template>
 
 <style>
+.hide {
+  opacity: 0;
+}
 #grass {
   height: 100%;
   width: 100%;
@@ -28,6 +31,12 @@ const grass1 = require('./grassImages/grass1.png')
 const grass2 = require('./grassImages/grass2.png')
 const grass3 = require('./grassImages/grass3.png')
 const grass4 = require('./grassImages/grass4.png')
+const grassArray = [
+  grass1,
+  grass2,
+  grass3,
+  grass4
+]
 
 export default {
   props: ['gardendata', 'currentbadge'],
@@ -72,30 +81,18 @@ export default {
       ctx.ellipse(xC, yC, xRad, yRad, 0, 0, Math.PI*2);
       ctx.stroke();
 
-      const
-        newCoord1 = this.generateCoordsInGarden(11123, 12314123123124, xC, yC, xRad, yRad),
-        newCoord2 = this.generateCoordsInGarden(11123, 12323123124, xC, yC, xRad, yRad),
-        newCoord3 = this.generateCoordsInGarden(11123, 1231413124, xC, yC, xRad, yRad),
-        newCoord4 = this.generateCoordsInGarden(11123, 12314123123124, xC, yC, xRad, yRad),
-        newCoord5 = this.generateCoordsInGarden(11123, 45454545, xC, yC, xRad, yRad),
-        newCoord6 = this.generateCoordsInGarden(11123, 12314123123124, xC, yC, xRad, yRad),
-        newCoord7 = this.generateCoordsInGarden(11123, 12314128724, xC, yC, xRad, yRad),
-        newCoord8 = this.generateCoordsInGarden(11123, 565, xC, yC, xRad, yRad),
-        newCoord9 = this.generateCoordsInGarden(11123, 87665, xC, yC, xRad, yRad);
+      const linksNumber = this.gardendata.links.length;
+      for (var i = 0; i < linksNumber; i++) {
+        const grassCoords = this.generateCoordsInGarden(this.currentbadge, this.currentbadge * i, xC, yC, xRad, yRad);
+        const random = new seedrandom(this.currentbadge * i)
+        const chosenOne = grassArray[Math.floor(random()*grassArray.length)] 
 
-      this.drawGrass(ctx, newCoord1, grass1, canvasHeight);
-      this.drawGrass(ctx, newCoord2, grass2, canvasHeight);
-      this.drawGrass(ctx, newCoord3, grass3, canvasHeight);
-      this.drawGrass(ctx, newCoord4, grass4, canvasHeight);
-      this.drawGrass(ctx, newCoord5, grass1, canvasHeight);
-      this.drawGrass(ctx, newCoord6, grass2, canvasHeight);
-      this.drawGrass(ctx, newCoord7, grass3, canvasHeight);
-      this.drawGrass(ctx, newCoord8, grass4, canvasHeight);
-      this.drawGrass(ctx, newCoord9, grass1, canvasHeight);
+        this.drawGrass(ctx, grassCoords, chosenOne, canvasHeight)
+      }
 
     },
     drawGrass(ctx, coords, imagePath, canvasHeight) {
-      const of10Scale = ((canvasHeight - coords.y) / canvasHeight) * 7;
+      const of10Scale = ((canvasHeight - coords.y) / canvasHeight) * 3;
       console.log(of10Scale)
 
       this.placeImage(ctx, coords, imagePath, of10Scale);

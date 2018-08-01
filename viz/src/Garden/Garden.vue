@@ -1,6 +1,6 @@
 <template>
   <div id="garden">
-    <div id="stats"> {{ currentbadge }} </div>
+    <div id="stats" class="hide"> {{ currentbadge }} </div>
     <FilePlants :gardendata="gardendata" :currentbadge=currentbadge></FilePlants>
     <Grass :gardendata="gardendata" :currentbadge=currentbadge></Grass>
   </div>
@@ -11,6 +11,9 @@
   height: 600px;
   width: 600px;
   position: relative;
+}
+.hide {
+  visibility: hidden;
 }
 
 #garden * {
