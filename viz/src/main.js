@@ -81,7 +81,9 @@ var vueapp = new Vue({
         } 
 
         if(reqname == "submitLink") {
-          console.log(":::parent:: we got a scan from badge id: " + badgeId);
+          var toBadgeId = Helpers.getBadgeIdFromUrl(data.link_to);
+          var fromBadgeId = Helpers.getBadgeIdFromUrl(data.link_from);
+          console.log(":::parent:: we got a scan from badge id: " + toBadgeId + ", linking to prev badge: " + fromBadgeId);
           console.log(":::parent:: we got a LINK ")
           var msg = {
             'from': {'name': 'kiosk'}, // TODO CHANGE NAME PROGRAMMATICALLY
