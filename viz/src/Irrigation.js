@@ -13,6 +13,16 @@ class Irrigation {
     await self.biome.start()
   }
 
+  async addEvent(msg) { // INTERFACE WITH BIOME
+    var self = this;
+    await self.biome.addEvent(msg)
+  }
+
+  getEvents() { // INTERFACE WITH BIOME
+    var self = this;
+    return self.biome.getEvents()
+  }
+
   async addEventNow(msg) {
     var self = this;
     msg.ver = 1;
@@ -20,9 +30,6 @@ class Irrigation {
     await self.biome.addEvent(msg)
   }
 
-  async addEvent(msg) {
-    await self.biome.addEvent(msg)
-  }
 
   listen(event_name, cb) { // register listener
     console.log(event_name);
@@ -38,7 +45,7 @@ class Irrigation {
         "force" in config &&
          config.force == true) {
       this.last_getEvents = new Date().getTime()
-      this.cachedEvents = _.sortBy(self.biome.getEvents(), "ts");
+      this.cachedEvents = _.sortBy(self.getEvents(), "ts");
     }
 
 
@@ -48,7 +55,7 @@ class Irrigation {
         this.last_getEvents - new Date().getTime() > 5 * 1000) {
 
       this.last_getEvents = new Date().getTime()
-      this.cachedEvents = _.sortBy(self.biome.getEvents(), "ts");
+      this.cachedEvents = _.sortBy(self.getEvents(), "ts");
     } 
 
     return this.cachedEvents
