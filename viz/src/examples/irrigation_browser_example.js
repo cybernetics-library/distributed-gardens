@@ -6,7 +6,7 @@ window.onload = () => {
   var irrigation = new Irrigation();
   window.irrigation = irrigation;
   irrigation.init()
-
+/*
   .then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed',
     'msg': { 'seed_by': '11111', 'seed_to': '11111',  media:[ 'ERIC_ED105298'] } })); })
 
@@ -192,7 +192,7 @@ window.onload = () => {
 
 
 
-
+*/
 
   .then(() => { console.log(irrigation.getHistory()); })
   .then(() => { console.log(irrigation.getAdjacencyList()); })

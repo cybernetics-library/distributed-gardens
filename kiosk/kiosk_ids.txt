@@ -4,3 +4,4 @@ plantkiosk3
 plantkiosk4
 plantkiosk5
 plantkiosk8
+relay
