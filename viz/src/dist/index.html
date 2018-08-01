@@ -43,14 +43,15 @@
 <link rel="stylesheet" href="/main.5a277841.css"></head>
 <body>
   <div id="app">
-    <meadow :graphdata="graphdata" :currentbadge="currentbadge" :gardendata="gardendata"></meadow>
+    {}
+    <meadow v-if="graphdata" :graphdata="graphdata" :currentbadge="currentbadge" :gardendata="gardendata"></meadow>
     <!-- <garden :gardendata=gardendata></garden> -->
-    <div id="debug">
+    <!-- <div id="debug">
       <li v-for="item in history">
         {{item}}
       </li>
       {{stats}}
-    </div>
+    </div> -->
   </div>
   <script src="/main.5a277841.js"></script>
   <iframe id="scanner" name="scanner" src="/scanner/index.html"></iframe>
