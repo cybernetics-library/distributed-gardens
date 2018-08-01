@@ -13,8 +13,13 @@ ngrok.authtoken(token).then(function() {
 
   ngrok.connect({proto: 'tcp', addr: 22})
    .then(function(d) {
-    console.log(d);
     slack.send(d)
+    try {
+      var resplit = d.split(/\/\/|:/);
+      console.log(d);
+      slack.send("`ssh pi@" + resplit[2] + " -p " + resplit[3] + "`")
+    } catch (err) {
+    }
    });
 
 });
