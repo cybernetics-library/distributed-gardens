@@ -70,6 +70,9 @@ npm install pm2@latest -g
 echo "=== install pm2 startup script ..."
 `pm2 startup | grep "sudo"`
 
+echo "=== enabling pi camera"
+sudo bash -c "echo bcm2835-v4l2 >> /etc/modules"
+
 
 echo "$kioskid" >> kiosk_ids.txt
 echo "=== Success! $kioskid added to kiosk_ids."
