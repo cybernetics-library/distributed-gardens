@@ -1,8 +1,5 @@
 var $ = require('jquery');
-var _ = require('lodash');
 var Irrigation  = require('./Irrigation');
-window._ = _;
-
 
 
 
