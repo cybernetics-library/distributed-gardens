@@ -139,7 +139,7 @@ export default {
         .d3VelocityDecay(.9)
         // .d3Force('center', [50,50])
         .nodeCanvasObject((node, ctx)=> {
-          ctx.fillStyle = "rgba(65,151,113,.1)";
+          ctx.fillStyle = "#b1ffb9";
           // ctx.strokeStyle = "rgba(65,151,113,.4)";
           // ctx.beginPath();
           // ctx.ellipse(120, 500, 100, 70, 0, 0, Math.PI*2);
