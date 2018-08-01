@@ -38,7 +38,6 @@ Helpers.getUrlValue = function(VarSearch){
     }
 }
 
-window.onload = () => {
 
 
 

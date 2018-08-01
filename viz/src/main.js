@@ -32,7 +32,7 @@ var vueapp = new Vue({
     init: function() {
       var self = this;
 
-      opts = {}
+      var opts = {}
       if(Helpers.getUrlValue("nonce") != undefined) {
         opts.nonce = Heplers.getUrlValue("nonce")
       }
