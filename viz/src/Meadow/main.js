@@ -1,8 +1,7 @@
 import Vue from 'vue/dist/vue.esm.js'
 import Meadow from './Meadow.vue'
-import Garden from '../Garden/Garden.vue'
 
-var mizdata = require('./miserables.json');
+var mizdata = require('./simple.json');
 
 var vueapp = new Vue({
   el: '#app',
@@ -13,7 +12,6 @@ var vueapp = new Vue({
   },
   components: {
     Meadow,
-    Garden
   },
   updated () { console.log('updated') }
 })
