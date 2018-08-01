@@ -8,6 +8,9 @@
 #FilePlants {
   height: 100%;
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   position: relative;
   font-family: Helvetica, Arial;
   font-size: 0.8em;
@@ -21,7 +24,6 @@
 </style>
 
 <script>
-import $ from 'jquery'
 import seedrandom from 'seedrandom'
 const a1 = require('./plantImages/a1.png')
 const a2 = require('./plantImages/a2.png')
@@ -92,13 +94,6 @@ export default {
       const newCoord5 = this.generateCoordsInGarden(64172, 'antoasdfas/asdfasdf/asdfher.gif', xC, yC, xRad, yRad);
       const newCoord6 = this.generateCoordsInGarden(64172, 'anasdjah/23/42/3dfsdf/toher.gif', xC, yC, xRad, yRad);
 
-      this.drawPoint(ctx, newCoord, 'red');
-      this.drawPoint(ctx, newCoord2, 'red');
-      this.drawPoint(ctx, newCoord3, 'red');
-      this.drawPoint(ctx, newCoord4, 'red');
-      this.drawPoint(ctx, newCoord5, 'red');
-      this.drawPoint(ctx, newCoord6, 'red');
-
       this.placeImage(ctx, newCoord, a1, 1);
       this.placeImage(ctx, newCoord2, a2, 5);
       this.placeImage(ctx, newCoord3, a3, 7);
@@ -112,7 +107,7 @@ export default {
       image.onload = () => {
         const 
           aspectRatio = image.height / image.width,
-          height = (ctx.canvas.height * 0.7) * (of10Scale * 0.1),
+          height = (ctx.canvas.height * 0.8) * (of10Scale * 0.1),
           width = height/aspectRatio,
           plantCenterBottomCoords = {
             x: coords.x - (width/2),

@@ -3,6 +3,7 @@ node_modules
 *.idlk
 package-lock.json
 dist/
+!viz/src/dist
 .cache
 badge/qrcodes
 .DS_Store

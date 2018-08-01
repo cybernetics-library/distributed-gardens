@@ -7,7 +7,7 @@
     "examples": "cd src/examples && parcel *.html",
     "meadow": "cd src/meadow && parcel index.html",
     "garden": "cd src/garden && parcel index.html",
-    "build": "",
+    "production": "cd src/dist && ../../node_modules/.bin/http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -16,6 +16,7 @@
     "circletype": "^2.3.0",
     "debug": "^3.1.0",
     "force-graph": "^1.8.0",
+    "http-server": "^0.11.1",
     "instascan": "github:dantaeyoung/instascan",
     "jquery": "^3.3.1",
     "seedrandom": "^2.4.3",
