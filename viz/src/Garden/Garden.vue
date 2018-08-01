@@ -1,8 +1,8 @@
 <template>
   <div id="garden">
     <div id="stats"> {{ currentbadge }} </div>
-    <FilePlants :gardendata="gardendata"></FilePlants>
-    <Grass :gardendata="gardendata"></Grass>
+    <FilePlants :gardendata="gardendata" :currentbadge=currentbadge></FilePlants>
+    <Grass :gardendata="gardendata" :currentbadge=currentbadge></Grass>
   </div>
 </template>
 
@@ -40,6 +40,7 @@ export default {
   },
   updated() {
     if(this.currentbadge != this.badgeId){
+      console.log('yo this bit is running')
       this.badgeId = this.currentbadge
       this.initGarden();
     }

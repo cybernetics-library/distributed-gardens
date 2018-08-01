@@ -1,3 +1,6 @@
+.hide {
+  opacity: 0;
+}
 #FilePlants {
   height: 100%;
   width: 100%;

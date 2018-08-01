@@ -30,32 +30,23 @@ const grass3 = require('./grassImages/grass3.png')
 const grass4 = require('./grassImages/grass4.png')
 
 export default {
-  props: {
-    "gardendata": {
-      default: {},
-    },
-    "currentbadge": {
-      default: '',
-    }
-  },
+  props: ['gardendata', 'currentbadge'],
   data: () => {
     return {
-    }
-  },
-  updated() {
-    if(this.currentbadge != this.badgeId){
-      this.badgeId = this.currentbadge
-      //this.init();
+      badgeId: null,
     }
   },
   mounted() {
-    console.log("grass was mounted");
+    //console.log("grass was mounted");
     //this.init();
     window.self = this;
   },
   updated() {
-    
-    this.init();
+    if(this.currentbadge != this.badgeId){
+      this.badgeId = this.currentbadge
+      console.log('updataed!! gonna render grass')
+      this.init();
+    }
   },
   methods: {
     init() {
