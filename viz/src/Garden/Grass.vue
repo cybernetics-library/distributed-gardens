@@ -82,7 +82,7 @@ export default {
       ctx.stroke();
 
       const linksNumber = this.gardendata.links.length;
-      for (var i = 0; i < linksNumber; i++) {
+      for (var i = 0; i < (linksNumber*3); i++) {
         const grassCoords = this.generateCoordsInGarden(this.currentbadge, this.currentbadge * i, xC, yC, xRad, yRad);
         const random = new seedrandom(this.currentbadge * i)
         const chosenOne = grassArray[Math.floor(random()*grassArray.length)] 
@@ -92,8 +92,7 @@ export default {
 
     },
     drawGrass(ctx, coords, imagePath, canvasHeight) {
-      const of10Scale = ((canvasHeight - coords.y) / canvasHeight) * 3;
-      console.log(of10Scale)
+      const of10Scale = ((canvasHeight - coords.y) / canvasHeight) * 2;
 
       this.placeImage(ctx, coords, imagePath, of10Scale);
     },
@@ -117,7 +116,7 @@ export default {
       const
         badgeIdRandGen = new seedrandom(badgeId),
         fileNameRandGen = new seedrandom(fileName),
-        newRadX = Math.floor(gardenRadX * badgeIdRandGen()),
+        newRadX = Math.floor(gardenRadX * badgeIdRandGen()) * 2,
         newRadY = Math.floor(gardenRadY * fileNameRandGen()),
         degAngle = fileNameRandGen() > 0.5 ? Math.floor(180 * fileNameRandGen()) : Math.floor(-180 * fileNameRandGen());
 

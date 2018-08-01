@@ -38,11 +38,11 @@ $(function() {
 
 
     var opts = {}
-/*    opts.swarm = [
-        '/ip4/ws-star-signal-1.servep2p.com/tcp/9090/ws/p2p-websocket-star',
+    opts.swarm = [
+        '/dns4/ws-star1.par.dwebops.pub/tcp/9090/ws/p2p-websocket-star/',
         '/dns4/ws-star2.sjc.dwebops.pub/tcp/443/wss/p2p-websocket-star',
         '/dns4/relay.decentralizedweb.net/tcp/9090'
-    ] */
+    ] 
     if(getUrlValue("nonce") != undefined) {
       opts.nonce = getUrlValue("nonce")
     }

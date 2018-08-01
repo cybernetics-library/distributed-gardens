@@ -176,8 +176,8 @@ export default {
       return '#419771';
     },
     zoomTo(Graph, node){
-      Graph.centerAt(node.x, node.y, 1000);
-      Graph.zoom(20, 2000);
+      Graph.centerAt(node.x, node.y-2, 1000);
+      Graph.zoom(60, 2000);
     },
     makeNode(Graph, currentbadge) {
       var { nodes, links } = this.Graph.graphData();
