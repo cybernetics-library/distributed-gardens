@@ -92,16 +92,43 @@ class Irrigation {
      .flatten()
      .uniq()
      .map((d) => { return { "id": d } })
+    .compact()
      .value()
     graphdata.links =  _.chain(self.getHistory())
      .filter({type: "link" })
      .map((d) => { return [d.msg.link_from, d.msg.link_to].sort().join("-") })
      .countBy()
      .map((v, k) => { var links = k.split("-"); return { "source": links[0], "target": links[1], "value": v} })
+     .compact()
      .value()
 
     console.log(graphdata, "graph data")
     return graphdata
+  }
+
+  getLinks(myid) {
+    return _.chain(self.getHistory())
+      .filter({type: "link" })
+      .compact()
+      .map(function(d) {
+        if(d.msg.link_from === myid) { return d.msg.link_to; }
+        if(d.msg.link_to === myid) { return d.msg.link_from; }
+      })
+      .compact()
+      .value()
+  }
+
+  getGardenData() {
+    var gardendata = {};
+    gardendata.files = _.chain(self.getHistory())
+      .filter({type: "seed" })
+      .map((d) => { return d.msg.media; })
+      .flatten()
+      .compact()
+      .value()
+
+    //links is an array of badge ids
+    return gardendata
   }
 
 
