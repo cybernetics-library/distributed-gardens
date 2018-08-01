@@ -36,10 +36,14 @@ git config --global user.email "info@cybernetics.social"
 git config --global user.name "plantkiosk"
 
 echo "=== hiding mouse pointer when not moving "
+sudo apt-get install unclutter
 LINE='@unclutter -idle 0.1'
 FILE=~/.config/lxsession/LXDE-pi/autostart
 grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
 
+export DISPLAY=:0
+xset s noblank
+xset s activate
 
 
 
