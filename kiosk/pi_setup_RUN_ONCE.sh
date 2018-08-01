@@ -72,6 +72,7 @@ echo "=== install pm2 startup script ..."
 
 echo "=== enabling pi camera"
 sudo bash -c "echo bcm2835-v4l2 >> /etc/modules"
+sudo bash -c "start_x=1 >> /boot/config.txt"
 
 echo "=== disabling screen sleep"
 echo setterm -blank 0 -powerdown 0 >> ~/.bashrc 
