@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "3d-force-graph": "^1.38.1",
+    "assets": "^3.0.0",
     "biome": "github:parkan/biome",
     "circletype": "^2.3.0",
     "debug": "^3.1.0",

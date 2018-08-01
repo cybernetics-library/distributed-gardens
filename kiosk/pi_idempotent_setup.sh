@@ -5,7 +5,7 @@
 
 echo "=== enabling pi camera"
 
-LINE='echo bcm2835-v4l2'
+LINE='bcm2835-v4l2'
 FILE=/etc/modules
 sudo grep -qF "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
 
@@ -31,4 +31,6 @@ LINE='@xset -dpms'
 FILE=/etc/xdg/lxsession/LXDE-pi/autostart
 sudo grep -qF "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
 
-
+echo "=== setting git names"
+git config --global user.email "info@cybernetics.social"
+git config --global user.name "plantkiosk"
