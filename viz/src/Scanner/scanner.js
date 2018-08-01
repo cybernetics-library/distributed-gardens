@@ -9,9 +9,9 @@ import PaperCup from '../Papercup'
 var globalQR;
 var theme;
 var isLink = false;
-// var audio = new Audio('sam_sound.mp3');
-
-
+var timer;
+const audio = require('./assets/garden.mp3');
+var garden_string = ""
 
 var paperCupChild = new PaperCup.PaperCupChild();
 
@@ -119,6 +119,7 @@ function handleScans(content) {
       console.log("garden name: " + garden_name);
       $('#garden_title').html(garden_name);
       $('#garden_title').show();
+      garden_string = garden_name
     });
 
     firstScan();
@@ -127,24 +128,24 @@ function handleScans(content) {
       // if there was a valid previous QR
       var msg = { "link_from": prevQRURL, "link_to": thisQRURL }
       console.log("scanner:: I'm trying to submit a link!");
+      $('#garden_title').html(garden_string);
+
       console.log(msg);
-      // audio.play();
+      audio.play();
       paperCupChild.sendRequest("submitLink", msg, function() {  });
     }
   } else {
+    $('#garden_title').html("Waiting...");
     isLink = false;
-//    console.log(isLink);
   };
 };
 
 
 
 function firstScan() {
-
   $("#cam1").hide();
   newGarden();
   $("#freeze1").addClass("grayscale blur");
-
 };
 
 
@@ -154,6 +155,7 @@ function refresh() {
   $("#freeze1").fadeOut("slow");
   $('#cam1').fadeIn("slow");
   $('#garden_title').html("");
+  clearTimeout(timer);
   // $('#garden_title').css("color", "#9fd6a7");
   // resetQR();
 }
@@ -169,15 +171,14 @@ function newGarden() {
 
   $("#freeze1").fadeIn("slow");
 
-
-  // change garden_title
   console.log("hiii");
   $('#garden_title').css("color","#214f32");
   $('body').css("background", "linear-gradient(rgba(79, 140, 96, 0) 60%, rgba(86, 144, 81, 0.4))");
 
   $('#prompt').hide();
-  console.log("trying to hide");
-  setTimeout(function() {refresh}, 9000);
+  timer = setTimeout(function() {
+    refresh();
+  }, 20000);
 }
 
 
