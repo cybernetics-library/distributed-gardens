@@ -33,6 +33,19 @@ $(document).ready(function() {
 
   }, 300 * 1000);
 
+  $.getJSON( "badge_data.json", function( data ) {
+
+    var badgeid = getUrlValue("BADGE");
+    if (badgeid in data) {
+      var garden_name = data[badgeid].word1 + " " +  data[badgeid].word2
+      $("#garden_name").html(garden_name);
+    }
+
+    console.log(data);
+  });
+
+
+
 
 });
 
@@ -103,7 +116,6 @@ body {
   }
   #submitbutton:focus {outline:0;}
   #title {
-    font-weight: bold;
     font-size: 1.6em;
     text-align: center;
   }
@@ -153,7 +165,14 @@ CUSTOMIZE BELOW
 <body>
 <div class="flexcontainer">
 	<div class="centerdiv">
-      <div id="title"><b>~ <i>Distributed Gardens</i></b> coming soon ~</div>
+      <div id="title">
+        <h2>Hello, <b>Gardener</b> of <b><span id="garden_name"></span></b>!</h2>
+        You are a gardener.<br>
+        Share your data plants with those you link with.
+        <br/><br/>
+        <b>~ <i>Distributed Gardens</i></b> is coming today at noon ~
+        <br />
+      </div>
 	</div>
     <div class="backgrounds">
 			<div id="background-over" class="background"></div>
