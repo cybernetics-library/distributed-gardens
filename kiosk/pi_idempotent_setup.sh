@@ -5,7 +5,7 @@
 
 echo "=== enabling pi camera"
 
-LINE='echo bcm2835-v4l2'
+LINE='bcm2835-v4l2'
 FILE=/etc/modules
 sudo grep -qF "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
 
