@@ -78,7 +78,7 @@ export default {
       default: {},
     },
     "badgedata": {
-      default: {},
+      default: '',
     }
   },
   data: () => {
@@ -87,8 +87,12 @@ export default {
   },
   mounted() {
     console.log("palants I was mounted");
-    //this.init();
+    
     window.self = this;
+  },
+  updated() {
+    console.log(this.gardendata)
+    this.init();
   },
   methods: {
     init() {
