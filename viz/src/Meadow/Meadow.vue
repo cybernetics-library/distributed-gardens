@@ -3,7 +3,10 @@
     <h1>{{currentbadge}}</h1>
     <div id="garden-overlay" class="dim"></div>
 
-    <garden :gardendata=gardendata></garden>
+    <garden 
+      :gardendata=gardendata
+      :currentbadge=currentbadge
+    ></garden>
 
     <div id="graph"></div>
   </div>
@@ -101,7 +104,7 @@ export default {
     }
   },
   updated() {
-    console.log(this.graphdata)
+    console.log(this.gardendata)
     if(this.currentbadge != this.badgeId){
       this.badgeId = this.currentbadge
           this.makeNode(this.Graph, this.currentbadge)
