@@ -40,4 +40,5 @@ class Biome {
 });
 
 
+module.exports = Biome;
 
