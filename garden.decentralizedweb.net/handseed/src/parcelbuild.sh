@@ -1,1 +1,1 @@
-parcel build index.html -d ../
+parcel build index.html -d ../build
