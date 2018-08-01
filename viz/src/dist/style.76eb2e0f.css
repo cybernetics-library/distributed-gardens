@@ -64,6 +64,7 @@ body, html {
     bottom: 1.2em;
     left: calc(50% - 137px);
     overflow: hidden;
+    transition: all 1s ease;
 
   }
 

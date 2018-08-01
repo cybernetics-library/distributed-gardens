@@ -117,7 +117,7 @@ function handleScans(content) {
       console.log("garden name: " + garden_name);
       $('#garden_title').html(garden_name);
       $('#garden_title').show();
-      garden_string = garden
+      garden_string = garden_name
     });
 
     firstScan();

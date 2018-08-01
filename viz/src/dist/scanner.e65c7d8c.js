@@ -65663,7 +65663,7 @@ function handleScans(content) {
       console.log("garden name: " + garden_name);
       (0, _jquery2.default)('#garden_title').html(garden_name);
       (0, _jquery2.default)('#garden_title').show();
-      garden_string = garden;
+      garden_string = garden_name;
     });
 
     firstScan();
@@ -65687,12 +65687,13 @@ function handleScans(content) {
 function firstScan() {
   (0, _jquery2.default)("#cam1").hide();
   newGarden();
-  (0, _jquery2.default)("#freeze1").addClass("grayscale blur");
+  (0, _jquery2.default)("#freeze1").addClass("grayscale blur").delay(1500).css('transform', 'translateY(70%)');
 };
 
 function refresh() {
   console.log("refreshhhhhhhh");
   (0, _jquery2.default)('#prompt').fadeIn("slow");
+  (0, _jquery2.default)("#freeze1").css('transform', 'translateY(0%)');
   (0, _jquery2.default)("#freeze1").fadeOut("slow");
   (0, _jquery2.default)('#cam1').fadeIn("slow");
   (0, _jquery2.default)('#garden_title').html("");
@@ -65778,7 +65779,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '59297' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '56302' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
