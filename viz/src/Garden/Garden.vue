@@ -1,6 +1,6 @@
 <template>
   <div id="garden">
-    <div id="stats"> {{ currentbadge }} </div>
+    <!-- <div id="stats"> {{ currentbadge }} </div> -->
     <FilePlants :gardendata="gardendata"></FilePlants>
     <Grass :gardendata="gardendata"></Grass>
   </div>
@@ -8,7 +8,7 @@
 
 <style scoped>
 #garden {
-  height: 400px;
+  height: 600px;
   width: 600px;
   position: relative;
 }
