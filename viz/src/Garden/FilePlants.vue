@@ -31,10 +31,53 @@ const a3 = require('./plantImages/a3.png')
 const b1 = require('./plantImages/b1.png')
 const b2 = require('./plantImages/b2.png')
 const b3 = require('./plantImages/b3.png')
+const c1 = require('./plantImages/c1.png')
+const c2 = require('./plantImages/c2.png')
+const c3 = require('./plantImages/c3.png')
+const d1 = require('./plantImages/d1.png')
+const d2 = require('./plantImages/d2.png')
+const d3 = require('./plantImages/d3.png')
+const d4 = require('./plantImages/d4.png')
+const d5 = require('./plantImages/d5.png')
+const d6 = require('./plantImages/d6.png')
+const d7 = require('./plantImages/d7.png')
+const d8 = require('./plantImages/d8.png')
+const d9 = require('./plantImages/d9.png')
+const d10 = require('./plantImages/d10.png')
+const d11 = require('./plantImages/d11.png')
+const d12 = require('./plantImages/d12.png')
+const d13 = require('./plantImages/d13.png')
+const plantfiles = [
+        a1,
+        a2,
+        a3,
+        b1,
+        b2,
+        b3,
+        c1,
+        c2,
+        c3,
+        d1,
+        d2,
+        d3,
+        d4,
+        d5,
+        d6,
+        d7,
+        d8,
+        d9,
+        d10,
+        d11,
+        d12,
+        d13
+      ];
 
 export default {
   props: {
     "gardendata": {
+      default: {},
+    },
+    "badgedata": {
       default: {},
     }
   },
@@ -44,7 +87,7 @@ export default {
   },
   mounted() {
     console.log("palants I was mounted");
-    this.init();
+    //this.init();
     window.self = this;
   },
   methods: {
@@ -87,19 +130,18 @@ export default {
       ctx.ellipse(xC, yC, xRad, yRad, 0, 0, Math.PI*2);
       ctx.stroke();
 
-      const newCoord = this.generateCoordsInGarden(64172, 'testname.gif', xC, yC, xRad, yRad);
-      const newCoord2 = this.generateCoordsInGarden(64172, 'antoher.gif', xC, yC, xRad, yRad);
-      const newCoord3 = this.generateCoordsInGarden(64172, 'anasdfasdafstoasdher.gif', xC, yC, xRad, yRad);
-      const newCoord4 = this.generateCoordsInGarden(64172, 'anas2379846jadftoher.gif', xC, yC, xRad, yRad);
-      const newCoord5 = this.generateCoordsInGarden(64172, 'antoasdfas/asdfasdf/asdfher.gif', xC, yC, xRad, yRad);
-      const newCoord6 = this.generateCoordsInGarden(64172, 'anasdjah/23/42/3dfsdf/toher.gif', xC, yC, xRad, yRad);
+      for (var i = Things.length - 1; i >= 0; i--) {
+        const fileName = Things[i];
 
-      this.placeImage(ctx, newCoord, a1, 1);
-      this.placeImage(ctx, newCoord2, a2, 5);
-      this.placeImage(ctx, newCoord3, a3, 7);
-      this.placeImage(ctx, newCoord4, b1, 3);
-      this.placeImage(ctx, newCoord5, b2, 6);
-      this.placeImage(ctx, newCoord6, b3, 8);
+        //draw plant for file
+        //get plant by filename
+        const plantRandom = new seedrandom(fileName);
+
+        const chosenOne = plantfiles[Math.floor(plantRandom()*plantfiles.length)];
+
+        const fileCoords = this.generateCoordsInGarden(this.badgedata, fileName, xC, yC, xRad, yRad);
+        this.placeImage(ctx, fileCoords, chosenOne, (plantRandom() * 8))
+      }
     }, 
     placeImage(ctx, coords, imagePath,  of10Scale) {
       const image = new Image();

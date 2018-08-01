@@ -1,6 +1,9 @@
 #FilePlants {
   height: 100%;
   width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   position: relative;
   font-family: Helvetica, Arial;
   font-size: 0.8em;
@@ -9,24 +12,27 @@
 .flower {
   position: absolute;
   text-align: center;
-}#Grass {
+}#grass {
   height: 100%;
   width: 100%;
-}
-.grass {
   position: absolute;
-  color: #364B5E;
-  font-weight: bold;
+  top: 0;
+  left: 0;
   font-family: Helvetica, Arial;
   font-size: 0.8em;
+  color: green;
+}
+.flower {
+  position: absolute;
+  text-align: center;
 }
 #garden[data-v-ce0ca1] {
   height: 400px;
   width: 600px;
-  /* position: relative; */
+  position: relative;
 }
 #garden *[data-v-ce0ca1] {
-  /* position: absolute; */
+  position: absolute;
 }
 body[data-v-c33ffa]{ margin: 0;
 }
