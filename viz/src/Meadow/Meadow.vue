@@ -104,7 +104,7 @@ export default {
     }
   },
   updated() {
-    console.log(this.gardendata)
+    //console.log(this.gardendata)
     if(this.currentbadge != this.badgeId){
       this.badgeId = this.currentbadge
           this.makeNode(this.Graph, this.currentbadge)

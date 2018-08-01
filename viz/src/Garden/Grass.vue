@@ -35,7 +35,7 @@ export default {
       default: {},
     },
     "currentbadge": {
-      default: {},
+      default: '',
     }
   },
   data: () => {
@@ -45,13 +45,17 @@ export default {
   updated() {
     if(this.currentbadge != this.badgeId){
       this.badgeId = this.currentbadge
-      this.init();
+      //this.init();
     }
   },
   mounted() {
     console.log("grass was mounted");
     //this.init();
     window.self = this;
+  },
+  updated() {
+    
+    this.init();
   },
   methods: {
     init() {
