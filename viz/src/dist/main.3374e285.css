@@ -15,7 +15,10 @@
 .flower {
   position: absolute;
   text-align: center;
-}#grass {
+}.hide {
+  opacity: 0;
+}
+#grass {
   height: 100%;
   width: 100%;
   position: absolute;
@@ -30,14 +33,20 @@
   text-align: center;
 }
 #garden[data-v-c4456f] {
-  height: 400px;
+  height: 600px;
   width: 600px;
   position: relative;
+}
+.hide[data-v-c4456f] {
+  visibility: hidden;
 }
 #garden *[data-v-c4456f] {
   position: absolute;
 }
 body[data-v-620bd2]{ margin: 0;
+}
+.hide[data-v-620bd2] {
+  visibility: hidden;
 }
 #info[data-v-620bd2]{
   width: 100%;
@@ -56,7 +65,7 @@ h1[data-v-620bd2]{
 }
 #garden[data-v-620bd2]{
     position: fixed;
-    width: 640px; height: 480px;
+    /* width: 640px; height: 480px; */
     /* width: 10px; height: 10px; */
     /* margin-left: -5px; margin-top: -5px; */
     background-color:'none';
@@ -66,7 +75,7 @@ h1[data-v-620bd2]{
 }
 #garden-overlay[data-v-620bd2]{
     position: absolute;
-    width: 300px; height: 300px;
+    /* width: 300px; height: 300px; */
     border-radius: 1000px;
     position: absolute;
     top: 50%; right: 50%;

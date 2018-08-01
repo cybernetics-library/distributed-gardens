@@ -99,17 +99,19 @@ function handleScans(content) {
   console.log('garden name', res);
   console.log('prev name', window.prevlink);
   if (!(_.isEqual(window.prevlink, res))) {
-    if(Object.values(window.prevlink).length != 0) {
+    if (Object.values(window.prevlink).length != 0) {
       var prevQRURL = Object.values(window.prevlink.names)[0]
-    } else { var prevQRURL = "" }
+    } else {
+      var prevQRURL = ""
+    }
 
-//    console.log(window.prevlink)
+    //    console.log(window.prevlink)
 
     window.prevlink = res;
-//    console.log(res);
+    //    console.log(res);
     console.log("new QR!!!!");
     isLink = true;
-//    console.log(isLink);
+    //    console.log(isLink);
     globalQR = content;
 
     var thisQRURL = content[0]
@@ -123,22 +125,25 @@ function handleScans(content) {
     });
 
     firstScan();
-//    paperCupChild.sendRequest("submitScan", thisQRURL, function() {  });
-    if(prevQRURL != "") {
+    //    paperCupChild.sendRequest("submitScan", thisQRURL, function() {  });
+    if (prevQRURL != "") {
       // if there was a valid previous QR
-      var msg = { "link_from": prevQRURL, "link_to": thisQRURL }
+      var msg = {
+        "link_from": prevQRURL,
+        "link_to": thisQRURL
+      }
       console.log("scanner:: I'm trying to submit a link!");
-      $('#garden_title').html(garden_string);
+     $('#garden_title').html(garden_string);
 
-      paperCupChild.sendRequest("submitLink", msg, function() {  });
+      paperCupChild.sendRequest("submitLink", msg, function() {});
       console.log(msg);
       const audioBuffer = new Audio(audioFile);
       audioBuffer.play();
-      paperCupChild.sendRequest("submitLink", msg, function() {  });
+      paperCupChild.sendRequest("submitLink", msg, function() {});
     }
   } else {
-    console.log('settting title to nothing')
-    $('#garden_title').html("");
+    // console.log('settting title to nothing')
+    // $('#garden_title').html("");
     isLink = false;
   };
 };
@@ -148,7 +153,7 @@ function handleScans(content) {
 function firstScan() {
   $("#cam1").hide();
   newGarden();
-  $("#freeze1").addClass("grayscale blur").delay( 1500 ).css('transform', 'translateY(70%)');
+  $("#freeze1").addClass("grayscale blur").delay(1500).css('transform', 'translateY(70%)');
 };
 
 
@@ -175,7 +180,7 @@ function newGarden() {
   $("#freeze1").fadeIn("slow");
 
   console.log("hiii");
-  $('#garden_title').css("color","#214f32");
+  $('#garden_title').css("color", "#214f32");
   $('body').css("background", "linear-gradient(rgba(79, 140, 96, 0) 60%, rgba(86, 144, 81, 0.4))");
 
   $('#prompt').hide();

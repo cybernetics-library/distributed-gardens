@@ -65411,6 +65411,17 @@ Helpers.keyOfObj = function (key, obj) {
   }
 };
 
+Helpers.getUrlValue = function (VarSearch) {
+  var SearchString = window.location.search.substring(1);
+  var VariableArray = SearchString.split('&');
+  for (var i = 0; i < VariableArray.length; i++) {
+    var KeyValuePair = VariableArray[i].split('=');
+    if (KeyValuePair[0] === VarSearch) {
+      return KeyValuePair[1];
+    }
+  }
+};
+
 exports.default = Helpers;
 },{"babel-runtime/helpers/typeof":"../node_modules/babel-runtime/helpers/typeof.js"}],"Papercup.js":[function(require,module,exports) {
 "use strict";
@@ -65526,7 +65537,9 @@ module.exports = {
   PaperCupParent: PaperCupParent,
   PaperCupChild: PaperCupChild
 };
-},{"babel-runtime/helpers/typeof":"../node_modules/babel-runtime/helpers/typeof.js","babel-runtime/helpers/classCallCheck":"../node_modules/babel-runtime/helpers/classCallCheck.js","babel-runtime/helpers/createClass":"../node_modules/babel-runtime/helpers/createClass.js","./Helpers":"Helpers.js"}],"scanner/scanner.js":[function(require,module,exports) {
+},{"babel-runtime/helpers/typeof":"../node_modules/babel-runtime/helpers/typeof.js","babel-runtime/helpers/classCallCheck":"../node_modules/babel-runtime/helpers/classCallCheck.js","babel-runtime/helpers/createClass":"../node_modules/babel-runtime/helpers/createClass.js","./Helpers":"Helpers.js"}],"scanner/assets/garden.mp3":[function(require,module,exports) {
+module.exports = "/garden.e876d5ec.mp3";
+},{}],"scanner/scanner.js":[function(require,module,exports) {
 'use strict';
 
 var _jquery = require('jquery');
@@ -65558,8 +65571,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var globalQR;
 var theme;
 var isLink = false;
-// var audio = new Audio('sam_sound.mp3');
-
+var timer;
+var audioFile = require('./assets/garden.mp3');
+var garden_string = "";
 
 var paperCupChild = new _Papercup2.default.PaperCupChild();
 
@@ -65637,8 +65651,9 @@ function handleScans(content) {
   // .radius(188);
 
   var res = parseQR(content);
+  console.log('garden name', res);
+  console.log('prev name', window.prevlink);
   if (!_lodash2.default.isEqual(window.prevlink, res)) {
-
     if (Object.values(window.prevlink).length != 0) {
       var prevQRURL = Object.values(window.prevlink.names)[0];
     } else {
@@ -65661,37 +65676,46 @@ function handleScans(content) {
       console.log("garden name: " + garden_name);
       (0, _jquery2.default)('#garden_title').html(garden_name);
       (0, _jquery2.default)('#garden_title').show();
+      garden_string = garden_name;
     });
 
     firstScan();
     //    paperCupChild.sendRequest("submitScan", thisQRURL, function() {  });
     if (prevQRURL != "") {
       // if there was a valid previous QR
-      var msg = { "link_from": prevQRURL, "link_to": thisQRURL };
+      var msg = {
+        "link_from": prevQRURL,
+        "link_to": thisQRURL
+      };
       console.log("scanner:: I'm trying to submit a link!");
+      (0, _jquery2.default)('#garden_title').html(garden_string);
+
+      paperCupChild.sendRequest("submitLink", msg, function () {});
       console.log(msg);
-      // audio.play();
+      var audioBuffer = new Audio(audioFile);
+      audioBuffer.play();
       paperCupChild.sendRequest("submitLink", msg, function () {});
     }
   } else {
+    console.log('settting title to nothing');
+    // $('#garden_title').html("");
     isLink = false;
-    //    console.log(isLink);
   };
 };
 
 function firstScan() {
-
   (0, _jquery2.default)("#cam1").hide();
   newGarden();
-  (0, _jquery2.default)("#freeze1").addClass("grayscale blur");
+  (0, _jquery2.default)("#freeze1").addClass("grayscale blur").delay(1500).css('transform', 'translateY(70%)');
 };
 
 function refresh() {
   console.log("refreshhhhhhhh");
   (0, _jquery2.default)('#prompt').fadeIn("slow");
-  (0, _jquery2.default)("#freeze1").fadeOut("slow");
-  (0, _jquery2.default)('#cam1').fadeIn("slow");
+  (0, _jquery2.default)("#freeze1").css('transform', 'translateY(0%)').fadeOut("slow");
+  (0, _jquery2.default)('#cam1').delay(700).fadeIn("slow");
   (0, _jquery2.default)('#garden_title').html("");
+  clearTimeout(timer);
   // $('#garden_title').css("color", "#9fd6a7");
   // resetQR();
 }
@@ -65705,16 +65729,14 @@ function newGarden() {
 
   (0, _jquery2.default)("#freeze1").fadeIn("slow");
 
-  // change garden_title
   console.log("hiii");
   (0, _jquery2.default)('#garden_title').css("color", "#214f32");
   (0, _jquery2.default)('body').css("background", "linear-gradient(rgba(79, 140, 96, 0) 60%, rgba(86, 144, 81, 0.4))");
-  //  $('html').css("background", "linear-gradient(rgba(79, 140, 96,0), #569051)");
 
   (0, _jquery2.default)('#prompt').hide();
-  setTimeout(function () {
+  timer = setTimeout(function () {
     refresh();
-  }, 9000000);
+  }, 20000);
 }
 
 (0, _jquery2.default)(document).ready(function () {
@@ -65746,7 +65768,7 @@ function newGarden() {
     console.error(e);
   });
 });
-},{"jquery":"../node_modules/jquery/dist/jquery.js","lodash":"../node_modules/lodash/lodash.js","circletype":"../node_modules/circletype/dist/circletype.min.js","webcamjs":"../node_modules/webcamjs/webcam.js","instascan":"../node_modules/instascan/index.js","../Papercup":"Papercup.js"}],"../../../../.nvm/versions/node/v8.4.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"jquery":"../node_modules/jquery/dist/jquery.js","lodash":"../node_modules/lodash/lodash.js","circletype":"../node_modules/circletype/dist/circletype.min.js","webcamjs":"../node_modules/webcamjs/webcam.js","instascan":"../node_modules/instascan/index.js","../Papercup":"Papercup.js","./assets/garden.mp3":"scanner/assets/garden.mp3"}],"../../../../.nvm/versions/node/v8.4.0/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 
@@ -65775,7 +65797,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '50741' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '63423' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
