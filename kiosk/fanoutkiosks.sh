@@ -13,5 +13,4 @@ for line in $(cat $filename); do kioskhostnames="pi@$kioskhostnames$line.local "
 kioskhostnames=`echo "$kioskhostnames" | xargs`
 
 echo "EXECUTING ./fanout-0.6.1/fanout \"$kioskhostnames\" \"$cmmd\""
-#`./fanout-0.6.1/fanout $kioskhostnames uptime`
 ./fanout-0.6.1/fanout "$kioskhostnames" "$cmmd"
