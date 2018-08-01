@@ -1,0 +1,30 @@
+#FilePlants {
+  height: 100%;
+  width: 100%;
+  position: relative;
+  font-family: Helvetica, Arial;
+  font-size: 0.8em;
+  color: green;
+}
+.flower {
+  position: absolute;
+  text-align: center;
+}#Grass {
+  height: 100%;
+  width: 100%;
+}
+.grass {
+  position: absolute;
+  color: #364B5E;
+  font-weight: bold;
+  font-family: Helvetica, Arial;
+  font-size: 0.8em;
+}
+#garden[data-v-4fdb35] {
+  height: 400px;
+  width: 600px;
+  position: relative;
+}
+#garden *[data-v-4fdb35] {
+  position: absolute;
+}
