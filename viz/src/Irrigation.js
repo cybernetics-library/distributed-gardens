@@ -20,9 +20,9 @@ class Irrigation {
     await self.biome.addEvent(msg)
   }
 
-  getEvents() { // INTERFACE WITH BIOME
+  async getEvents() { // INTERFACE WITH BIOME
     var self = this;
-    return self.biome.getEvents()
+    return await self.biome.getEvents()
   }
 
   async addEventNow(msg) {

@@ -16,27 +16,38 @@ class plasticBiome {
   async start() {
     var self = this;
     // Use connect method to connect to the server
-    (await function mcconnect() { 
-      MongoClient.connect(self.dburl, function(err, client) {
-        assert.equal(null, err);
-        console.log("Connected successfully to server");
+    var  mcconnect = function() { 
+      return new Promise(function(resolve, reject) {
+        MongoClient.connect(self.dburl, function(err, client) {
+//          assert.equal(null, err);
+          console.log("Connected successfully to server");
 
-        self.db = client.db(self.dbname);
-        self.collection = self.db.collection(self.dbcollection);
-        self.connected = true;
+          self.db = client.db(self.dbname);
+          self.collection = self.db.collection(self.dbcollection);
+          self.connected = true;
+          resolve();
+        });
       });
-    })();
+    }
+    await mcconnect();
   }
 
-  getEvents() {
+  async getEvents() {
     var self = this;
-    if(this.connected) {
-      self.collection.find({}).toArray(function(err, docs) {
-        assert.equal(err, null);
-        console.log("Found the following records");
-        console.log(docs)
+    var ge = function() {
+      return new Promise(function(resolve, reject) {
+          if(self.connected) {
+            self.collection.find({}).toArray(function(err, docs) {
+      //        assert.equal(err, null);
+              console.log("Found the following records");
+              console.log(docs)
+              resolve(docs)
+            });
+          }  // if this isn't connected.. uh uh. we need to be synchrnous to be compliant with biome
       });
-    }  // if this isn't connected.. uh uh. we need to be synchrnous to be compliant with biome
+    }
+    var docs = await ge();
+    return docs;
   }
 
   async addEvent(msg) {
