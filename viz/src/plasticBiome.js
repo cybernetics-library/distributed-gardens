@@ -11,20 +11,28 @@ class plasticBiome {
     this.dbname = "distributed-gardens"
     this.dbcollection = "events"
     this.connected = false;
-    // Use connect method to connect to the server
-    MongoClient.connect(self.dburl, function(err, client) {
-      console.log("Connected successfully to server");
+  }
 
-      self.db = client.db(self.dbname);
-      self.collection = self.db.collection(self.dbcollection);
-      this.connected = true;
-    });
+  async start() {
+    var self = this;
+    // Use connect method to connect to the server
+    (await function mcconnect() { 
+      MongoClient.connect(self.dburl, function(err, client) {
+        assert.equal(null, err);
+        console.log("Connected successfully to server");
+
+        self.db = client.db(self.dbname);
+        self.collection = self.db.collection(self.dbcollection);
+        self.connected = true;
+      });
+    })();
   }
 
   getEvents() {
     var self = this;
     if(this.connected) {
       self.collection.find({}).toArray(function(err, docs) {
+        assert.equal(err, null);
         console.log("Found the following records");
         console.log(docs)
       });
