@@ -133,9 +133,23 @@ export default {
         .nodeAutoColorBy('group')
         .linkDirectionalParticles(2)
         .linkDirectionalParticleWidth(1.4)
+        .d3VelocityDecay(.9)
+        .nodeCanvasObject((node, ctx)=> {
+          ctx.fillStyle = "rgba(65,151,113,.1)";
+          // ctx.strokeStyle = "rgba(65,151,113,.4)";
+          // ctx.beginPath();
+          // ctx.ellipse(120, 500, 100, 70, 0, 0, Math.PI*2);
+          // ctx.stroke();
+          ctx.beginPath(); 
+          // ctx.arc(node.x, node.y, 5, 0, 2 * Math.PI, false);
+          ctx.ellipse(node.x, node.y, 6, 1, 0, 0, 2 * Math.PI);
+
+          ctx.fill(); // circle
+          // ctx.stroke();
+        })
+        .linkCurvature('value')
         .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
         .onEngineTick(() => {
-          // this.nextNode = this.Graph.graphData().nodes[0]
           this.manageNodes(this.Graph.graphData().nodes, this.nextNode)
         })
         // .enableZoomPanInteraction(false)
@@ -144,6 +158,7 @@ export default {
         });
         
         this.nextNode = self.Graph.graphData().nodes[0]
+        this.Graph.zoom(10, 2000);
         // this.previousNode = this.nextNode
 
       self.Graph.graphData().nodes.forEach((node,i) => {
@@ -222,7 +237,7 @@ export default {
     renderGarden() {
       var { nodes, links } = this.Graph.graphData();
       if(this.previousNode){
-        links.push({source: this.previousNode, target: this.nextNode, val: 1000 })
+        links.push({source: this.previousNode, target: this.nextNode, val: 10 })
         this.Graph.graphData({ nodes, links });
       }
       clearTimeout(this.renderTimer);
