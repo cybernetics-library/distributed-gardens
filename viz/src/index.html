@@ -6,7 +6,7 @@
         html, body {
             margin: 0;
             padding: 0;
-            background: #71C1A9;
+            /* background: #71C1A9; */
         }
         #scanner {
           border-width: 0px;
@@ -14,7 +14,8 @@
           height: 100vh;
           position: absolute;
           bottom: 0px;
-          z-index: 100
+          z-index: 100;
+          /* opacity: 0; */
         }
         #meadow {
           width: 100vw;
@@ -42,18 +43,20 @@
 </head>
 <body>
   <div id="app">
-    <meadow 
+    {}
+    <meadow
+      v-if=graphdata
       :graphdata=graphdata
       :currentbadge=currentbadge
       :gardendata=gardendata
       ></meadow>
     <!-- <garden :gardendata=gardendata></garden> -->
-    <div id="debug">
+    <!-- <div id="debug">
       <li v-for="item in history">
         {{item}}
       </li>
       {{stats}}
-    </div>
+    </div> -->
   </div>
   <script src="main.js"></script>
   <iframe id="scanner" name="scanner" src="scanner/index.html"></iframe>

@@ -9,7 +9,7 @@ import Helpers from './Helpers'
 import Meadow from './Meadow/Meadow.vue'
 // import Garden from './Garden/Garden.vue'
 
-var mizdata = require('./Meadow/miserables.json')
+var mizdata = require('./Meadow/simple.json')
 var badgedata = require('./data/badge_data.json')
 
 var vueapp = new Vue({
@@ -22,7 +22,8 @@ var vueapp = new Vue({
     irrigation: null,
     history: [],
     stats: {},
-    graphdata: mizdata,
+    // graphdata: mizdata,
+    graphdata: null,
     gardendata: fakeData.gardenstats(),
     badgedata: badgedata,
     currentbadge: '',
@@ -36,7 +37,7 @@ var vueapp = new Vue({
           self.getData();
           console.log(self.irrigation);
           console.log(self.graphdata);
-          // self.graphdata = self.irrigation.getGraphData();
+          self.graphdata = self.irrigation.getGraphData();
         });
       self.createPaperCupHandler();
     },
@@ -47,7 +48,7 @@ var vueapp = new Vue({
     },
     getData: function() {
       var self = this;
-//      self.graphdata = self.irrigation.getGraphData();
+      self.graphdata = self.irrigation.getGraphData();
       self.irrigation = self.irrigation;
       self.history = self.irrigation.getHistory();
       self.stats = self.irrigation.getStats()

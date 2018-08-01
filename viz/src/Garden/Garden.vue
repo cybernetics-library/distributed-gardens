@@ -8,9 +8,14 @@
 
 <style scoped>
 #garden {
-   position: relative;
+  height: 400px;
+  width: 600px;
+  position: relative;
 }
 
+#garden * {
+  position: absolute;
+}
 </style>
 
 <script>

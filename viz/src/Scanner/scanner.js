@@ -9,6 +9,8 @@ import PaperCup from '../Papercup'
 var globalQR;
 var theme;
 var isLink = false;
+// var audio = new Audio('sam_sound.mp3');
+
 
 
 var paperCupChild = new PaperCup.PaperCupChild();
@@ -126,6 +128,7 @@ function handleScans(content) {
       var msg = { "link_from": prevQRURL, "link_to": thisQRURL }
       console.log("scanner:: I'm trying to submit a link!");
       console.log(msg);
+      // audio.play();
       paperCupChild.sendRequest("submitLink", msg, function() {  });
     }
   } else {
