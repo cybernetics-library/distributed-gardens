@@ -27,6 +27,9 @@ export default {
   props: {
     "gardendata": {
       default: {},
+    },
+    "currentbadge": {
+      default: {},
     }
   },
   data: () => {
@@ -34,12 +37,16 @@ export default {
       current_time: null,
     }
   },
+  updated() {
+    console.log(this.currentbadge)
+  },
   components: {
     FilePlants,
     Grass
   },
   mounted() {
     console.log("gardenn  I was mounted");
+     console.log(this.currentbadge)
     this.initGarden();
     window.self = this;
   },
