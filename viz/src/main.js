@@ -24,7 +24,7 @@ var vueapp = new Vue({
     stats: {},
     // graphdata: mizdata,
     graphdata: null,
-    gardendata: fakeData.gardenstats(),
+    gardendata: {}, //fakeData.gardenstats(),
     badgedata: badgedata,
     currentbadge: '',
   },
@@ -63,6 +63,7 @@ var vueapp = new Vue({
           var badgeurl = data;
           var badgeId = Helpers.getBadgeIdFromUrl(badgeurl);
           self.currentbadge = badgeId
+          self.gardendata = self.irrigation.getGardenData(self.currentbadge);
           console.log(":::parent:: we were asked for badge title: " + self.badgedata[badgeId].title);
           return self.badgedata[badgeId].title;
         } 
