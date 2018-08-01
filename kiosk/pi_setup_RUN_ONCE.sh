@@ -75,7 +75,9 @@ sudo bash -c "echo bcm2835-v4l2 >> /etc/modules"
 
 echo "=== disabling screen sleep"
 echo setterm -blank 0 -powerdown 0 >> ~/.bashrc 
-
+sudo bash -c "echo @xset s noblank >> /etc/xdg/lxsession/LXDE-pi/autostart"
+sudo bash -c "@xset s off >> /etc/xdg/lxsession/LXDE-pi/autostart"
+sudo bash -c "@xset -dpms >> /etc/xdg/lxsession/LXDE-pi/autostart"
 
 echo "$kioskid" >> kiosk_ids.txt
 echo "=== Success! $kioskid added to kiosk_ids."
