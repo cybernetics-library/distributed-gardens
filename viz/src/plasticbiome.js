@@ -37,7 +37,7 @@ class Biome {
     await self.collection.insertMany([msg])
   }
 
-});
+}
 
 
 module.exports = Biome;
