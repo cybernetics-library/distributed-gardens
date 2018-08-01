@@ -1,10 +1,16 @@
 <template>
+  <div>
+    <span class="hide">{{currentbadge}}</span>
   <canvas id="FilePlants">
 
   </canvas>
+</div>
 </template>
 
 <style>
+.hide {
+  opacity: 0;
+}
 #FilePlants {
   height: 100%;
   width: 100%;
@@ -73,22 +79,23 @@ const plantfiles = [
       ];
 
 export default {
-  props: {
-    "gardendata": {
-      default: {},
-    },
-    "badgedata": {
-      default: {},
-    }
-  },
+  props: ['gardendata', 'currentbadge'],
   data: () => {
     return {
+      badgeId: null,
     }
   },
   mounted() {
-    console.log("palants I was mounted");
-    //this.init();
+    //console.log("palants I was mounted");
+    
     window.self = this;
+  },
+  updated() {
+    if(this.currentbadge != this.badgeId){
+      this.badgeId = this.currentbadge
+      console.log('updataed!! gonna render plants',this.gardendata)
+      this.init();
+    }
   },
   methods: {
     init() {
@@ -130,8 +137,8 @@ export default {
       ctx.ellipse(xC, yC, xRad, yRad, 0, 0, Math.PI*2);
       ctx.stroke();
 
-      for (var i = Things.length - 1; i >= 0; i--) {
-        const fileName = Things[i];
+      for (var i = this.gardendata.files.length - 1; i >= 0; i--) {
+        const fileName = this.gardendata.files[i];
 
         //draw plant for file
         //get plant by filename

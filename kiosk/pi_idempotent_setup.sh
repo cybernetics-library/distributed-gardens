@@ -34,3 +34,12 @@ sudo grep -qF "$LINE" "$FILE" || echo "$LINE" | sudo tee -a "$FILE"
 echo "=== setting git names"
 git config --global user.email "info@cybernetics.social"
 git config --global user.name "plantkiosk"
+
+echo "=== hiding mouse pointer when not moving "
+LINE='@unclutter -idle 0.1'
+FILE=~/.config/lxsession/LXDE-pi/autostart
+grep -qF -- "$LINE" "$FILE" || echo "$LINE" >> "$FILE"
+
+
+
+
