@@ -7,6 +7,7 @@
     "examples": "cd src/examples && parcel *.html",
     "meadow": "cd src/meadow && parcel index.html",
     "garden": "cd src/garden && parcel index.html",
+    "build": "rm -rf build && parcel src/index.html src/Scanner/index.html -d build/ --public-url ./",
     "production": "cd src/dist && ../../node_modules/.bin/http-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
