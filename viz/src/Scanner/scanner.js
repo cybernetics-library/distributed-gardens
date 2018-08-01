@@ -10,7 +10,7 @@ var globalQR;
 var theme;
 var isLink = false;
 var timer;
-const audio = require('./assets/garden.mp3');
+var audio = require('./assets/garden.mp3');
 var garden_string = ""
 
 var paperCupChild = new PaperCup.PaperCupChild();
@@ -97,8 +97,6 @@ function handleScans(content) {
 
   var res = parseQR(content);
   if (!(_.isEqual(window.prevlink, res))) {
-
-
     if(Object.values(window.prevlink).length != 0) {
       var prevQRURL = Object.values(window.prevlink.names)[0]
     } else { var prevQRURL = "" }
@@ -119,7 +117,7 @@ function handleScans(content) {
       console.log("garden name: " + garden_name);
       $('#garden_title').html(garden_name);
       $('#garden_title').show();
-      garden_string = garden_name
+      garden_string = garden
     });
 
     firstScan();
@@ -128,14 +126,14 @@ function handleScans(content) {
       // if there was a valid previous QR
       var msg = { "link_from": prevQRURL, "link_to": thisQRURL }
       console.log("scanner:: I'm trying to submit a link!");
-      $('#garden_title').html(garden_string);
+      // $('#garden_title').html(garden_string);
 
       console.log(msg);
       audio.play();
       paperCupChild.sendRequest("submitLink", msg, function() {  });
     }
   } else {
-    $('#garden_title').html("Waiting...");
+    $('#garden_title').html("");
     isLink = false;
   };
 };

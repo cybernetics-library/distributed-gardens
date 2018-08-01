@@ -1,6 +1,6 @@
 <template>
   <div id="meadow">
-    <h1>{{currentbadge}}</h1>
+    <!-- <h1>{{currentbadge}}</h1> -->
     <div id="garden-overlay" class="dim"></div>
 
     <garden 
