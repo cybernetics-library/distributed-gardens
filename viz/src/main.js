@@ -22,7 +22,7 @@ var vueapp = new Vue({
     irrigation: null,
     history: [],
     stats: {},
-    // graphdata: mizdata,
+    graphdata: {},
     gardendata: fakeData.gardenstats(),
     badgedata: badgedata,
     currentbadge: '',

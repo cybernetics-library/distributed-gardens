@@ -1,6 +1,6 @@
 var Irrigation  = require('../Irrigation');
-var _ = require('lodash');
-window._ = _;
+var $ = require('jquery');
+window.$ = $;
 
 window.onload = () => {
   var irrigation = new Irrigation({ nonce: 11113 });
@@ -194,9 +194,13 @@ window.onload = () => {
 
 */
 
-  .then(() => { console.log(irrigation.getHistory()); })
+  .then(() => { console.log(irrigation.getHistory()); 
+    $("#output").html(JSON.stringify(irrigation.getHistory(), null, 2))
+  })
   .then(() => { console.log(irrigation.getAdjacencyList()); })
-  .then(() => { console.log(irrigation.getStats()); })
+  .then(() => { console.log(irrigation.getStats()); 
+    $("#output2").html(JSON.stringify(irrigation.getStats(), null, 2))
+  })
   .then(() => { console.log(irrigation.getGraphData()); })
   .then(() => { console.log(irrigation.biome._psa.peerCountGuess()); })
 }
