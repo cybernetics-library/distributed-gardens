@@ -94,44 +94,42 @@ export default {
     Garden
   },
   data: () => {
-    console.log('new data')
     return {
       current_time: null,
       Graph: null,
       badgeId: null,
       state: null,
       nextNode: null,
+      previousNode: null,
+      divNodes: [],
+      renderTimer: null,
+      focusTimer: null,
+      elem: null
     }
   },
   updated() {
     if(this.currentbadge != this.badgeId){
-      console.log('new badge')
       this.badgeId = this.currentbadge
           this.makeNode(this.Graph, this.currentbadge)
     }
   },
   mounted() {
-    // console.log(this.currentbadge)
     this.initGraph();
     window.self = this;
   },
   methods: {
     initGraph() {
-      var Graph = null
-      const elem = document.getElementById('graph');
+      this.elem = document.getElementById('graph');
       const garden_overlay = document.getElementById('garden-overlay');
       var selectedNode = 0
-      // var nextNode = 3
-      var previousNode = null
-      var divNodes = []
       var gotBadge = false
 
-      var renderTimer
-      var focusTimer
+      // var renderTimer
+      // var focusTimer
       this.state = "ready"
 
       var self = this;
-      self.Graph = ForceGraph()(elem)
+      self.Graph = ForceGraph()(this.elem)
         .graphData(this.graphdata)
         .nodeLabel('id')
         .nodeAutoColorBy('group')
@@ -139,16 +137,26 @@ export default {
         .linkDirectionalParticleWidth(1.4)
         .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
         .onEngineTick(() => {
-          this.nextNode = self.Graph.graphData().nodes[0]
-          manageNodes(self.Graph.graphData().nodes, this.nextNode, garden)
+          // this.nextNode = this.Graph.graphData().nodes[0]
+          this.manageNodes(this.Graph.graphData().nodes, this.nextNode)
         })
-        .enableZoomPanInteraction(false)
+        // .enableZoomPanInteraction(false)
         .onNodeClick(node => {
-          zoomTo(self.Graph, node)
+          this.zoomTo(this.Graph, node)
         });
-        console.log(self.Graph.graphData  ())
         
         this.nextNode = self.Graph.graphData().nodes[0]
+        // this.previousNode = this.nextNode
+
+      self.Graph.graphData().nodes.forEach((node,i) => {
+        var dot = document.createElement('div');
+        dot.id = i
+        dot.className = 'dot'
+        // elem.appendChild(dot);
+        this.elem.insertAdjacentElement('afterbegin', dot)
+
+        this.divNodes.push({el: dot})
+      })
 
     },
     getColor(n) {
@@ -159,46 +167,22 @@ export default {
       Graph.zoom(20, 2000);
     },
     makeNode(Graph, currentbadge) {
-      // console.log(Graph, "I'm a graph")
-      // console.log(currentbadge , "I'm a badgeNum")
-      var { nodes, links } = Graph.graphData();
-      nodes.push({id: "new", group: 1 })
-      Graph.graphData({ nodes, links });
-      this.nextNode = Graph.graphData().nodes[Graph.graphData().nodes.length-1]
+      var { nodes, links } = this.Graph.graphData();
+      nodes.push({id: "new", group: 100 })
+      this.Graph.graphData({ nodes, links });
+      this.state = "ready"
 
-      this.zoomTo(Graph, this.nextNode)
-    }
-  }
-}
+      var dot = document.createElement('div');
+      dot.id = this.Graph.graphData().nodes.length-1
+      dot.className = 'dot'
+      this.elem.appendChild(dot);
+      this.elem.insertAdjacentElement('afterbegin', dot)
 
-// TODO : SEND DATA BACK TO INDEX SO THAT GARDEN CAN DO TRANSFORMS
-  // function makeNode(Graph, currentbadge) {
-  //   console.log(Graph)
-  //   console.log(currentbadge)
-    // var { nodes, links } = self.Graph.graphData();
-    // nodes.push({id: "new", group: 1 })
-    // Graph.graphData({ nodes, links });
-    // state = "ready"
+      this.divNodes.push({el: dot})
 
-    // var dot = document.createElement('div');
-    // dot.id = Graph.graphData().nodes.length-1
-    // dot.className = 'dot'
-    // // elem.appendChild(dot);
-    // elem.insertAdjacentElement('afterbegin', dot)
-
-    // divNodes.push({el: dot})
-
-    // initCycle()
-  // }
-
-
-  // function zoomTo(Graph, node){
-  //   console.log('hello')
-  //   Graph.centerAt(node.x, node.y, 1000);
-  //   Graph.zoom(20, 2000);
-  // }
-
- function manageNodes(nodes, nextNode){
+      this.initCycle()
+    },
+    manageNodes(nodes, nextNode){
       var garden = document.getElementById("garden")
       var graph = document.getElementById( 'graph' )
 
@@ -209,28 +193,59 @@ export default {
       var correctedX = ((nextNode.x * canvasZoom.k) + (canvasZoom.x)) - 10*canvasZoom.k/2
       var correctedY = ((nextNode.y * canvasZoom.k) + (canvasZoom.y)) - 10*canvasZoom.k/2
 
-      // nodes.forEach((node, i) => {
-      //   var el = document.getElementById(i)
-      //   var correctedX = ((node.x * canvasZoom.k) + (canvasZoom.x))
-      //   var correctedY = ((node.y * canvasZoom.k) + (canvasZoom.y))
-      //   // console.log(el)
-      //   el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
-      // })
+      nodes.forEach((node, i) => {
+        var el = document.getElementById(i)
+        var correctedX = ((node.x * canvasZoom.k) + (canvasZoom.x)) - 10*canvasZoom.k/2
+        var correctedY = ((node.y * canvasZoom.k) + (canvasZoom.y)) - 10*canvasZoom.k/2
 
-      // garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); width:" + 10*canvasZoom.k + "px; height:" + 10*canvasZoom.k + "px; "
+        // console.log(el)
+        el.style = "transform: translate(" + correctedX + "px ," + correctedY + "px);"
+      })
+
+      garden.style = "transform: translate(" + correctedX + "px ," + correctedY + "px); width:" + 10*canvasZoom.k + "px; height:" + 10*canvasZoom.k + "px; "
+    },
+    focusGarden() {
+      console.log(this.nextNode)
+      this.zoomTo(this.Graph, this.nextNode)
+      clearTimeout(this.focusTimer);
+      this.state = "focused"
+      console.log(this.state)
+      // garden_overlay.className = 'none'
+      this.initCycle()
+    },
+    focusGraph() {
+      // Graph.centerAt(0, 0, 1000);
+      this.Graph.zoom(4, 2000);
+      clearTimeout(this.focusTimer);
+      this.state = "waiting"
+      // garden_overlay.className = 'dim'
+      this.initCycle()
+    },
+    renderGarden() {
+      var { nodes, links } = this.Graph.graphData();
+      if(this.previousNode){
+        links.push({source: this.previousNode, target: this.nextNode, val: 1000 })
+        this.Graph.graphData({ nodes, links });
+      }
+      clearTimeout(this.renderTimer);
+      this.focusTimer = setTimeout(this.focusGarden, 3000);
+    },
+    initCycle() {
+      if (this.state === "waiting"){
+        // renderTimer = setTimeout(focusGraph, 10000);
+      } else if(this.state === 'ready'){
+        this.previousNode = this.nextNode
+        this.nextNode = this.Graph.graphData().nodes[this.Graph.graphData().nodes.length-1]
+        this.Graph.centerAt(this.nextNode.x, this.nextNode.y, 1000);
+        this.renderTimer = setTimeout(this.renderGarden, 3000);
+      } else if (this.state === "focused"){
+        this.renderTimer = setTimeout(this.focusGraph, 10000);
+      }
     }
+  }
+}
 
-/*function inputChange(e) {
-		e.preventDefault()
-		var val = document.getElementById("name").value
-		var node = Graph.graphData().nodes[val]
-		console.log(document.getElementById("name").value);
-		console.log(Graph.graphData().nodes[val])
-		Graph.centerAt(node.x, node.y, 1000);
-		Graph.zoom(60, 2000);
-}*/
-
-
+// TODO : SEND DATA BACK TO INDEX SO THAT GARDEN CAN DO TRANSFORMS
 
 </script>
 
