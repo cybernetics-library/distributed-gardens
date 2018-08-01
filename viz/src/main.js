@@ -71,6 +71,7 @@ var vueapp = new Vue({
           var badgeId = Helpers.getBadgeIdFromUrl(badgeurl);
           self.currentbadge = badgeId
           self.gardendata = self.irrigation.getGardenData(self.currentbadge);
+          console.log(":::parent:: we got a scan from badge id: " + badgeId);
           console.log(":::parent:: we were asked for badge title: " + self.badgedata[badgeId].title);
           return self.badgedata[badgeId].title;
         } 
@@ -80,6 +81,7 @@ var vueapp = new Vue({
         } 
 
         if(reqname == "submitLink") {
+          console.log(":::parent:: we got a scan from badge id: " + badgeId);
           console.log(":::parent:: we got a LINK ")
           var msg = {
             'from': {'name': 'kiosk'}, // TODO CHANGE NAME PROGRAMMATICALLY
