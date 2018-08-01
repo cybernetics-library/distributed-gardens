@@ -130,6 +130,8 @@ body, html {
 
   #garden_title {
     font-size: 2em;
+    /* font-style: italic; */
+    /* font-weight: 'light'; */
     display: block;
     margin: auto;
     position: fixed;
@@ -137,7 +139,8 @@ body, html {
     padding-top: .9em;
     text-align: center;
     color: #214f32;
-    font-stretch: expanded;
+    /* font-stretch: expanded; */
+    font-style: italic;
     /* transform: scale(1,2); */
     -webkit-text-stroke: .2px black;
     color: #3D9970;

@@ -65411,6 +65411,17 @@ Helpers.keyOfObj = function (key, obj) {
   }
 };
 
+Helpers.getUrlValue = function (VarSearch) {
+  var SearchString = window.location.search.substring(1);
+  var VariableArray = SearchString.split('&');
+  for (var i = 0; i < VariableArray.length; i++) {
+    var KeyValuePair = VariableArray[i].split('=');
+    if (KeyValuePair[0] === VarSearch) {
+      return KeyValuePair[1];
+    }
+  }
+};
+
 exports.default = Helpers;
 },{"babel-runtime/helpers/typeof":"../node_modules/babel-runtime/helpers/typeof.js"}],"Papercup.js":[function(require,module,exports) {
 "use strict";
@@ -65674,9 +65685,9 @@ function handleScans(content) {
       console.log("scanner:: I'm trying to submit a link!");
       // $('#garden_title').html(garden_string);
 
+      paperCupChild.sendRequest("submitLink", msg, function () {});
       console.log(msg);
       audio.play();
-      paperCupChild.sendRequest("submitLink", msg, function () {});
     }
   } else {
     (0, _jquery2.default)('#garden_title').html("");
@@ -65778,7 +65789,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = '' || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + '53628' + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + '52741' + '/');
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
 
