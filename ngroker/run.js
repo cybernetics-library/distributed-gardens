@@ -9,7 +9,7 @@ var slack = new SlackWebhook('https://hooks.slack.com/services/TB3SRL4H4/BC1SRHH
 
 const ngrok = require('ngrok');
 (async function() {
-  const url = await ngrok.connect(443);
+  const url = await ngrok.connect(22);
   slack.send(url)
 })();
 
