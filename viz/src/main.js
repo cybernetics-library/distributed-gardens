@@ -34,6 +34,7 @@ var vueapp = new Vue({
       self.startIrrigation()
         .then(function () {
           console.log("started!");
+          console.log("WE ARE USING NONCE " + self.irrigation.biome._config.nonce)
           self.getData();
           console.log(self.irrigation);
           console.log(self.graphdata);

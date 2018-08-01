@@ -1,6 +1,6 @@
 <template>
   <div id="meadow">
-    <h1 class="hide">{{currentbadge}}</h1>
+    <!-- <h1>{{currentbadge}}</h1> -->
     <div id="garden-overlay" class="dim"></div>
 
     <garden 
@@ -34,7 +34,7 @@
     }
     #garden{
         position: fixed;
-        width: 640px; height: 480px;
+        /* width: 640px; height: 480px; */
         /* width: 10px; height: 10px; */
         /* margin-left: -5px; margin-top: -5px; */
         background-color:'none';
@@ -45,7 +45,7 @@
 
      #garden-overlay{
         position: absolute;
-        width: 300px; height: 300px;
+        /* width: 300px; height: 300px; */
         border-radius: 1000px;
         position: absolute;
         top: 50%; right: 50%;
@@ -107,14 +107,13 @@ export default {
     }
   },
   updated() {
-    //console.log(this.gardendata)
     if(this.currentbadge != this.badgeId){
       this.badgeId = this.currentbadge
-          this.makeNode(this.Graph, this.currentbadge)
+      this.makeNode(this.Graph, this.currentbadge)
     }
   },
   mounted() {
-    // console.log(this.graphdata)
+    // console.log(this)
     this.initGraph();
     window.self = this;
   },
