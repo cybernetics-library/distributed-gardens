@@ -10,5 +10,4 @@ DISPLAY=:0 chromium-browser --noerrdialogs --incognito --kiosk --use-fake-ui-for
 
 export DISPLAY=:0
 xset s noblank
-xset s activate
 xset s reset
