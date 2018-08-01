@@ -74,7 +74,7 @@ Seeding - badge 12345 adding data (seeding to) '33333' via a kiosk
   'ver': 1,
   'ts': 1531764520.1234,
   'from': { name: 'web_microsite' },
-  'type': 'addinfo', 
+  'type': 'seed', 
   'msg': { 'seed_by': '12345', 'seed_to': '33333', media: [{ .. IA metadata format here}] }
 }
 ```
@@ -85,7 +85,7 @@ Set info - badge 56789 adding info to their own garden
   'ver': 1,
   'ts': 1531764520.1234,
   'from': { name: 'kiosk_2_hallway' },
-  'type': 'seed', 
+  'type': 'setinfo', 
   'msg': { 'badge_id': 56789', 'name': 'Alice Abbasi', 'email': 'aliceabbasi@example.com' } 
 }
 ```
