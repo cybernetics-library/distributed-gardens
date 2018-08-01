@@ -93,7 +93,7 @@ var _ = require('lodash');
 window.$ = $;
 window._ = _;
 
-opts = {}
+var opts = {}
 if(getUrlValue("nonce") != undefined) {
   opts.nonce = getUrlValue("nonce")
 }
