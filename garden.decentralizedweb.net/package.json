@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "biome": "github:parkan/biome",
+    "jquery": "^3.3.1",
+    "lodash": "^4.17.10"
+  },
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-runtime": "^6.26.0"
+  }
+}
