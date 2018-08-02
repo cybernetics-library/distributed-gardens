@@ -14,7 +14,6 @@ window.getUrlValue = getUrlValue;
 
 
 
-
 let text = `
 ERIC_ED105298
 AnApproachToCybernetics
@@ -136,6 +135,68 @@ neighborhooddemo0000yate
 DTIC_ADA391228
 ERIC_ED041071
 studyofcertainof00bostCrowdshot1
+TheDiaryOfANetworkAdministrator06042005
+Particle_Theory-17177
+DTIC_ADA121326
+arxiv-1405.3223
+starfishspiderun00orib
+perma_cc_Q24K-G33A
+ERIC_ED020995
+ERIC_ED048659
+citiesareabnorma00peterich
+publicmoneymuse00bene
+ERIC_ED272067
+OnExchangingOntologies
+DTIC_ADA472967
+ZagrebCyberfeminism1999
+VariantIssue14
+Josephine_201702
+BeyondBytes
+TechnologyIsNotNeutralExhibition-TeslaArchiveDocumentationB
+TheLimitsToGrowth
+mediaenvironment0000lama
+isbn_9780312252373
+LeveragePoints
+DonellaMeadowsPt.2
+DonellaMeadowsF5
+DesigningEarthAnewTogether
+electronicoracle00mead
+psychocybernetic00bobb_0
+AnApproachToCybernetics
+cybernetics00wien
+psychocybernetic00maxw_1
+redBox_201708
+TheNewPsychoCyberneticsByMaxwellMaltz
+NewAgeTantraYogaTheCyberneticsOfSexAndLoveHowardJohnZitko
+NoisesculptorLandscapeII
+humanuseofhumanb00wien
+CyberneticsOrCommunicationAndControlInTheAnimalAndTheMachineNorbertWiener
+humanuseofhuma1954wien
+scienceofartc00muel
+arxiv-quant-ph0403146
+arxiv-1011.3049
+Distributed_XYZ
+DistributedControlSystems
+DTIC_ADA095385
+ParallelDistributedProcessing
+insidedistribute00eddo
+arxiv-1412.6388
+arxiv-1302.4544
+arxiv-1606.02205
+Distributed_Large-Scale_Dimensional_Metrology
+springer_10.1007-1-4020-2460-6
+arxiv-1604.01292
+in.ernet.dli.2015.193652
+arxiv-quant-ph0407037
+Ldhaney-MCTV_ep2W3_h264148
+pyohio_2018-Distributed_Software_with_Python
+DTIC_ADA131245
+2000-L-00410
+nasa_techdoc_19920007367
+arxiv-1210.7057
+tucows_60084_PGP
+896OpenPGPDiscussionAndSkillshare
+perma_cc_95FY-MJJX
 Brewsterinaworkinggroup2
 TBLandCorydebate
 peertopeerbuildi00moor
@@ -153,6 +214,7 @@ IADecentralization1
 p2p2p2p-1
 p2p2p2p-2
 `;
+
 
 var Irrigation  = require('../Irrigation');
 var $ = require('jquery');
@@ -181,6 +243,7 @@ window.onload = () => {
       (async function submitstuff() { 
 
         var pbadges = irrigation.getParticipantBadges();
+        console.log(pbadges)
 
         for (var k in badges) {
 
