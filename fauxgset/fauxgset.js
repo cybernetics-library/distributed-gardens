@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var Datastore = require('nedb');
 var cors = require('cors')
 var express = require("express");
+var fetch = require('node-fetch');
 
 var db = new Datastore({ filename: './data/db', autoload: true });
 
@@ -38,6 +39,20 @@ app.post("/addEvent", function(req, res) {
     //console.log("got an event req");
     //console.log(msg);
 ////    var jsonmsg = JSON.stringify(msg)
+    if(msg.type !== undefined && msg.type == 'seed'){
+        msg.ipfs = []
+        for(id of media){
+            try {
+                var url = 'https://gateway.dweb.me/arc/archive.org/leaf/' + id
+                var res = fetch(url) 
+                var json = await response.json()
+                var ipfsPaths = JSON.parse(json[id]).urls.filter((s) => s.startsWith('ipfs:')).map((s) => s.replace(/^ipfs:/,''))
+                msg.ipfs = msg.ipfs.concat(ipfsPaths)
+            } catch(err) {
+                console.log(err)
+            }
+        }
+    }
     db.insert(msg, function (err, newDocs) {
       res.status(200).send("success")
     })
