@@ -30,7 +30,8 @@ app.post("/addEvent", function(req, res) {
   if(req.body != undefined) {
     var msg = req.body;
     if(("nonce" in msg) == false) { msg.nonce = DEFAULTNONCE.toString(); }
-    db.insert(msg, function (err, newDocs) {
+    var jsonmsg = JSON.stringify(msg)
+    db.insert(jsonmsg, function (err, newDocs) {
       res.status(200).send("success")
     })
   }
