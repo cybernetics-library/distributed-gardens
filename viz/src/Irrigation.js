@@ -137,8 +137,8 @@ class Irrigation {
       .filter({type: "link" })
       .compact()
       .map(function(d) {
-        if(d.msg.link_from === myid) { return d.msg.link_to; }
-        if(d.msg.link_to === myid) { return d.msg.link_from; }
+        if(d.msg.link_from == myid) { return d.msg.link_to; }
+        if(d.msg.link_to == myid) { return d.msg.link_from; }
       })
       .uniq()
       .compact()
@@ -198,6 +198,7 @@ class Irrigation {
 		var self = this;
 		return _.chain(self.getLinksOfLinks(myid))
 				.map((l) => { return self.getFiles(l) })
+			  .concat(self.getFiles(myid))
 				.flatten()
 				.compact().uniq()
 				.value()
