@@ -9,7 +9,7 @@
 - `rendezvous --port=9090 --host=127.0.0.1`
 - ipfs stuff
   - `ipfs init`
-  - // change ~/.ipfs/config to read
-  -//    "DisableRelay": false,
-  -//    "EnableRelayHop": true
+  - change `~/.ipfs/config` to read:
+    - `"DisableRelay": false`
+    - `"EnableRelayHop": true`
   - `ipfs daemon`
