@@ -183,7 +183,7 @@ export default {
     },
     zoomTo(Graph, node){
       Graph.centerAt(node.x, node.y-2, 1000);
-      Graph.zoom(100, 2000);
+      Graph.zoom(120, 2000);
     },
     makeNode(Graph, currentbadge) {
       var { nodes, links } = this.Graph.graphData();

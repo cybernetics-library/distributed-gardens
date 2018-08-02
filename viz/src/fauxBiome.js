@@ -40,7 +40,7 @@ class fauxBiome {
   async start() {
     this.interv = setInterval(() => {
       this.getAndStoreEvents();
-    }, 60*1000); // checks every 10 secs
+    }, 5*1000); // checks every 5 secs
     await this.getAndStoreEvents();
   }
 
