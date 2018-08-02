@@ -22,12 +22,17 @@ class fauxBiome {
     return new Promise(function(resolve, reject) {
       request.post({ 
           url: thisuri,
-          form: JSON.stringify(msg)
+          json: msg
         },
         function(err, httpResponse, body) {
           resolve();
         });
     });
+
+    setTimeout(() => {
+      self.getAndStoreEvents();
+    }, 500); // checks every 10 secs
+ 
   }
 
   async start() {
