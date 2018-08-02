@@ -7,3 +7,4 @@ dist/
 .cache
 badge/qrcodes
 .DS_Store
+fauxgset/data
