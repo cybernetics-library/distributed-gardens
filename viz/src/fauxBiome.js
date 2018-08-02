@@ -12,6 +12,8 @@ class fauxBiome {
     this.getEventsEndpoint = "/getEvents"
     this.addEventEndpoint = "/addEvent"
     this._config = Object.assign({}, defaults, options)
+    this._psa = {};
+    this._psa.peerCountGuess = () => { return "n/a"; }
   }
 
 
