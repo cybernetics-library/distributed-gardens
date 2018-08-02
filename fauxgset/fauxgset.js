@@ -31,7 +31,7 @@ app.get("/getEvents", function(req, res) {
   });
 });
 
-app.post("/addEvent", function(req, res) {
+app.post("/addEvent", async function(req, res) {
   if(req.body != undefined) {
     var msg = req.body;
     if(("nonce" in msg) == false) { msg.nonce = DEFAULTNONCE; }
