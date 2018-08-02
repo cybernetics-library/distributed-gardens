@@ -13,3 +13,9 @@
     - `"DisableRelay": false`
     - `"EnableRelayHop": true`
   - `ipfs daemon`
+- certs
+  - get certs
+  - untar the certs in `/usr/local/etc/nginx`
+
+
+if you run `startup
