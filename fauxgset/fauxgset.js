@@ -20,7 +20,7 @@ app.get("/getEvents", function(req, res) {
   var nonce = DEFAULTNONCE;
   if("nonce" in req.query) { nonce = req.query.nonce; }
  
-  db.find({ nonce: nonce }, function (err, docs) {
+  db.find({ nonce: nonce.toString() }, function (err, docs) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(docs))
   });
@@ -29,7 +29,7 @@ app.get("/getEvents", function(req, res) {
 app.post("/addEvent", function(req, res) {
   if(req.body != undefined) {
     var msg = req.body;
-    if(("nonce" in msg) == false) { msg.nonce = DEFAULTNONCE; }
+    if(("nonce" in msg) == false) { msg.nonce = DEFAULTNONCE.toString(); }
     db.insert(msg, function (err, newDocs) {
       res.status(200).send("success")
     })
