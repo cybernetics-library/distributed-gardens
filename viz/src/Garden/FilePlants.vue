@@ -145,10 +145,10 @@ export default {
         const chosenOne = plantfiles[Math.floor(plantRandom()*plantfiles.length)];
 
         const fileCoords = this.generateCoordsInGarden(this.badgedata, fileName, xC, yC, xRad, yRad);
-        this.placeImage(ctx, fileCoords, chosenOne, (plantRandom() * 8))
+        this.placeImage(fileName, ctx, fileCoords, chosenOne, (plantRandom() * 8))
       }
     }, 
-    placeImage(ctx, coords, imagePath,  of10Scale) {
+    placeImage(labelName, ctx, coords, imagePath,  of10Scale) {
       const image = new Image();
       image.src = imagePath;
       image.onload = () => {
@@ -163,10 +163,10 @@ export default {
 
         ctx.drawImage(image, plantCenterBottomCoords.x, plantCenterBottomCoords.y, width, height);
 
-        this.generateLabel(ctx, width, height, plantCenterBottomCoords, imagePath);
+        this.generateLabel(labelName, ctx, width, height, plantCenterBottomCoords, imagePath);
       }
     },
-    generateLabel(ctx, imgWidth, imgHeight, coords, imagePath) {
+    generateLabel(labelName, ctx, imgWidth, imgHeight, coords, imagePath) {
       ctx.font = '20px sans-serif';
       ctx.fillStyle = 'rgba(0,0,0,0.5)';
       const
@@ -192,7 +192,7 @@ export default {
       ctx.setLineDash([]);
       ctx.stroke();
 
-      ctx.fillText(imagePath, pathCoords2.x - textMeasures.width - 10, pathCoords2.y);
+      ctx.fillText(labelName, pathCoords2.x - textMeasures.width - 10, pathCoords2.y);
     },
     drawPoint(ctx, coords, color) {
       ctx.beginPath();

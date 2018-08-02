@@ -33,7 +33,7 @@ class fauxBiome {
 
     setTimeout(() => {
       self.getAndStoreEvents();
-    }, 500); // checks every 10 secs
+    }, 1000);
  
   }
 

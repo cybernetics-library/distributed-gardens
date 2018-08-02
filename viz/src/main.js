@@ -5,8 +5,10 @@ import Irrigation from './Irrigation'
 import PaperCup from './PaperCup'
 import fakeData from './fakeData'
 import Helpers from './Helpers'
+import Events from './Events'
 
 import Meadow from './Meadow/Meadow.vue'
+import Backgrounds from './Backgrounds/Backgrounds.vue'
 // import Garden from './Garden/Garden.vue'
 
 var mizdata = require('./Meadow/simple.json')
@@ -17,6 +19,7 @@ var vueapp = new Vue({
   components: {
     Meadow,
     // Garden
+    Backgrounds
   },
   data: {
     irrigation: null,
@@ -116,5 +119,5 @@ window.PaperCup = PaperCup;
 window._ = _;
 window.Helpers = Helpers;
 
-
+ 
 

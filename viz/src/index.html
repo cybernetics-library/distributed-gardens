@@ -39,6 +39,35 @@
           left: 0px;
           z-index: 50;
         }
+
+.backgrounds {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 0.6;
+}
+
+.background {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+/*	transition: opacity 1s; */
+}
+#background-over { z-index: 20; }
+#background-under { z-index: 10; }
+
+
+iframe#backg {
+  border: none;
+  width: 100vw;
+ height: 100vh;
+}
+
     </style>
     <title>~222EARTH~</title>
 </head>
@@ -57,8 +86,10 @@
       </li>
       {{stats}}
     </div> -->
+    <backgrounds></backgrounds>
   </div>
   <script src="main.js"></script>
   <iframe id="scanner" name="scanner" src="scanner/index.html"></iframe>
+  <!--<iframe id="backg" src="http://garden.decentralizedweb.net/splash"></iframe>-->
 </body>
 </html>
