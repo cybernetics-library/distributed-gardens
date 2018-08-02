@@ -19,8 +19,9 @@ var DEFAULTNONCE = 33333;
 app.get("/getEvents", function(req, res) {
   var nonce = DEFAULTNONCE;
   if("nonce" in req.query) { nonce = req.query.nonce; }
+  var query = { "nonce": nonce.toString() };
  
-  db.find({ nonce: nonce.toString() }, function (err, docs) {
+  db.find(query, function (err, docs) {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(docs))
   });
