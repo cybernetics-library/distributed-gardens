@@ -11,6 +11,7 @@ class plasticBiome {
     this.dbname = "distributed-gardens"
     this.dbcollection = "events"
     this.connected = false;
+    this._config = { nonce: "PLASTICBIOME" };
   }
 
   async start() {
@@ -18,15 +19,16 @@ class plasticBiome {
     // Use connect method to connect to the server
     var  mcconnect = function() { 
       return new Promise(function(resolve, reject) {
-        MongoClient.connect(self.dburl, function(err, client) {
-//          assert.equal(null, err);
+/*        MongoClient.connect(self.dburl, function(err, client) {
+          assert.equal(null, err);
           console.log("Connected successfully to server");
 
           self.db = client.db(self.dbname);
           self.collection = self.db.collection(self.dbcollection);
           self.connected = true;
           resolve();
-        });
+        }); */
+          resolve();
       });
     }
     await mcconnect();
@@ -36,12 +38,19 @@ class plasticBiome {
     var self = this;
     var ge = function() {
       return new Promise(function(resolve, reject) {
-          if(self.connected) {
-            self.collection.find({}).toArray(function(err, docs) {
-              resolve(docs)
-            });
-          }  // if this isn't connected.. uh uh. we need to be synchrnous to be compliant with biome
+
+                  MongoClient.connect(self.dburl, function(err, client) {
+//                    assert.equal(null, err);
+                    console.log("Connected successfully to server");
+
+                    self.db = client.db(self.dbname);
+                    self.collection = self.db.collection(self.dbcollection);
+                    self.collection.find({}).toArray(function(err, docs) {
+                      resolve(docs);
+                    })
+                  }); 
       });
+   
     }
     var docs = await ge();
     return docs;
