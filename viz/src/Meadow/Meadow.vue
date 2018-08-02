@@ -187,25 +187,25 @@ export default {
     },
     makeNode(Graph, currentbadge) {
       var { nodes, links } = this.Graph.graphData();
-      var isNew = false
+      var isNew = true
 
-      // nodes.forEeach((node) => {
-      //   if(node.id === this.badgeId){
-      //     console.log('I found ')
-      //     isNew = true
-      //     this.state = "readyNew"
-      //   }
-      // })
+      nodes.forEach((v) => {
+         if(v.id === this.badgeId){
+          console.log('I found ')
+          isNew = false
+          this.state = "readyNew"
+        }
+      });
 
-      // if(!isNew){
-      //   nodes.push({id: this.badgeId, group: 100 })
-      //   this.Graph.graphData({ nodes, links });
-      //   this.state = "ready"
-      // }
+      if(isNew){
+        nodes.push({id: this.badgeId, group: 100 })
+        this.Graph.graphData({ nodes, links });
+        this.state = "ready"
+      }
 
-      nodes.push({id: this.badgeId, group: 100 })
-      this.Graph.graphData({ nodes, links });
-      this.state = "ready"
+      // nodes.push({id: this.badgeId, group: 100 })
+      // this.Graph.graphData({ nodes, links });
+      // this.state = "ready"
 
       // var dot = document.createElement('div');
       // dot.id = this.Graph.graphData().nodes.length-1
@@ -263,17 +263,18 @@ export default {
       this.focusTimer = setTimeout(this.focusGarden, 3000);
     },
     initCycle() {
+      var { nodes, links } = this.Graph.graphData();
       if (this.state === "waiting"){
         console.log('waiting');
-      // } else if(this.state === 'readyNew'){
-      //   this.previousNode = this.nextNode
-      //   nodes.forEeach((node) => {
-      //     if(node.id === this.badgeId){
-      //       this.nextNode = node
-      //     }
-      //   })
-      //   this.Graph.centerAt(this.nextNode.x, this.nextNode.y, 1000);
-      //   this.renderTimer = setTimeout(this.renderGarden, 3000);
+      } else if(this.state === 'readyNew'){
+        this.previousNode = this.nextNode
+        nodes.forEach((v) => {
+          if(v.id === this.badgeId){
+            this.nextNode = v
+          }
+        });
+        this.Graph.centerAt(this.nextNode.x, this.nextNode.y, 1000);
+        this.renderTimer = setTimeout(this.renderGarden, 3000);
       } else if(this.state === 'ready'){
         this.previousNode = this.nextNode
         this.nextNode = this.Graph.graphData().nodes[this.Graph.graphData().nodes.length-1]
