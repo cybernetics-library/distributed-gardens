@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Karla" rel="stylesheet">
+<script src="jquery-3.3.1.min.js"></script>
+<script src="gradientGenerator.js"></script>
+<script src="Events.js"></script>
+<script src="lodash.min.js"></script>
+<script>
+var getUrlValue = function(VarSearch){
+    var SearchString = window.location.search.substring(1);
+    var VariableArray = SearchString.split('&');
+    for(var i = 0; i < VariableArray.length; i++){
+        var KeyValuePair = VariableArray[i].split('=');
+        if(KeyValuePair[0] === VarSearch){
+            return KeyValuePair[1];
+        }
+    }
+}
+
+
+
+$(document).ready(function() {
+    Events.transitionGradients();
+  setInterval(function() {
+    Events.transitionGradients();
+  }, 5000);
+
+  setTimeout(function() {
+    window.location.reload(true);
+
+  }, 300 * 1000);
+
+
+});
+
+</script>
+<style type="text/css">
+.centerdiv {
+  z-index: 1000
+}
+
+body {
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+}
+* {
+  font-family: 'Karla', sans-serif;
+}
+.flexcontainer {
+	height:100vh;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: row;
+}
+
+.centerdiv {
+  padding: 20px;
+    font-size: 0.9em;
+}
+
+  html, body {
+      margin: 0;
+      padding: 0;
+        min-height: 100vh;
+  }
+  input {
+    border: 2px solid aquamarine;
+    padding: 0.3em;
+    font-size: 1.6em;
+    border-radius: 0.75em;
+    text-align: center;
+  }
+  input:disabled {
+    color: gray;
+      background-color: lightgray;
+  }
+  #form {
+    text-align: center;
+  }
+  .label {
+          margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+  }
+  #submitbutton {
+    margin-top: 1em;
+    font-size: 1.5em;
+    padding: 0.3em;
+    border-radius: 0.5em;
+    cursor: pointer;
+  }
+  #submitbutton:hover {
+    background: linear-gradient(29deg, rgb(255, 196, 181, 0.3) 0%, rgb(197, 181, 255, 0.3) 100%);
+      background-color: white;
+  }
+  #submitbutton:active {
+    background: linear-gradient(29deg, rgb(255, 196, 181) 0%, rgb(197, 181, 255) 100%);
+  }
+  #submitbutton:focus {outline:0;}
+  #title {
+    font-size: 1.6em;
+    text-align: center;
+  }
+
+
+
+
+
+
+
+
+
+.backgrounds {
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+    opacity: 0.6;
+}
+
+.background {
+	position: fixed;
+	top: 0px;
+	left: 0px;
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	width: 100%;
+/*	transition: opacity 1s; */
+}
+#background-over { z-index: 20; }
+#background-under { z-index: 10; }
+
+
+
+</style>
+
+<!-- 
+///////////////
+CUSTOMIZE BELOW
+///////////////
+ -->
+
+    <title>~ splash ~</title>
+
+</head>
+<body>
+<div class="flexcontainer">
+    <div class="backgrounds">
+			<div id="background-over" class="background"></div>
+			<div id="background-under" class="background"></div>
+		</div>
+</div>
+
+</body>
+</html>
+
+
+
+</html>
