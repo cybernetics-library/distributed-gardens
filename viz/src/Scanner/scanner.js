@@ -11,7 +11,6 @@ var theme;
 var isLink = false;
 var timer;
 var audioFile = require('./assets/garden.mp3');
-var garden_string = ""
 
 var paperCupChild = new PaperCup.PaperCupChild();
 
@@ -99,52 +98,52 @@ function handleScans(content) {
   console.log('garden name', res);
   console.log('prev name', window.prevlink);
   if (!(_.isEqual(window.prevlink, res))) {
+
+    
     if (Object.values(window.prevlink).length != 0) {
       var prevQRURL = Object.values(window.prevlink.names)[0]
     } else {
       var prevQRURL = ""
     }
 
-    //    console.log(window.prevlink)
 
     window.prevlink = res;
-    //    console.log(res);
     console.log("new QR!!!!");
     isLink = true;
-    //    console.log(isLink);
     globalQR = content;
 
     var thisQRURL = content[0]
+
+    firstScan();
+
+    // get the badge url and display everywhere
     paperCupChild.sendRequest("getBadgeTitle", thisQRURL, function(garden_name) {
       console.log("badge url to garden name");
       console.log("badge url: " + thisQRURL);
       console.log("garden name: " + garden_name);
       $('#garden_title').html(garden_name);
       $('#garden_title').show();
-      garden_string = garden_name
     });
 
-    firstScan();
-    //    paperCupChild.sendRequest("submitScan", thisQRURL, function() {  });
-    if (prevQRURL != "") {
+    if(prevQRURL != "") {
       // if there was a valid previous QR
-      var msg = {
-        "link_from": prevQRURL,
-        "link_to": thisQRURL
-      }
-      console.log("scanner:: I'm trying to submit a link!");
-     $('#garden_title').html(garden_string);
+      // aka WE HAVE A LINK
+      //
+      var msg = { "link_from": prevQRURL, "link_to": thisQRURL }
 
-      paperCupChild.sendRequest("submitLink", msg, function() {});
-      console.log(msg);
+      console.log("scanner:: I'm trying to submit a link!");
+
+      paperCupChild.sendRequest("submitLink", msg, function() { 
+        console.log("scanner:: LINK SUBMITTED");
+        console.log(msg);
+      });
       const audioBuffer = new Audio(audioFile);
       audioBuffer.play();
-      paperCupChild.sendRequest("submitLink", msg, function() {});
     }
   } else {
-    // console.log('settting title to nothing')
-    // $('#garden_title').html("");
-    isLink = false;
+//    console.log('settting title to nothing')
+//    $('#garden_title').html("");
+//    isLink = false;
   };
 };
 
@@ -162,7 +161,7 @@ function refresh() {
   $('#prompt').fadeIn("slow");
   $("#freeze1").css('transform', 'translateY(0%)').fadeOut("slow");
   $('#cam1').delay(700).fadeIn("slow");
-  $('#garden_title').html("");
+  $('#garden_title').fadeOut("slow");
   clearTimeout(timer);
   // $('#garden_title').css("color", "#9fd6a7");
   // resetQR();

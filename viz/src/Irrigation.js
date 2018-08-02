@@ -1,4 +1,5 @@
-var Biome = require('biome')
+var plasticBiome = require('./plasticbiome')
+//var Biome = require('biome')
 var _ = require('lodash');
 
 
@@ -9,8 +10,19 @@ class Irrigation {
 
   async init() {
     var self = this;
-    self.biome = Biome(this.config)
+    //self.biome = Biome(this.config)
+    self.biome = new plasticBiome(this.config)
     await self.biome.start()
+  }
+
+  async addEvent(msg) { // INTERFACE WITH BIOME
+    var self = this;
+    await self.biome.addEvent(msg)
+  }
+
+  async getEvents() { // INTERFACE WITH BIOME
+    var self = this;
+    return await self.biome.getEvents()
   }
 
   async addEventNow(msg) {
@@ -20,13 +32,9 @@ class Irrigation {
     await self.biome.addEvent(msg)
   }
 
-  async addEvent(msg) {
-    await self.biome.addEvent(msg)
-  }
 
   listen(event_name, cb) { // register listener
-    console.log(event_name);
-    console.log(cb);
+    var self = this;
     self.biome.on(event_name, cb)
   }
 
@@ -38,7 +46,7 @@ class Irrigation {
         "force" in config &&
          config.force == true) {
       this.last_getEvents = new Date().getTime()
-      this.cachedEvents = _.sortBy(self.biome.getEvents(), "ts");
+      this.cachedEvents = _.sortBy(self.getEvents(), "ts");
     }
 
 
@@ -48,7 +56,7 @@ class Irrigation {
         this.last_getEvents - new Date().getTime() > 5 * 1000) {
 
       this.last_getEvents = new Date().getTime()
-      this.cachedEvents = _.sortBy(self.biome.getEvents(), "ts");
+      this.cachedEvents = _.sortBy(self.getEvents(), "ts");
     } 
 
     return this.cachedEvents
