@@ -1,4 +1,4 @@
-var plasticBiome = require('./plasticbiome')
+var fauxBiome = require('./fauxBiome')
 //var Biome = require('biome')
 var _ = require('lodash');
 
@@ -11,7 +11,7 @@ class Irrigation {
   async init() {
     var self = this;
     //self.biome = Biome(this.config)
-    self.biome = new plasticBiome(this.config)
+    self.biome = new fauxBiome(self.config)
     await self.biome.start()
   }
 
