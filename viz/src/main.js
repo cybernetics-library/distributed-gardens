@@ -5,7 +5,6 @@ import Irrigation from './Irrigation'
 import PaperCup from './PaperCup'
 import fakeData from './fakeData'
 import Helpers from './Helpers'
-import Events from './Events'
 
 import Meadow from './Meadow/Meadow.vue'
 // import Garden from './Garden/Garden.vue'

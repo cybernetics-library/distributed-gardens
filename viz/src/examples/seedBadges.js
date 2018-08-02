@@ -15,7 +15,6 @@ window.getUrlValue = getUrlValue;
 
 
 
-
 let text = `
 ERIC_ED105298
 AnApproachToCybernetics
@@ -85,6 +84,17 @@ TNM_Atlas_magazine_subscription_offer_20180209_0281
 TNM_Encyclopedia_Britannica_announcing_new_editio_20171018_0083
 TNM_Electronic_kits_-_Heathkit_1967_20171025_0125
 TNM_General_Electric_-_RTV_Silicone_rubber_brochu_20170630_0094
+IMG1624_201808
+broskoski-nelson-1
+broskoski-nelson-2
+evans-marshall-1
+evans-marshall-2
+broskoski-nekson_evans-marshall
+flock_201808
+lightning_talks-1
+IADecentralization1
+p2p2p2p-1
+p2p2p2p-2
 `;
 
 var Irrigation  = require('../Irrigation');
