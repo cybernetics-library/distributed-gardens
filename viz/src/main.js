@@ -8,7 +8,6 @@ import Helpers from './Helpers'
 import Events from './Events'
 
 import Meadow from './Meadow/Meadow.vue'
-import Backgrounds from './Backgrounds/Backgrounds.vue'
 // import Garden from './Garden/Garden.vue'
 
 var mizdata = require('./Meadow/simple.json')
@@ -17,9 +16,7 @@ var badgedata = require('./data/badge_data.json')
 var vueapp = new Vue({
   el: '#app',
   components: {
-    Meadow,
-    // Garden
-    Backgrounds
+    Meadow
   },
   data: {
     irrigation: null,
