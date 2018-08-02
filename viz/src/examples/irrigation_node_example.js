@@ -1,12 +1,12 @@
 var Irrigation  = require('../Irrigation');
-var irrigation = new Irrigation({ nonce: "33334" });
+var irrigation = new Irrigation({ nonce: 55555 });
 irrigation.init()
  
   //.then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed',
     //'msg': { 'seed_by': '11111', 'seed_to': '44444',  media:[ 'electricsheep-flock-244-32500-1'] } })); }) 
   ////.then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed',
     ////'msg': { 'seed_by': '11111', 'seed_to': '55555',  media:[ 'cd_from-psychodelics-to-cybernetics-featuring_system-01'] } })); })
-  .then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'tester' }, 'type': 'seed',
+  .then(() => { console.log(irrigation.addEventNow({ 'from': { 'name': 'texxxster' }, 'type': 'seed',
     'msg': { 'seed_by': '11111', 'seed_to': '66666',  media:[ 'NorbertWienerCybernetics'] } })); })
 
   .then(() => { console.log("connected"); })
