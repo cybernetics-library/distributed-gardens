@@ -23,6 +23,7 @@
     "instascan": "github:dantaeyoung/instascan",
     "jquery": "^3.3.1",
     "mongodb": "^3.1.1",
+    "request": "^2.87.0",
     "seedrandom": "^2.4.3",
     "vue": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0",
