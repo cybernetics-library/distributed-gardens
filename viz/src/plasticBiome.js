@@ -38,9 +38,6 @@ class plasticBiome {
       return new Promise(function(resolve, reject) {
           if(self.connected) {
             self.collection.find({}).toArray(function(err, docs) {
-      //        assert.equal(err, null);
-              console.log("Found the following records");
-              console.log(docs)
               resolve(docs)
             });
           }  // if this isn't connected.. uh uh. we need to be synchrnous to be compliant with biome
