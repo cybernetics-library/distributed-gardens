@@ -139,6 +139,8 @@ export default {
         .d3VelocityDecay(.9)
         // .d3Force('center', [50,50])
         .nodeCanvasObject((node, ctx)=> {
+
+
           ctx.fillStyle = "#b1ffb9";
           // ctx.strokeStyle = "rgba(65,151,113,.4)";
           // ctx.beginPath();
