@@ -8,8 +8,8 @@
 
 <style scoped>
 #garden {
-  height: 600px;
-  width: 600px;
+  height: 1000px;
+  width: 1000px;
   position: relative;
 }
 .hide {

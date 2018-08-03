@@ -45,6 +45,11 @@ var vueapp = new Vue({
           console.log(self.irrigation);
           console.log(self.graphdata);
           self.graphdata = self.irrigation.getGraphData();
+
+          window.setInterval(() => {
+            self.irrigation.biome.getEvents();
+          }, 5 * 1000);
+
         });
       self.createPaperCupHandler();
     },

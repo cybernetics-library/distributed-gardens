@@ -148,7 +148,7 @@ export default {
           // ctx.stroke();
           ctx.beginPath(); 
           // ctx.arc(node.x, node.y, 5, 0, 2 * Math.PI, false);
-          ctx.ellipse(node.x, node.y+1, 4.5, 1, 0, 0, 2 * Math.PI);
+          ctx.ellipse(node.x, node.y - 2, 4.5, 1, 0, 0, 2 * Math.PI);
 
           ctx.fill(); // circle
           // ctx.stroke();
