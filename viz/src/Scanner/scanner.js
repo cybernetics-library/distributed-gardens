@@ -170,7 +170,7 @@ function refresh() {
 
 
 function newGarden() {
-  $("#freeze1").hide();
+  $("#freeze1").fadeOut(0);
   //freeze cam
   Webcam.snap(function(data_uri) {
     document.getElementById('freeze1').innerHTML = '<img src="' + data_uri + '"/>';
